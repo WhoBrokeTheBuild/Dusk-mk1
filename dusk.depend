@@ -1,5 +1,0 @@
-# depslib dependency file v1.0
-1420002801 source:/home/stephen/Repos/dusk/main.cpp
-	<cstdio>
-	<GLFW/glfw3.h>
-

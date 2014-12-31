@@ -5,12 +5,14 @@
 		<Option title="duskrc" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="Project/;Project/import/;Project/export/;Project/intermediate/;Project/util/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/duskrc" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="test.obj test.dskm" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -31,6 +33,30 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="duskrc.cpp">
+			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="ext_types_map.h">
+			<Option virtualFolder="Project/util/" />
+		</Unit>
+		<Unit filename="func.cpp">
+			<Option virtualFolder="Project/util/" />
+		</Unit>
+		<Unit filename="func.h">
+			<Option virtualFolder="Project/util/" />
+		</Unit>
+		<Unit filename="imp_obj.h">
+			<Option virtualFolder="Project/import/" />
+		</Unit>
+		<Unit filename="inter_model.cpp">
+			<Option virtualFolder="Project/intermediate/" />
+		</Unit>
+		<Unit filename="inter_model.h">
+			<Option virtualFolder="Project/intermediate/" />
+		</Unit>
+		<Unit filename="usage.h">
+			<Option virtualFolder="Project/util/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

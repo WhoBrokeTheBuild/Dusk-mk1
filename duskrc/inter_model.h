@@ -1,0 +1,6 @@
+#ifndef DUSK_INTER_MODEL_H
+#define DUSK_INTER_MODEL_H
+
+
+
+#endif // DUSK_INTER_MODEL_H

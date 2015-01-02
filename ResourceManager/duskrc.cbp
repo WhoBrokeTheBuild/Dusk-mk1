@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="duskrc" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="Project/;Project/Import/;Project/Export/;Project/Intermediate/;Project/Util/;Project/Collections/;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/duskrc" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="assets/cube.obj assets/test.dskm" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/duskrc" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-pedantic-errors" />
+			<Add option="-pedantic" />
+			<Add option="-Wzero-as-null-pointer-constant" />
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add directory="../Libraries" />
+		</Compiler>
+		<Unit filename="ArrayList.h">
+			<Option virtualFolder="Project/Collections/" />
+		</Unit>
+		<Unit filename="ExportDSKM.cpp">
+			<Option virtualFolder="Project/Export/" />
+		</Unit>
+		<Unit filename="ExportDSKM.h">
+			<Option virtualFolder="Project/Export/" />
+		</Unit>
+		<Unit filename="ExportOBJ.cpp">
+			<Option virtualFolder="Project/Export/" />
+		</Unit>
+		<Unit filename="ExportOBJ.h">
+			<Option virtualFolder="Project/Export/" />
+		</Unit>
+		<Unit filename="ExtensionTypeMap.cpp">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="ExtensionTypeMap.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Functions.cpp">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Functions.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="ImportDSKM.cpp">
+			<Option virtualFolder="Project/Import/" />
+		</Unit>
+		<Unit filename="ImportDSKM.h">
+			<Option virtualFolder="Project/Import/" />
+		</Unit>
+		<Unit filename="ImportOBJ.cpp">
+			<Option virtualFolder="Project/Import/" />
+		</Unit>
+		<Unit filename="ImportOBJ.h">
+			<Option virtualFolder="Project/Import/" />
+		</Unit>
+		<Unit filename="InterModel.cpp">
+			<Option virtualFolder="Project/Intermediate/" />
+		</Unit>
+		<Unit filename="InterModel.h">
+			<Option virtualFolder="Project/Intermediate/" />
+		</Unit>
+		<Unit filename="Main.cpp">
+			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="MainArgs.cpp">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="MainArgs.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Map.h">
+			<Option virtualFolder="Project/Collections/" />
+		</Unit>
+		<Unit filename="MathFunctions.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Usage.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

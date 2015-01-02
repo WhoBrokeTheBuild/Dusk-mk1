@@ -31,11 +31,11 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wmain" />
 			<Add option="-pedantic-errors" />
 			<Add option="-pedantic" />
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add directory="Libraries" />
 		</Compiler>
 		<Linker>
 			<Add library="m" />
@@ -48,7 +48,7 @@
 			<Add library="Xrandr" />
 			<Add library="pthread" />
 		</Linker>
-		<Unit filename="main.cpp">
+		<Unit filename="Main.cpp">
 			<Option virtualFolder="Project/" />
 		</Unit>
 		<Extensions>

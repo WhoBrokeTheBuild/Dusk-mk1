@@ -5,13 +5,13 @@
 		<Option title="dusk" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Project/;" />
+		<Option virtualFolders="Project/;Project/Util/;Project/Shaders/;Project/Managers/;Project/Collections/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/dusk" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
+				<Option working_dir="bin" />
 				<Option object_output="obj/" />
-				<Option type="5" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -35,21 +35,73 @@
 			<Add option="-pedantic" />
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
-			<Add directory="Libraries" />
+			<Add directory="Libraries/glm/include" />
+			<Add directory="Libraries/GLEW/include" />
 		</Compiler>
 		<Linker>
 			<Add library="m" />
 			<Add library="glfw3" />
 			<Add library="GL" />
 			<Add library="GLU" />
+			<Add library="GLEW" />
 			<Add library="X11" />
 			<Add library="Xi" />
 			<Add library="Xxf86vm" />
 			<Add library="Xrandr" />
 			<Add library="pthread" />
+			<Add directory="Libraries/GLEW/lib" />
 		</Linker>
+		<Unit filename="ArrayList.h">
+			<Option virtualFolder="Project/Collections/" />
+		</Unit>
+		<Unit filename="Functions.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
 		<Unit filename="Main.cpp">
 			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="Map.h">
+			<Option virtualFolder="Project/Collections/" />
+		</Unit>
+		<Unit filename="MathFunctions.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="OpenGL.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Program.cpp">
+			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="Program.h">
+			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="Shader.h" />
+		<Unit filename="ShaderManager.Uniforms.inc.h">
+			<Option virtualFolder="Project/Managers/" />
+		</Unit>
+		<Unit filename="ShaderManager.cpp">
+			<Option virtualFolder="Project/Managers/" />
+		</Unit>
+		<Unit filename="ShaderManager.h">
+			<Option virtualFolder="Project/Managers/" />
+		</Unit>
+		<Unit filename="Shaders/flat.fs.glsl">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/flat.vs.glsl">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/skybox.fs.glsl">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/skybox.vs.glsl">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="TimeInfo.cpp">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="TimeInfo.h">
+			<Option virtualFolder="Project/Util/" />
 		</Unit>
 		<Extensions>
 			<code_completion />

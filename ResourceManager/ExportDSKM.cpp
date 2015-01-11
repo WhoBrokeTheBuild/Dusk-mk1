@@ -28,31 +28,41 @@ bool ExportDSKM( const string& filename, InterModel* pModel )
     file.write((const char*)&nameLength, sizeof(unsigned short));
     file.write(pModel->Name.c_str(), nameLength);
 
-    unsigned int vertCount = pModel->Verts.getSize();
-    file.write((const char*)&vertCount, sizeof(unsigned int));
-    file.write((const char*)&pModel->Verts[0], sizeof(vec3) * vertCount);
+	unsigned int vertCount = pModel->Verts.getSize();
+	file.write((const char*)&vertCount, sizeof(unsigned int));
 
-    unsigned int vertIndCount = pModel->VertInds.getSize();
-    file.write((const char*)&vertIndCount, sizeof(unsigned int));
-    file.write((const char*)&pModel->VertInds[0], sizeof(int) * vertIndCount);
+	if (!pModel->Verts.isEmpty())
+		file.write((const char*)&pModel->Verts[0], sizeof(vec3) * vertCount);
 
+	unsigned int vertIndCount = pModel->VertInds.getSize();
+	file.write((const char*)&vertIndCount, sizeof(unsigned int));
 
-    unsigned int normCount = pModel->Norms.getSize();
-    file.write((const char*)&normCount, sizeof(unsigned int));
-    file.write((const char*)&pModel->Norms[0], sizeof(vec3) * normCount);
+	if (!pModel->VertInds.isEmpty())
+		file.write((const char*)&pModel->VertInds[0], sizeof(int) * vertIndCount);
 
-    unsigned int normIndCount = pModel->NormInds.getSize();
-    file.write((const char*)&normIndCount, sizeof(unsigned int));
-    file.write((const char*)&pModel->NormInds[0], sizeof(int) * normIndCount);
+	unsigned int normCount = pModel->Norms.getSize();
+	file.write((const char*)&normCount, sizeof(unsigned int));
+	
+	if (!pModel->Norms.isEmpty())
+		file.write((const char*)&pModel->Norms[0], sizeof(vec3) * normCount);
 
+	unsigned int normIndCount = pModel->NormInds.getSize();
+	file.write((const char*)&normIndCount, sizeof(unsigned int));
 
-    unsigned int texCoordCount = pModel->TexCoords.getSize();
-    file.write((const char*)&texCoordCount, sizeof(unsigned int));
-    file.write((const char*)&pModel->TexCoords[0], sizeof(vec2) * texCoordCount);
+	if (!pModel->NormInds.isEmpty())
+		file.write((const char*)&pModel->NormInds[0], sizeof(int) * normIndCount);
 
-    unsigned int texCoordIndCount = pModel->TexCoordInds.getSize();
-    file.write((const char*)&texCoordIndCount, sizeof(unsigned int));
-    file.write((const char*)&pModel->TexCoordInds[0], sizeof(int) * texCoordIndCount);
+	unsigned int texCoordCount = pModel->TexCoords.getSize();
+	file.write((const char*)&texCoordCount, sizeof(unsigned int));
+
+	if (!pModel->TexCoords.isEmpty())
+		file.write((const char*)&pModel->TexCoords[0], sizeof(vec2) * texCoordCount);
+
+	unsigned int texCoordIndCount = pModel->TexCoordInds.getSize();
+	file.write((const char*)&texCoordIndCount, sizeof(unsigned int));
+
+	if (!pModel->TexCoordInds.isEmpty())
+		file.write((const char*)&pModel->TexCoordInds[0], sizeof(int) * texCoordIndCount);
 
     file.close();
 

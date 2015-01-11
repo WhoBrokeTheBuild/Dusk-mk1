@@ -27,41 +27,66 @@ bool ImportDSKM( const string& filename, InterModel* pModel )
 
     unsigned short nameLength = 0;
     file.read((char*)&nameLength, sizeof(unsigned short));
-    pModel->Name.resize(nameLength);
-    file.read(&pModel->Name[0], nameLength);
 
+	if (nameLength > 0)
+	{
+		pModel->Name.resize(nameLength);
+		file.read(&pModel->Name[0], nameLength);
+	}
 
     unsigned int vertCount = 0;
     file.read((char*)&vertCount, sizeof(unsigned int));
-    pModel->Verts.resize(vertCount);
-    file.read((char*)&pModel->Verts[0], sizeof(vec3) * vertCount);
+
+	if (vertCount > 0)
+	{
+		pModel->Verts.resize(vertCount);
+		file.read((char*)&pModel->Verts[0], sizeof(vec3) * vertCount);
+	}
 
     unsigned int vertIndCount = 0;
     file.read((char*)&vertIndCount, sizeof(unsigned int));
-    pModel->VertInds.resize(vertIndCount);
-    file.read((char*)&pModel->VertInds[0], sizeof(int) * vertIndCount);
 
+	if (vertIndCount > 0)
+	{
+		pModel->VertInds.resize(vertIndCount);
+		file.read((char*)&pModel->VertInds[0], sizeof(int) * vertIndCount);
+	}
 
     unsigned int normCount = 0;
     file.read((char*)&normCount, sizeof(unsigned int));
-    pModel->Norms.resize(normCount);
-    file.read((char*)&pModel->Norms[0], sizeof(vec3) * normCount);
+
+	if (normCount > 0)
+	{
+		pModel->Norms.resize(normCount);
+		file.read((char*)&pModel->Norms[0], sizeof(vec3) * normCount);
+	}
 
     unsigned int normIndCount = 0;
     file.read((char*)&normIndCount, sizeof(unsigned int));
-    pModel->NormInds.resize(normIndCount);
-    file.read((char*)&pModel->NormInds[0], sizeof(int) * normIndCount);
 
+	if (normIndCount > 0)
+	{
+		pModel->NormInds.resize(normIndCount);
+		file.read((char*)&pModel->NormInds[0], sizeof(int) * normIndCount);
+	}
 
     unsigned int texCoordCount = pModel->TexCoords.getSize();
     file.read((char*)&texCoordCount, sizeof(unsigned int));
-    pModel->TexCoords.resize(texCoordCount);
-    file.read((char*)&pModel->TexCoords[0], sizeof(vec2) * texCoordCount);
+
+	if (texCoordCount > 0)
+	{
+		pModel->TexCoords.resize(texCoordCount);
+		file.read((char*)&pModel->TexCoords[0], sizeof(vec2) * texCoordCount);
+	}
 
     unsigned int texCoordIndCount = pModel->TexCoordInds.getSize();
     file.read((char*)&texCoordIndCount, sizeof(unsigned int));
-    pModel->TexCoordInds.resize(texCoordIndCount);
-    file.read((char*)&pModel->TexCoordInds[0], sizeof(int) * texCoordIndCount);
+
+	if (texCoordIndCount > 0)
+	{
+		pModel->TexCoordInds.resize(texCoordIndCount);
+		file.read((char*)&pModel->TexCoordInds[0], sizeof(int) * texCoordIndCount);
+	}
 
     file.close();
 

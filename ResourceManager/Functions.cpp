@@ -2,7 +2,8 @@
 
 void error( const string& msg, const bool& fatal /*= true*/ )
 {
-    printf("Error: %s\n", msg.c_str());
+	printf("Error: %s\n", msg.c_str());
+	system("pause");
     if (fatal)
         exit(1);
 }

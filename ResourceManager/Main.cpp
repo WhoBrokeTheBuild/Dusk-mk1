@@ -1,10 +1,11 @@
 #include <cstdlib>
 #include <cstdio>
-
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <algorithm>
+
+#include <SDL.h>
 
 #include "MainArgs.h"
 #include "Functions.h"
@@ -25,6 +26,8 @@ int main( int argc, char* argv[] )
 {
     MainArgs args;
     ParseMainArgs(argc, argv, &args);
+
+	SDL_Init(SDL_INIT_EVERYTHING);
 
     LoadExtensionTypeMap(STR_EXT_TYPES_MAP);
 

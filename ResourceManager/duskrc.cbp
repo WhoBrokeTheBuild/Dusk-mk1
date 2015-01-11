@@ -37,7 +37,12 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add directory="../Libraries/glm/include" />
+			<Add directory="/usr/include/SDL2" />
 		</Compiler>
+		<Linker>
+			<Add library="SDL2" />
+			<Add library="SDL2main" />
+		</Linker>
 		<Unit filename="ArrayList.h">
 			<Option virtualFolder="Project/Collections/" />
 		</Unit>

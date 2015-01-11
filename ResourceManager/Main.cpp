@@ -5,7 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
-#include <SDL.h>
+extern "C"
+{
+    #include <SDL.h>
+}
 
 #include "MainArgs.h"
 #include "Functions.h"

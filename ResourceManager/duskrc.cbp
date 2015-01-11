@@ -36,7 +36,7 @@
 			<Add option="-Wzero-as-null-pointer-constant" />
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
-			<Add directory="../Libraries" />
+			<Add directory="../Libraries/glm/include" />
 		</Compiler>
 		<Unit filename="ArrayList.h">
 			<Option virtualFolder="Project/Collections/" />

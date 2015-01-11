@@ -5,7 +5,7 @@
 		<Option title="duskrc" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Project/;Project/Import/;Project/Export/;Project/Intermediate/;Project/Util/;Project/Collections/;" />
+		<Option virtualFolders="Project/;Project/Import/;Project/Export/;Project/Intermediate/;Project/Util/;Project/Collections/;Project/Import/Models/;Project/Export/Models/;Project/Export/Textures/;Project/Import/Textures/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/duskrc" prefix_auto="1" extension_auto="1" />
@@ -42,16 +42,34 @@
 			<Option virtualFolder="Project/Collections/" />
 		</Unit>
 		<Unit filename="ExportDSKM.cpp">
-			<Option virtualFolder="Project/Export/" />
+			<Option virtualFolder="Project/Export/Models/" />
 		</Unit>
 		<Unit filename="ExportDSKM.h">
-			<Option virtualFolder="Project/Export/" />
+			<Option virtualFolder="Project/Export/Models/" />
+		</Unit>
+		<Unit filename="ExportDSKT.cpp">
+			<Option virtualFolder="Project/Export/Textures/" />
+		</Unit>
+		<Unit filename="ExportDSKT.h">
+			<Option virtualFolder="Project/Export/Textures/" />
+		</Unit>
+		<Unit filename="ExportJPG.cpp">
+			<Option virtualFolder="Project/Export/Textures/" />
+		</Unit>
+		<Unit filename="ExportJPG.h">
+			<Option virtualFolder="Project/Export/Textures/" />
 		</Unit>
 		<Unit filename="ExportOBJ.cpp">
-			<Option virtualFolder="Project/Export/" />
+			<Option virtualFolder="Project/Export/Models/" />
 		</Unit>
 		<Unit filename="ExportOBJ.h">
-			<Option virtualFolder="Project/Export/" />
+			<Option virtualFolder="Project/Export/Models/" />
+		</Unit>
+		<Unit filename="ExportPNG.cpp">
+			<Option virtualFolder="Project/Export/Textures/" />
+		</Unit>
+		<Unit filename="ExportPNG.h">
+			<Option virtualFolder="Project/Export/Textures/" />
 		</Unit>
 		<Unit filename="ExtensionTypeMap.cpp">
 			<Option virtualFolder="Project/Util/" />
@@ -66,21 +84,45 @@
 			<Option virtualFolder="Project/Util/" />
 		</Unit>
 		<Unit filename="ImportDSKM.cpp">
-			<Option virtualFolder="Project/Import/" />
+			<Option virtualFolder="Project/Import/Models/" />
 		</Unit>
 		<Unit filename="ImportDSKM.h">
-			<Option virtualFolder="Project/Import/" />
+			<Option virtualFolder="Project/Import/Models/" />
+		</Unit>
+		<Unit filename="ImportDSKT.cpp">
+			<Option virtualFolder="Project/Import/Textures/" />
+		</Unit>
+		<Unit filename="ImportDSKT.h">
+			<Option virtualFolder="Project/Import/Textures/" />
+		</Unit>
+		<Unit filename="ImportJPG.cpp">
+			<Option virtualFolder="Project/Import/Textures/" />
+		</Unit>
+		<Unit filename="ImportJPG.h">
+			<Option virtualFolder="Project/Import/Textures/" />
 		</Unit>
 		<Unit filename="ImportOBJ.cpp">
-			<Option virtualFolder="Project/Import/" />
+			<Option virtualFolder="Project/Import/Models/" />
 		</Unit>
 		<Unit filename="ImportOBJ.h">
-			<Option virtualFolder="Project/Import/" />
+			<Option virtualFolder="Project/Import/Models/" />
+		</Unit>
+		<Unit filename="ImportPNG.cpp">
+			<Option virtualFolder="Project/Import/Textures/" />
+		</Unit>
+		<Unit filename="ImportPNG.h">
+			<Option virtualFolder="Project/Import/Textures/" />
 		</Unit>
 		<Unit filename="InterModel.cpp">
 			<Option virtualFolder="Project/Intermediate/" />
 		</Unit>
 		<Unit filename="InterModel.h">
+			<Option virtualFolder="Project/Intermediate/" />
+		</Unit>
+		<Unit filename="InterTexture.cpp">
+			<Option virtualFolder="Project/Intermediate/" />
+		</Unit>
+		<Unit filename="InterTexture.h">
 			<Option virtualFolder="Project/Intermediate/" />
 		</Unit>
 		<Unit filename="Main.cpp">

@@ -137,6 +137,12 @@ bool Program::initWindow()
 	glfwSwapInterval(0);
 
     glewExperimental = GL_TRUE;
+	GLenum ret = glewInit();
+	if (ret != GLEW_OK)
+	{
+		LogErrorFmt(getClassName(), "Failed to initialize GLEW (Error #%d, %s)", ret, glewGetErrorString(ret));
+		return false;
+	}
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 

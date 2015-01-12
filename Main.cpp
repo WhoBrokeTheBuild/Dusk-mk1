@@ -1,148 +1,28 @@
-#include <cstdio>
-#include <string>
-#include <GLFW/glfw3.h>
+#include <Arc/MemoryTracker.h>
 
-using std::string;
-
-void error( const string& msg, const bool& fatal = true )
-{
-    printf("Error: %s\n", msg.c_str());
-    if (fatal)
-        exit(1);
-}
-
-void glfwError( int error, const char* description )
-{
-}
-
-void glfwResize( GLFWwindow* window, int width, int height )
-{
-}
-
-void glfwKey( GLFWwindow* window, int key, int scancode, int action, int mods )
-{
-	switch (action)
-	{
-	case GLFW_PRESS:
-
-
-		break;
-	case GLFW_RELEASE:
-
-
-		break;
-	case GLFW_REPEAT:
-
-
-		break;
-	}
-}
-
-void glfwMouseMove( GLFWwindow* window, double x, double y )
-{
-}
-
-void glfwMouse( GLFWwindow* window, int button, int action, int mods )
-{
-	switch (action)
-	{
-	case GLFW_PRESS:
-
-
-		break;
-	case GLFW_RELEASE:
-
-
-		break;
-	}
-}
-
-void glfwMouseScroll( GLFWwindow* window, double x, double y )
-{
-}
+#include "Program.h"
+#include "Log.h"
+#include "ShaderManager.h"
 
 int main(int argc, char* argv[])
 {
-	if ( ! glfwInit())
-        error("Failed to initialize GLFW");
+    Log::AddInfoOutput("stdout");
+    Log::AddErrorOutput("stderr");
 
-	glfwSetErrorCallback(glfwError);
+    Log::AddInfoOutput("info.log", false);
+    Log::AddErrorOutput("error.log", false);
 
-	glfwWindowHint(GLFW_DEPTH_BITS, 16);
+    Log::AddInfoOutput("combined.log", false);
+    Log::AddErrorOutput("combined.log", false);
 
-	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
+    Arc::Arc_InitMemoryTracker();
 
-    bool m_Fullscreen = false;
-    int m_Width = 800, m_Height = 600;
-    string m_Title = "Dusk Engine - Test";
+    Program::getInstance().start();
 
-	if (m_Fullscreen)
-	{
-		const GLFWvidmode* mode = glfwGetVideoMode(pMonitor);
+    if (Arc::Arc_GetMemoryAllocationCount() > 0)
+        Arc::Arc_PrintMemoryAllocations();
 
-		if (mode->width > 0 && mode->height > 0)
-		{
-			m_Width = mode->width;
-			m_Height = mode->height;
-		}
-	}
-
-	GLFWwindow* pWindow = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), (m_Fullscreen ? pMonitor : NULL), NULL);
-
-	if ( ! pWindow )
-	{
-        error("Failed to create GLFW Window");
-	}
-
-	glfwMakeContextCurrent(pWindow);
-
-	glfwSwapInterval(0);
-
-	//glewExperimental = GL_TRUE;
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-	glEnable(GL_DEPTH_TEST);
-
-	//glEnable(GL_CULL_FACE);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	if (pWindow != nullptr)
-	{
-		glfwSetFramebufferSizeCallback(pWindow, glfwResize);
-		glfwSetKeyCallback(pWindow, glfwKey);
-		glfwSetMouseButtonCallback(pWindow, glfwMouse);
-		glfwSetCursorPosCallback(pWindow, glfwMouseMove);
-		glfwSetScrollCallback(pWindow, glfwMouseScroll);
-	}
-
-	float m_LastFrameTime = 0.0f;
-
-	while( ! glfwWindowShouldClose(pWindow) )
-	{
-		const float updateInt = 1.0f / 60.0f;
-		static float updateTimer = 0.0f;
-
-		double currTime = glfwGetTime();
-		float deltaTime = (float)(currTime - m_LastFrameTime);
-		m_LastFrameTime = currTime;
-
-		updateTimer += deltaTime;
-
-		if (updateTimer >= updateInt)
-		{
-			updateTimer = 0.0f;
-			deltaTime = updateInt; // Actual time since last update/render
-
-			//update(deltaTime);
-			//render();
-			glfwSwapBuffers(pWindow);
-		}
-
-		glfwPollEvents();
-	}
+    Arc::Arc_CleanupMemoryTracker();
 
     return 0;
 }

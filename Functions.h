@@ -1,0 +1,4 @@
+#ifndef DUSK_FUCNTIONS_H
+#define DUSK_FUCNTIONS_H
+
+#endif // DUSK_FUCNTIONS_H

@@ -5,8 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
-#include <SDL.h>
-#include <SDL_image.h>
+extern "C"
+{
+    #include <SDL.h>
+}
 
 #include "MainArgs.h"
 #include "Functions.h"
@@ -19,9 +21,6 @@
 #include "ExportOBJ.h"
 #include "ImportDSKM.h"
 #include "ExportDSKM.h"
-
-#include "ImportPNG.h"
-#include "ExportPNG.h"
 
 using std::string;
 using std::map;
@@ -57,20 +56,15 @@ int main( int argc, char* argv[] )
         error("Type Category Mismatch");
     }
 
-	InterModel model;
-	InterTexture texture;
+    InterModel model;
     if (args.InputType == "model/wavefront-obj")
     {
         ImportOBJ(args.InputFilename, &model);
-	}
-	else if (args.InputType == "model/dusk-engine-binary")
-	{
-		ImportDSKM(args.InputFilename, &model);
-	}
-	else if (args.InputType == "texture/png")
-	{
-		ImportPNG(args.InputFilename, &texture);
-	}
+    }
+    else if (args.InputType == "model/dusk-engine-binary")
+    {
+        ImportDSKM(args.InputFilename, &model);
+    }
 
     if (args.OutputType == "model/wavefront-obj")
     {
@@ -79,11 +73,7 @@ int main( int argc, char* argv[] )
     else if (args.OutputType == "model/dusk-engine-binary")
     {
         ExportDSKM(args.OutputFilename, &model);
-	}
-	else if (args.OutputType == "texture/png")
-	{
-		ExportPNG(args.InputFilename, &texture);
-	}
+    }
 
     return 0;
 }

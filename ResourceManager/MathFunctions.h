@@ -1,23 +1,7 @@
-#ifndef MATH_FUNCTIONS_H
-#define MATH_FUNCTIONS_H
+#ifndef DUSK_MATH_FUNCTIONS_H
+#define DUSK_MATH_FUNCTIONS_H
 
 #include <cstdarg>
-
-inline unsigned int MaxUInt( int numItems, ... )
-{
-    va_list args;
-    va_start( args, numItems );
-
-    unsigned int max = 0;
-
-    for ( int i = 0; i < numItems; ++i )
-    {
-        unsigned int num = va_arg( args, unsigned int );
-        max = ( num > max ? num : max );
-    }
-
-    return max;
-}
 
 /* Determines if a value is between two other numbers
  *
@@ -58,16 +42,4 @@ inline int Sign( Number value )
     return ( value > 0 ? 1 : ( value < 0 ? -1 : 0 ) );
 }
 
-float Floor( float value, int accuracy );
-
-float Nearest( float value, int accuracy );
-
-float Ceil( float value, int accuracy );
-
-double Floor( double value, int accuracy );
-
-double Nearest( double value, int accuracy );
-
-double Ceil( double value, int accuracy );
-
-#endif // MATH_FUNCTIONS_H
+#endif // DUSK_MATH_FUNCTIONS_H

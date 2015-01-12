@@ -5,16 +5,18 @@
 		<Option title="dusk" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Project/;" />
+		<Option virtualFolders="Project/;Project/Util/;Project/Shaders/;Project/Assets/;Project/Assets/Shaders/;Project/Logs/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/dusk" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
+				<Option working_dir="bin" />
 				<Option object_output="obj/" />
-				<Option type="5" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,6 +26,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-DRELEASE" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,21 +38,84 @@
 			<Add option="-pedantic" />
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
-			<Add directory="Libraries" />
+			<Add directory="Libraries/glm/include" />
+			<Add directory="Libraries/GLEW/include" />
+			<Add directory="Libraries/Arc/include" />
 		</Compiler>
 		<Linker>
 			<Add library="m" />
 			<Add library="glfw3" />
 			<Add library="GL" />
 			<Add library="GLU" />
+			<Add library="GLEW" />
 			<Add library="X11" />
 			<Add library="Xi" />
 			<Add library="Xxf86vm" />
 			<Add library="Xrandr" />
 			<Add library="pthread" />
+			<Add library="ArcCore" />
+			<Add directory="Libraries/GLEW/lib" />
+			<Add directory="Libraries/Arc/lib" />
 		</Linker>
+		<Unit filename="Functions.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Log.cpp">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Log.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
 		<Unit filename="Main.cpp">
 			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="OpenGL.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="Program.cpp">
+			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="Program.h">
+			<Option virtualFolder="Project/" />
+		</Unit>
+		<Unit filename="Shader.h">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="ShaderManager.Uniforms.inc.h">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="ShaderManager.cpp">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="ShaderManager.h">
+			<Option virtualFolder="Project/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/flat.fs.glsl">
+			<Option virtualFolder="Project/Assets/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/flat.vs.glsl">
+			<Option virtualFolder="Project/Assets/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/skybox.fs.glsl">
+			<Option virtualFolder="Project/Assets/Shaders/" />
+		</Unit>
+		<Unit filename="Shaders/skybox.vs.glsl">
+			<Option virtualFolder="Project/Assets/Shaders/" />
+		</Unit>
+		<Unit filename="TimeInfo.cpp">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="TimeInfo.h">
+			<Option virtualFolder="Project/Util/" />
+		</Unit>
+		<Unit filename="bin/combined.log">
+			<Option virtualFolder="Project/Logs/" />
+		</Unit>
+		<Unit filename="bin/error.log">
+			<Option virtualFolder="Project/Logs/" />
+		</Unit>
+		<Unit filename="bin/info.log">
+			<Option virtualFolder="Project/Logs/" />
 		</Unit>
 		<Extensions>
 			<code_completion />

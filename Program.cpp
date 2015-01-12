@@ -1,14 +1,28 @@
 #include "Program.h"
 
+#include "Log.h"
+#include "TimeInfo.h"
+#include "ShaderManager.h"
+#include "Shader.h"
+
 Program::~Program()
 {
 }
 
 void Program::start()
 {
-    LogInfo("Program", "Starting");
+    LogInfo(getClassName(), "Starting");
 
-    initWindow();
+    if ( ! init())
+    {
+        LogError(getClassName(), "Initializing failed");
+    }
+
+    if ( ! load())
+    {
+        LogError(getClassName(), "Loading assets failed");
+        return;
+    }
 
 	float lastFrameTime = 0.0f;
 	TimeInfo timeInfo;
@@ -44,23 +58,46 @@ void Program::start()
 	}
 }
 
+bool Program::init()
+{
+    LogInfo(getClassName(), "Initializing");
+
+    if ( ! initWindow())
+    {
+        LogError(getClassName(), "Failed to create window");
+        return false;
+    }
+
+    return true;
+}
+
+bool Program::load()
+{
+    LogInfo(getClassName(), "Loading Resources");
+
+    ArrayList<Shader> flatShaderList;
+    flatShaderList.add(Shader("Shaders/flat.fs.glsl", GL_FRAGMENT_SHADER));
+    flatShaderList.add(Shader("Shaders/flat.vs.glsl", GL_VERTEX_SHADER));
+    getShaderManager()->loadProgram("flat", flatShaderList);
+
+    return true;
+}
+
 void Program::update(const TimeInfo& timeInfo)
 {
-    LogInfo("Program", "Updating");
 }
 
 void Program::render()
 {
-    LogInfo("Program", "Rendering");
 }
 
 bool Program::initWindow()
 {
-    LogInfo("Program", "Initializing Window");
+    LogInfo(getClassName(), "Initializing Window");
 
 	if ( ! glfwInit())
 	{
-        LogError("Program", "Failed to initialize GLFW");
+        LogError(getClassName(), "Failed to initialize GLFW");
         return false;
 	}
 
@@ -89,14 +126,15 @@ bool Program::initWindow()
 
 	if ( ! mp_Window )
 	{
-        LogError("Program", "Failed to create GLFW Window");
+        LogError(getClassName(), "glfwCreateWindow failed");
+        return false;
 	}
 
 	glfwMakeContextCurrent(mp_Window);
 
 	glfwSwapInterval(0);
 
-	//glewExperimental = GL_TRUE;
+    glewExperimental = GL_TRUE;
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -156,7 +194,7 @@ void Program::hookMouseScroll( const double& x, const double& y )
 
 void glfwError( int error, const char* description )
 {
-    LogError("GLFW", description);
+    LogErrorFmt("GLFW", "%s (%d)", description, error);
 }
 
 void glfwResize( GLFWwindow* window, int width, int height )

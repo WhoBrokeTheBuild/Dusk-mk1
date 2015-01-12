@@ -1,12 +1,14 @@
 #ifndef DUSK_SHADER_H
 #define DUSK_SHADER_H
 
+#include <Arc/ManagedObject.h>
 #include "OpenGL.h"
 #include <string>
 
 using std::string;
 
-struct Shader
+struct Shader :
+    public Arc::ManagedObject
 {
 public:
 
@@ -25,6 +27,8 @@ public:
 		Filename = rhs.Filename;
 		Type = rhs.Type;
 	}
+
+	virtual inline string getClassName( void ) const { return "Shader"; }
 
 	string Filename;
 	GLenum Type;

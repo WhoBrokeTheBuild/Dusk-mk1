@@ -1,13 +1,16 @@
 #ifndef DUSK_PROGRAM_H
 #define DUSK_PROGRAM_H
 
+#include <Arc/ManagedObject.h>
 #include "OpenGL.h"
 
 #include "Functions.h"
-#include "TimeInfo.h"
-#include "ShaderManager.h"
 
-class Program
+class TimeInfo;
+class ShaderManager;
+
+class Program :
+    public Arc::ManagedObject
 {
 
 public:
@@ -21,9 +24,13 @@ public:
 
     virtual ~Program();
 
+    virtual inline string getClassName( void ) const { return "Program"; }
+
     void start();
     void update(const TimeInfo& timeInfo);
     void render();
+
+    ShaderManager* getShaderManager( void ) { return mp_ShaderManager; }
 
     GLFWwindow* getWindow() { return mp_Window; }
 
@@ -44,6 +51,8 @@ private:
     Program(Program const&);
     void operator=(Program const&);
 
+    bool init();
+    bool load();
     bool initWindow();
 
     ShaderManager*      mp_ShaderManager;

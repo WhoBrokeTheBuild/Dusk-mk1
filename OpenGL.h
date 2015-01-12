@@ -16,7 +16,7 @@
 //#pragma comment( lib, "OpenGL32.lib")
 //#pragma comment( lib, "GLu32.lib")
 //#pragma comment( lib, "glew32.lib")
-//#pragma comment (lib, "glfw3.lib")
+//#pragma comment( lib, "glfw3.lib")
 
 using glm::vec2;
 using glm::vec3;

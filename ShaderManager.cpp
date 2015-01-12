@@ -2,10 +2,11 @@
 
 #include <fstream>
 #include "Shader.h"
+#include "Log.h"
 
 bool ShaderManager::loadProgram( const string& name, const ArrayList<Shader>& shaders )
 {
-	ArrayList<GLuint> shaderIDs;
+	ArrayList<GLShader> shaderIDs;
 	for (unsigned int i = 0; i < shaders.getSize(); ++i)
 	{
 		const Shader& shader = shaders[i];
@@ -13,9 +14,7 @@ bool ShaderManager::loadProgram( const string& name, const ArrayList<Shader>& sh
 		shaderIDs.add(loadShaderFromFile(shader.Filename, shader.Type));
 	}
 
-	GLuint program;
-
-	program = glCreateProgram();
+	GLProgram program = glCreateProgram();
 
 	for (unsigned int i = 0; i < shaders.getSize(); ++i)
 	{
@@ -29,7 +28,7 @@ bool ShaderManager::loadProgram( const string& name, const ArrayList<Shader>& sh
 
 	if (programLinked != GL_TRUE)
 	{
-		//Log::ErrorFmt(getClassName(), "Failed to link program %d\n", program);
+		LogErrorFmt(getClassName(), "Failed to link program %d\n", program);
 		printProgramLog(program);
 		glDeleteProgram(program);
 		program = 0;
@@ -101,14 +100,14 @@ void ShaderManager::printProgramLog( const GLuint& program )
 		glGetProgramInfoLog( program, maxLength, &infoLogLength, infoLog );
 		if( infoLogLength > 0 )
 		{
-			//Log::ErrorFmt(getClassName(), "Log for Program %d:\n%s", program, infoLog);
+			LogErrorFmt(getClassName(), "Log for Program %d:\n%s", program, infoLog);
 		}
 
 		delete[] infoLog;
 	}
 	else
 	{
-		//Log::ErrorFmt(getClassName(), "Cannot print program log, %d is not a program", program);
+		LogErrorFmt(getClassName(), "Cannot print program log, %d is not a program", program);
 	}
 }
 
@@ -126,20 +125,20 @@ void ShaderManager::printShaderLog( const GLuint& shader )
 		glGetShaderInfoLog( shader, maxLength, &infoLogLength, infoLog );
 		if( infoLogLength > 0 )
 		{
-			//Log::ErrorFmt(getClassName(), "Log for Shader %d:\n%s", shader, infoLog);
+			LogErrorFmt(getClassName(), "Log for Shader %d:\n%s", shader, infoLog);
 		}
 
 		delete[] infoLog;
 	}
 	else
 	{
-		//Log::ErrorFmt(getClassName(), "Cannot print shader log, %d is not a shader", shader);
+		LogErrorFmt(getClassName(), "Cannot print shader log, %d is not a shader", shader);
 	}
 }
 
-GLuint ShaderManager::loadShaderFromFile( const string& filename, const GLenum& shaderType )
+GLShader ShaderManager::loadShaderFromFile( const string& filename, const GLenum& shaderType )
 {
-	//Log::InfoFmt(getClassName(), "Load from file \"%s\"", filename.c_str());
+	LogInfoFmt(getClassName(), "Load from file \"%s\"", filename.c_str());
 	GLuint shader = 0;
 	string shaderString;
 	std::ifstream file(filename);
@@ -159,7 +158,7 @@ GLuint ShaderManager::loadShaderFromFile( const string& filename, const GLenum& 
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &shaderCompiled);
 		if (shaderCompiled != GL_TRUE)
 		{
-			//Log::ErrorFmt(getClassName(), "Failed to compile shader %d \"%s", shader, filename.c_str());
+			LogErrorFmt(getClassName(), "Failed to compile shader %d \"%s", shader, filename.c_str());
 			printShaderLog(shader);
 			glDeleteShader(shader);
 			shader = 0;
@@ -167,11 +166,11 @@ GLuint ShaderManager::loadShaderFromFile( const string& filename, const GLenum& 
 	}
 	else
 	{
-		//Log::ErrorFmt(getClassName(), "Unable to open file \"%s\"", filename.c_str());
+		LogErrorFmt(getClassName(), "Unable to open file \"%s\"", filename.c_str());
 		return 0;
 	}
 
-	//Log::InfoFmt(getClassName(), "Shader \"%s\" Loaded", filename.c_str());
+	LogInfoFmt(getClassName(), "Shader \"%s\" Loaded", filename.c_str());
 
 	return shader;
 }
@@ -196,6 +195,6 @@ void ShaderManager::checkUniformError( void )
 
 	if (error != GL_NO_ERROR)
 	{
-		//Log::ErrorFmt(getClassName(), "Uniform Error, #%d %s", error, gluGetString(error));
+		LogErrorFmt(getClassName(), "Uniform Error, #%d %s", error, gluGetString(error));
 	}
 }

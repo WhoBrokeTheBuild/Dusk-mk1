@@ -1,17 +1,22 @@
 #ifndef DUSK_SHADER_MANAGER_H
 #define DUSK_SHADER_MANAGER_H
 
+#include <Arc/ManagedObject.h>
+#include <Arc/ArrayList.h>
+#include <Arc/Map.h>
+
 #include <string>
 
 #include "OpenGL.h"
-#include "ArrayList.h"
-#include "Map.h"
 
 using std::string;
+using Arc::ArrayList;
+using Arc::Map;
 
 struct Shader;
 
-class ShaderManager
+class ShaderManager :
+    public Arc::ManagedObject
 {
 public:
 
@@ -29,10 +34,10 @@ public:
 	bool loadProgram( const string& name, const ArrayList<Shader>& shaders );
 
 	bool useProgram( const string& name );
-	GLint getProgram( const string& name ) { return (m_Programs.containsKey(name) ? m_Programs[name] : -1); }
+	GLProgram getProgram( const string& name ) { return (m_Programs.containsKey(name) ? m_Programs[name] : -1); }
 
 	inline GLint getUniformLocation( const string& uniformName ) { return getUniformLocation(m_CurrProgName, uniformName); }
-	GLint getUniformLocation( const string& programName, const string& uniformName );
+	GLUniformLocation getUniformLocation( const string& programName, const string& uniformName );
 
     #include "ShaderManager.Uniforms.inc.h"
 
@@ -42,7 +47,7 @@ private:
 
 	void printShaderLog( const GLShader& shader );
 
-	GLuint loadShaderFromFile( const string& filename, const GLenum& shaderType );
+	GLShader loadShaderFromFile( const string& filename, const GLenum& shaderType );
 
 	void checkUniformError( void );
 

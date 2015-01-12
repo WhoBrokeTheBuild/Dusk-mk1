@@ -14,7 +14,9 @@ using std::string;
 "obj model/wavefront-obj\n" \
 "fbx model/maya-binary\n" \
 "png texture/png\n" \
-"tga texture/targa\n"
+"tga texture/targa\n" \
+"jpg texture/jpg\n" \
+"jpeg texture/jpg\n"
 
 extern Map<string, string> gExtensionTypeMap;
 

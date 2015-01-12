@@ -72,12 +72,19 @@
   <ItemGroup>
     <ClInclude Include="ArrayList.h" />
     <ClInclude Include="ExportDSKM.h" />
+    <ClInclude Include="ExportDSKT.h" />
+    <ClInclude Include="ExportJPG.h" />
     <ClInclude Include="ExportOBJ.h" />
+    <ClInclude Include="ExportPNG.h" />
     <ClInclude Include="ExtensionTypeMap.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="ImportDSKM.h" />
+    <ClInclude Include="ImportDSKT.h" />
+    <ClInclude Include="ImportJPG.h" />
     <ClInclude Include="ImportOBJ.h" />
+    <ClInclude Include="ImportPNG.h" />
     <ClInclude Include="InterModel.h" />
+    <ClInclude Include="InterTexture.h" />
     <ClInclude Include="MainArgs.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MathFunctions.h" />
@@ -85,12 +92,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExportDSKM.cpp" />
+    <ClCompile Include="ExportDSKT.cpp" />
+    <ClCompile Include="ExportJPG.cpp" />
     <ClCompile Include="ExportOBJ.cpp" />
+    <ClCompile Include="ExportPNG.cpp" />
     <ClCompile Include="ExtensionTypeMap.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="ImportDSKM.cpp" />
+    <ClCompile Include="ImportDSKT.cpp" />
+    <ClCompile Include="ImportJPG.cpp" />
     <ClCompile Include="ImportOBJ.cpp" />
+    <ClCompile Include="ImportPNG.cpp" />
     <ClCompile Include="InterModel.cpp" />
+    <ClCompile Include="InterTexture.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainArgs.cpp" />
   </ItemGroup>

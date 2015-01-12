@@ -34,7 +34,7 @@ void Program::start()
 
 		double currTime = glfwGetTime();
 		float elapsedTime = (float)(currTime - lastFrameTime);
-		lastFrameTime = currTime;
+		lastFrameTime = (float) currTime;
 
 		updateTimer += elapsedTime;
 
@@ -67,6 +67,8 @@ bool Program::init()
         LogError(getClassName(), "Failed to create window");
         return false;
     }
+
+	mp_ShaderManager = New ShaderManager();
 
     return true;
 }

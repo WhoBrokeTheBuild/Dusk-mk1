@@ -175,7 +175,7 @@ GLShader ShaderManager::loadShaderFromFile( const string& filename, const GLenum
 	return shader;
 }
 
-GLint ShaderManager::getUniformLocation( const string& programName, const string& uniformName )
+GLUniformLocation ShaderManager::getUniformLocation( const string& programName, const string& uniformName )
 {
 	if (m_CurrProg == 0)
 		return -1;

@@ -1,22 +1,23 @@
 #ifndef DUSK_OPENGL_H
 #define DUSK_OPENGL_H
 
-//#define WIN32_LEAN_AND_MEAN
-//#include <Windows.h>
+#if defined(ARC_OS_WINDOWS)
+
+#define NOGDI
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
+#endif // ARC_OS_WINDOWS
 
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GLFW/glfw3.h>
 
+#define GLM_FORCE_PURE
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-
-//#pragma comment( lib, "OpenGL32.lib")
-//#pragma comment( lib, "GLu32.lib")
-//#pragma comment( lib, "glew32.lib")
-//#pragma comment( lib, "glfw3.lib")
 
 using glm::vec2;
 using glm::vec3;

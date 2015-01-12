@@ -6,6 +6,8 @@ class TimeInfo
 {
 public:
 
+	TimeInfo() { }
+
     double TotalSeconds;
     double TotalMilliseconds;
     double ElapsedSeconds;

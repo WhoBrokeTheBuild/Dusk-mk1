@@ -36,7 +36,7 @@ public:
 	bool useProgram( const string& name );
 	GLProgram getProgram( const string& name ) { return (m_Programs.containsKey(name) ? m_Programs[name] : -1); }
 
-	inline GLint getUniformLocation( const string& uniformName ) { return getUniformLocation(m_CurrProgName, uniformName); }
+	inline GLUniformLocation getUniformLocation( const string& uniformName ) { return getUniformLocation(m_CurrProgName, uniformName); }
 	GLUniformLocation getUniformLocation( const string& programName, const string& uniformName );
 
     #include "ShaderManager.Uniforms.inc.h"

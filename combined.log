@@ -1,0 +1,5 @@
++0.0.0.50 INF <program.cpp:14> Program: Starting
++0.0.0.50 INF <program.cpp:63> Program: Initializing
++0.0.0.50 INF <program.cpp:98> Program: Initializing Window
++0.0.0.160 INF <program.cpp:78> Program: Loading Resources
++0.0.0.170 INF <shadermanager.cpp:141> Shader Manager: Load from file "Shaders/flat.fs.glsl"

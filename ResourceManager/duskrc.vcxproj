@@ -77,6 +77,7 @@
     <ClInclude Include="ExportJPG.h" />
     <ClInclude Include="ExportOBJ.h" />
     <ClInclude Include="ExportPNG.h" />
+    <ClInclude Include="ExportTGA.h" />
     <ClInclude Include="ExtensionTypeMap.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="ImportDSKM.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="ImportJPG.h" />
     <ClInclude Include="ImportOBJ.h" />
     <ClInclude Include="ImportPNG.h" />
+    <ClInclude Include="ImportTGA.h" />
     <ClInclude Include="InterModel.h" />
     <ClInclude Include="InterTexture.h" />
     <ClInclude Include="MainArgs.h" />
@@ -97,6 +99,7 @@
     <ClCompile Include="ExportJPG.cpp" />
     <ClCompile Include="ExportOBJ.cpp" />
     <ClCompile Include="ExportPNG.cpp" />
+    <ClCompile Include="ExportTGA.cpp" />
     <ClCompile Include="ExtensionTypeMap.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="ImportDSKM.cpp" />
@@ -104,6 +107,7 @@
     <ClCompile Include="ImportJPG.cpp" />
     <ClCompile Include="ImportOBJ.cpp" />
     <ClCompile Include="ImportPNG.cpp" />
+    <ClCompile Include="ImportTGA.cpp" />
     <ClCompile Include="InterModel.cpp" />
     <ClCompile Include="InterTexture.cpp" />
     <ClCompile Include="Main.cpp" />

@@ -10,4 +10,3 @@ using std::string;
 bool ImportPNG( const string& filename, InterTexture* pTexture );
 
 #endif // DUSK_IMPORT_PNG_H
-

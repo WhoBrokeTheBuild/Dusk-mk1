@@ -1,4 +1,4 @@
-#include <cstdlib>
+﻿#include <cstdlib>
 #include <cstdio>
 #include <iostream>
 #include <string>
@@ -17,14 +17,34 @@ extern "C"
 #include "ExtensionTypeMap.h"
 
 #include "InterModel.h"
+#include "InterTexture.h"
 
 #include "ImportOBJ.h"
 #include "ExportOBJ.h"
+
 #include "ImportDSKM.h"
 #include "ExportDSKM.h"
 
+#include "ImportPNG.h"
+#include "ExportPNG.h"
+
+#include "ImportJPG.h"
+#include "ExportJPG.h"
+
+#include "ImportTGA.h"
+#include "ExportTGA.h"
+
+#include "ImportDSKT.h"
+#include "ExportDSKT.h"
+
 using std::string;
 using std::map;
+
+typedef bool (*InportModelFunc)(const string&, InterModel*);
+typedef bool (*ExportModelFunc)(const string&, InterModel*);
+
+typedef bool(*InportTextureFunc)(const string&, InterTexture*);
+typedef bool(*ExportTextureFunc)(const string&, InterTexture*);
 
 int main( int argc, char* argv[] )
 {
@@ -57,24 +77,50 @@ int main( int argc, char* argv[] )
         error("Type Category Mismatch");
     }
 
-    InterModel model;
-    if (args.InputType == "model/wavefront-obj")
-    {
-        ImportOBJ(args.InputFilename, &model);
-    }
-    else if (args.InputType == "model/dusk-engine-binary")
-    {
-        ImportDSKM(args.InputFilename, &model);
-    }
+	if (in_type_cat == "model")
+	{
+		Map<string, InportModelFunc> importFuncs;
+		Map<string, ExportModelFunc> exportFuncs;
 
-    if (args.OutputType == "model/wavefront-obj")
-    {
-        ExportOBJ(args.OutputFilename, &model);
-    }
-    else if (args.OutputType == "model/dusk-engine-binary")
-    {
-        ExportDSKM(args.OutputFilename, &model);
-    }
+		importFuncs.add("model/wavefront-obj", ImportOBJ);
+		importFuncs.add("model/dusk-engine-binary", ImportDSKM);
+
+		importFuncs.add("model/wavefront-obj", ExportOBJ);
+		importFuncs.add("model/dusk-engine-binary", ExportDSKM);
+
+		if (!importFuncs.containsKey(args.InputType) || !exportFuncs.containsKey(args.OutputType))
+		{
+			printf("Unsupported Input/Output Types\n");
+			return 1;
+		}
+
+		InterModel model;
+		importFuncs[args.InputType](args.InputFilename, &model);
+		exportFuncs[args.OutputType](args.InputFilename, &model);
+	}
+	else if (in_type_cat == "texture")
+	{
+		Map<string, InportTextureFunc> importFuncs;
+		Map<string, ExportTextureFunc> exportFuncs;
+
+		importFuncs.add("texture/png", ImportPNG);
+		importFuncs.add("texture/jpg", ImportJPG);
+		importFuncs.add("texture/dusk-engine-binary", ImportDSKT);
+
+		importFuncs.add("texture/png", ExportPNG);
+		importFuncs.add("texture/jpg", ExportJPG);
+		importFuncs.add("texture/dusk-engine-binary", ExportDSKT);
+
+		if (!importFuncs.containsKey(args.InputType) || !exportFuncs.containsKey(args.OutputType))
+		{
+			printf("Unsupported Input/Output Types\n");
+			return 1;
+		}
+
+		InterTexture texture;
+		importFuncs[args.InputType](args.InputFilename, &texture);
+		exportFuncs[args.OutputType](args.InputFilename, &texture);
+	}
 
     return 0;
 }

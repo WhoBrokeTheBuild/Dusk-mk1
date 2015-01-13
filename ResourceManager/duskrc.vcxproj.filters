@@ -90,6 +90,12 @@
     <ClInclude Include="ImportPNG.h">
       <Filter>Project\Import\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="ExportTGA.h">
+      <Filter>Project\Export\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportTGA.h">
+      <Filter>Project\Import\Textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -138,6 +144,12 @@
       <Filter>Project\Import\Textures</Filter>
     </ClCompile>
     <ClCompile Include="ImportPNG.cpp">
+      <Filter>Project\Import\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportTGA.cpp">
+      <Filter>Project\Export\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportTGA.cpp">
       <Filter>Project\Import\Textures</Filter>
     </ClCompile>
   </ItemGroup>

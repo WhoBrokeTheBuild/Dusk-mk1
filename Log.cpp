@@ -199,12 +199,7 @@ void Log::Output( std::ostream& stream, const string& type, const string& src, c
 
 	int ms = (int)(seconds * 1000.0f);
 
-	//if (stream != std::cout && stream != std::cerr)
-	//{
-		stream << "+" << hours << "." << mins << "." << secs << "." << ms << " " << type << " ";
-	//}
-
-	stream << "<" << Arc::Arc_Basename(file) << ":" << line << "> " << src << ": " << msg << std::endl;
+	stream << "+" << hours << "." << mins << "." << secs << "." << ms << " " << type << " <" << Arc::Arc_Basename(file) << ":" << line << "> " << src << ": " << msg << std::endl;
 }
 
 string Log::Format( const string& fmt, va_list args )

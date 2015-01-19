@@ -8,6 +8,7 @@
 
 class TimeInfo;
 class ShaderManager;
+class Camera;
 
 class Program :
     public Arc::ManagedObject
@@ -22,7 +23,7 @@ public:
         return prog;
     }
 
-    virtual ~Program();
+    virtual inline ~Program() { }
 
     virtual inline string getClassName( void ) const { return "Program"; }
 
@@ -52,15 +53,22 @@ private:
     void operator=(Program const&);
 
     bool init();
+    void term();
     bool load();
     bool initWindow();
 
     ShaderManager*      mp_ShaderManager;
+    Camera*             mp_Camera;
     //ResourceManager*    mp_ResourceManager;
 
     GLFWwindow*         mp_Window;
     int                 m_Width;
     int                 m_Height;
+
+
+    // Temporary
+    int m_NumVerts;
+    GLuint m_VertArray;
 
 };
 

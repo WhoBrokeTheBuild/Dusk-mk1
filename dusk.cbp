@@ -5,11 +5,10 @@
 		<Option title="dusk" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Project/;Project/Util/;Project/Shaders/;Project/Assets/;Project/Assets/Shaders/;Project/Logs/;" />
+		<Option virtualFolders="Project/;Project/Util/;Project/Shaders/;Project/Assets/;Project/Assets/Shaders/;Project/Logs/;Scene/;" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/dusk" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin" />
+				<Option output="dusk" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -20,10 +19,11 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/dusk" prefix_auto="1" extension_auto="1" />
+				<Option output="dusk" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-DRELEASE" />
@@ -39,7 +39,6 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add directory="Libraries/glm/include" />
-			<Add directory="Libraries/GLEW/include" />
 			<Add directory="Libraries/Arc/include" />
 		</Compiler>
 		<Linker>
@@ -54,9 +53,15 @@
 			<Add library="Xrandr" />
 			<Add library="pthread" />
 			<Add library="ArcCore" />
-			<Add directory="Libraries/GLEW/lib" />
 			<Add directory="Libraries/Arc/lib" />
+			<Add directory="/usr/lib64" />
 		</Linker>
+		<Unit filename="Camera.cpp">
+			<Option virtualFolder="Scene/" />
+		</Unit>
+		<Unit filename="Camera.h">
+			<Option virtualFolder="Scene/" />
+		</Unit>
 		<Unit filename="Functions.h">
 			<Option virtualFolder="Project/Util/" />
 		</Unit>
@@ -108,13 +113,13 @@
 		<Unit filename="TimeInfo.h">
 			<Option virtualFolder="Project/Util/" />
 		</Unit>
-		<Unit filename="bin/combined.log">
+		<Unit filename="combined.log">
 			<Option virtualFolder="Project/Logs/" />
 		</Unit>
-		<Unit filename="bin/error.log">
+		<Unit filename="error.log">
 			<Option virtualFolder="Project/Logs/" />
 		</Unit>
-		<Unit filename="bin/info.log">
+		<Unit filename="info.log">
 			<Option virtualFolder="Project/Logs/" />
 		</Unit>
 		<Extensions>

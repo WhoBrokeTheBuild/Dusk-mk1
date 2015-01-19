@@ -8,7 +8,7 @@
 		<Option virtualFolders="Project/;Project/Import/;Project/Export/;Project/Intermediate/;Project/Util/;Project/Collections/;Project/Import/Models/;Project/Export/Models/;Project/Export/Textures/;Project/Import/Textures/;" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/duskrc" prefix_auto="1" extension_auto="1" />
+				<Option output="duskrc" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -18,7 +18,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/duskrc" prefix_auto="1" extension_auto="1" />
+				<Option output="duskrc" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />

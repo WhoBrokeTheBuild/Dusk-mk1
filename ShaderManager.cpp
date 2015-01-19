@@ -170,8 +170,6 @@ GLShader ShaderManager::loadShaderFromFile( const string& filename, const GLenum
 		return 0;
 	}
 
-	LogInfoFmt(getClassName(), "Shader \"%s\" Loaded", filename.c_str());
-
 	return shader;
 }
 

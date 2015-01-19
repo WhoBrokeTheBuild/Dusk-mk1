@@ -8,6 +8,7 @@
 #include <string>
 
 #include "OpenGL.h"
+#include "Math.h"
 
 using std::string;
 using Arc::ArrayList;

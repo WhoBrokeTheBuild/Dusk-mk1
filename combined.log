@@ -1,6 +1,6 @@
-+0.0.0.10 INF <Program.cpp:11> Program: Starting
-+0.0.0.10 INF <Program.cpp:62> Program: Initializing
-+0.0.0.10 INF <Program.cpp:193> Program: Initializing Window
-+0.0.0.59 INF <Program.cpp:84> Program: Loading Resources
-+0.0.0.59 INF <ShaderManager.cpp:141> Shader Manager: Load from file "Shaders/flat.fs.glsl"
-+0.0.0.59 INF <ShaderManager.cpp:141> Shader Manager: Load from file "Shaders/flat.vs.glsl"
++0.0.0.164 INF <program.cpp:11> Program: Starting
++0.0.0.171 INF <program.cpp:62> Program: Initializing
++0.0.0.173 INF <program.cpp:193> Program: Initializing Window
++0.0.0.400 INF <program.cpp:84> Program: Loading Resources
++0.0.0.403 INF <shadermanager.cpp:141> Shader Manager: Load from file "Shaders/flat.fs.glsl"
++0.0.0.409 INF <shadermanager.cpp:141> Shader Manager: Load from file "Shaders/flat.vs.glsl"

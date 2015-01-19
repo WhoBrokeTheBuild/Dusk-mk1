@@ -68,7 +68,7 @@ bool Program::init()
     }
 
 	mp_ShaderManager = New ShaderManager();
-    mp_Camera = New Camera(m_Width, m_Height, vec3(20.0f, 150.0f, 20.0f), vec3(0.7f, 0.0f, 0.7f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f, 2.0f);
+    mp_Camera = New Camera((float)m_Width, (float)m_Height, vec3(20.0f, 150.0f, 20.0f), vec3(0.7f, 0.0f, 0.7f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f, 2.0f);
 
     return true;
 }

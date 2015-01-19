@@ -78,7 +78,7 @@ public:
 
 	void changePitch( const GLfloat& amount );
 	void changeYaw( const GLfloat& amount );
-	void rotate( const GLfloat& amount, const vec3& axis );
+	//void rotate( const GLfloat& amount, const vec3& axis );
 
 	inline GLfloat getSpeed( void ) const { return m_Speed; }
 	inline void setSpeed( const GLfloat& speed ) { m_Speed = speed; }

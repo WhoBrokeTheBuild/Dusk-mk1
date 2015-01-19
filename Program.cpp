@@ -157,6 +157,24 @@ void Program::render()
 	mat4x4 mProj = mp_Camera->getProjectionMatrix();
 	mat4x4 mViewProj = mProj * mView;
 
+	LogInfoFmt(getClassName(), "View Matrix:\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
+        mView[0][0], mView[0][1], mView[0][2], mView[0][3],
+        mView[1][0], mView[1][1], mView[1][2], mView[1][3],
+        mView[2][0], mView[2][1], mView[2][2], mView[2][3],
+        mView[3][0], mView[3][1], mView[3][2], mView[3][3]);
+
+	LogInfoFmt(getClassName(), "Projection Matrix:\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
+        mProj[0][0], mProj[0][1], mProj[0][2], mProj[0][3],
+        mProj[1][0], mProj[1][1], mProj[1][2], mProj[1][3],
+        mProj[2][0], mProj[2][1], mProj[2][2], mProj[2][3],
+        mProj[3][0], mProj[3][1], mProj[3][2], mProj[3][3]);
+
+	LogInfoFmt(getClassName(), "View/Projection Matrix:\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
+        mViewProj[0][0], mViewProj[0][1], mViewProj[0][2], mViewProj[0][3],
+        mViewProj[1][0], mViewProj[1][1], mViewProj[1][2], mViewProj[1][3],
+        mViewProj[2][0], mViewProj[2][1], mViewProj[2][2], mViewProj[2][3],
+        mViewProj[3][0], mViewProj[3][1], mViewProj[3][2], mViewProj[3][3]);
+
 	mp_ShaderManager->useProgram("flat");
 
 	glm::mat4x4 mModel = mat4(1.0f);
@@ -173,7 +191,19 @@ void Program::render()
 	mModel = glm::rotate(mModel, m_Rot.y, vec3(0.0f, 1.0f, 0.0f));
 	mModel = glm::rotate(mModel, m_Rot.z, vec3(0.0f, 0.0f, 1.0f));
 
+	LogInfoFmt(getClassName(), "Model Matrix:\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
+        mModel[0][0], mModel[0][1], mModel[0][2], mModel[0][3],
+        mModel[1][0], mModel[1][1], mModel[1][2], mModel[1][3],
+        mModel[2][0], mModel[2][1], mModel[2][2], mModel[2][3],
+        mModel[3][0], mModel[3][1], mModel[3][2], mModel[3][3]);
+
 	mModelViewProj = mViewProj * mModel;
+
+	LogInfoFmt(getClassName(), "Model/View/Projection Matrix:\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
+        mModelViewProj[0][0], mModelViewProj[0][1], mModelViewProj[0][2], mModelViewProj[0][3],
+        mModelViewProj[1][0], mModelViewProj[1][1], mModelViewProj[1][2], mModelViewProj[1][3],
+        mModelViewProj[2][0], mModelViewProj[2][1], mModelViewProj[2][2], mModelViewProj[2][3],
+        mModelViewProj[3][0], mModelViewProj[3][1], mModelViewProj[3][2], mModelViewProj[3][3]);
 
 	GLint m4ModelViewProjLoc  = mp_ShaderManager->getUniformLocation("uModelViewProj");
 	GLint v4FlatColorLoc  = mp_ShaderManager->getUniformLocation("uFlatColor");
@@ -205,7 +235,7 @@ bool Program::initWindow()
 	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
 
     bool m_Fullscreen = false;
-    int m_Width = 800, m_Height = 600;
+    m_Width = 800, m_Height = 600;
     string m_Title = "Dusk Engine - Test";
 
 	if (m_Fullscreen)

@@ -90,11 +90,11 @@ void Camera::reset( GLfloat width, GLfloat height )
 	m_PosDelta = vec3(0.0f);
 }
 
-void Camera::rotate( const GLfloat& amount, const vec3& axis )
-{
+//void Camera::rotate( const GLfloat& amount, const vec3& axis )
+//{
 	//m_Dir = glm::rotate(m_Dir, amount, axis);
 	//m_ViewUpdated = true;
-}
+//}
 
 void Camera::changePitch( const GLfloat& amount )
 {

@@ -1,71 +1,139 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Project">
+      <UniqueIdentifier>{ce193d8e-3699-40db-b550-189f3eb3a5d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{2273a15e-3ee6-4a54-a40e-561cbf29ed20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Project\Assets">
+      <UniqueIdentifier>{5ce2ebfe-5c1f-4cd4-b2c1-421dacf519c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Graphics">
+      <UniqueIdentifier>{93575e19-331d-44b5-800e-4154ae728ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Graphics\Shaders">
+      <UniqueIdentifier>{be56721e-af19-46cf-98cc-68c93abd7e0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Assets\Models">
+      <UniqueIdentifier>{13b0c1e0-9a36-4e8f-b890-7c7c1809508e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Assets\Textures">
+      <UniqueIdentifier>{1f2494da-e4de-4d19-ad78-73b9a98b49a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Timing">
+      <UniqueIdentifier>{158a5405-6ecb-4e58-a953-7c9f3e739b73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math">
+      <UniqueIdentifier>{8b152985-d051-40c6-b58c-09ae74b3d72c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Logging">
+      <UniqueIdentifier>{da4305dc-7397-42c0-a3bb-0b5282a79596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Logging\Logs">
+      <UniqueIdentifier>{c8c77654-7da4-4cda-911c-3863ed75d6fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Utility">
+      <UniqueIdentifier>{4b151a9b-1224-4709-b8b9-3c0cca2b54ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Base">
+      <UniqueIdentifier>{02d71b42-486a-40d1-ae44-14f8ddafecbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Assets\Textures\Skyboxes">
+      <UniqueIdentifier>{dae1c1d7-5d55-4cf5-b617-6c04f8eff616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Assets\Materials">
+      <UniqueIdentifier>{143f591e-5e85-470e-ae25-22f0a87e312d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeInfo.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Project\Scene</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Project\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Program.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="TimeInfo.cpp">
+      <Filter>Project\Timing</Filter>
     </ClCompile>
     <ClCompile Include="Log.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Project\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Main.cpp">
+      <Filter>Project\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Project\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TimeInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.Uniforms.inc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Program.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Project\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Functions.h">
-      <Filter>Header Files</Filter>
+      <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Shader.h">
+      <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.Uniforms.inc.h">
+      <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeInfo.h">
+      <Filter>Project\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Project\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL.h">
+      <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Project\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Program.h">
+      <Filter>Project\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="info.log" />
-    <Text Include="error.log" />
-    <Text Include="combined.log" />
+    <Text Include="combined.log">
+      <Filter>Project\Logging\Logs</Filter>
+    </Text>
+    <Text Include="error.log">
+      <Filter>Project\Logging\Logs</Filter>
+    </Text>
+    <Text Include="info.log">
+      <Filter>Project\Logging\Logs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\flat.fs.glsl">
+      <Filter>Project\Graphics\Shaders</Filter>
+    </None>
+    <None Include="Shaders\flat.vs.glsl">
+      <Filter>Project\Graphics\Shaders</Filter>
+    </None>
+    <None Include="Shaders\skybox.fs.glsl">
+      <Filter>Project\Graphics\Shaders</Filter>
+    </None>
+    <None Include="Shaders\skybox.vs.glsl">
+      <Filter>Project\Graphics\Shaders</Filter>
+    </None>
+    <None Include="Assets\mdl_cube.dskm">
+      <Filter>Project\Assets\Models</Filter>
+    </None>
+    <None Include="Assets\mdl_monkey.dskm">
+      <Filter>Project\Assets\Models</Filter>
+    </None>
+    <None Include="Assets\mdl_test2.dskm">
+      <Filter>Project\Assets\Models</Filter>
+    </None>
+    <None Include="Assets\behemoth\mdl_behemoth.dskm">
+      <Filter>Project\Assets\Models</Filter>
+    </None>
   </ItemGroup>
 </Project>

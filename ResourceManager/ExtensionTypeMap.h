@@ -3,9 +3,10 @@
 
 #include <string>
 
-#include "Map.h"
+#include <Arc/Map.h>
 
 using std::string;
+using Arc::Map;
 
 #define STR_EXT_TYPES_MAP \
 "dskm model/dusk-engine-binary\n" \

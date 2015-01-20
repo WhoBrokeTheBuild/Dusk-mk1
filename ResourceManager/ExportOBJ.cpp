@@ -6,10 +6,11 @@
 #include <glm/glm.hpp>
 
 #include "Functions.h"
-#include "ArrayList.h"
+#include <Arc/ArrayList.h>
 
 using glm::vec3;
 using glm::vec2;
+using Arc::ArrayList;
 
 bool ExportOBJ( const string& filename, InterModel* pModel )
 {

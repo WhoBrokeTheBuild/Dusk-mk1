@@ -11,9 +11,10 @@ extern "C"
     #include <SDL_image.h>
 }
 
+#include <Arc/Map.h>
+
 #include "MainArgs.h"
 #include "Functions.h"
-#include "Map.h"
 #include "ExtensionTypeMap.h"
 
 #include "InterModel.h"
@@ -38,7 +39,7 @@ extern "C"
 #include "ExportDSKT.h"
 
 using std::string;
-using std::map;
+using Arc::Map;
 
 typedef bool (*InportModelFunc)(const string&, InterModel*);
 typedef bool (*ExportModelFunc)(const string&, InterModel*);

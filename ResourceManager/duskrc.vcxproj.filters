@@ -10,9 +10,6 @@
     <Filter Include="Project\Export">
       <UniqueIdentifier>{9f0bbbb9-4db0-466b-9c4b-b650143ecbee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Collections">
-      <UniqueIdentifier>{4b43daf9-3ca5-4267-aa23-9d86384eaff5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\Util">
       <UniqueIdentifier>{88863d66-a5ef-4290-9c1c-18e24ee9e9a8}</UniqueIdentifier>
     </Filter>
@@ -33,15 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayList.h">
-      <Filter>Project\Collections</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Project\Collections</Filter>
-    </ClInclude>
-    <ClInclude Include="MathFunctions.h">
-      <Filter>Project\Util</Filter>
-    </ClInclude>
     <ClInclude Include="MainArgs.h">
       <Filter>Project\Util</Filter>
     </ClInclude>
@@ -96,6 +84,10 @@
     <ClInclude Include="ImportTGA.h">
       <Filter>Project\Import\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="InterMaterial.h">
+      <Filter>Project\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -151,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="ImportTGA.cpp">
       <Filter>Project\Import\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="InterMaterial.cpp">
+      <Filter>Project\Intermediate</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

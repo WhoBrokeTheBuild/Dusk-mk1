@@ -46,12 +46,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../Libraries/SDL/include/;../Libraries/glm/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Libraries/SDL/include/;../Libraries/glm/include/;../Libraries/Arc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Libraries/SDL/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Libraries/SDL/lib/;../Libraries/Arc/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;ArcCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -71,7 +71,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayList.h" />
     <ClInclude Include="ExportDSKM.h" />
     <ClInclude Include="ExportDSKT.h" />
     <ClInclude Include="ExportJPG.h" />
@@ -86,11 +85,11 @@
     <ClInclude Include="ImportOBJ.h" />
     <ClInclude Include="ImportPNG.h" />
     <ClInclude Include="ImportTGA.h" />
+    <ClInclude Include="InterMaterial.h" />
     <ClInclude Include="InterModel.h" />
     <ClInclude Include="InterTexture.h" />
     <ClInclude Include="MainArgs.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="MathFunctions.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Usage.h" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +107,7 @@
     <ClCompile Include="ImportOBJ.cpp" />
     <ClCompile Include="ImportPNG.cpp" />
     <ClCompile Include="ImportTGA.cpp" />
+    <ClCompile Include="InterMaterial.cpp" />
     <ClCompile Include="InterModel.cpp" />
     <ClCompile Include="InterTexture.cpp" />
     <ClCompile Include="Main.cpp" />

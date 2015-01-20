@@ -5,15 +5,20 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include "ArrayList.h"
+#include <Arc/ArrayList.h>
+#include <Arc/ManagedObject.h>
 
 using std::string;
 using glm::vec3;
 using glm::vec2;
+using Arc::ArrayList;
 
-class InterModel
+class InterModel :
+	public Arc::ManagedObject
 {
 public:
+
+	virtual inline string getClassName(void) const { return "Intermediate Model"; }
 
     string              Name;
 

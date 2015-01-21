@@ -189,10 +189,10 @@ void Log::Output( std::ostream& stream, const string& type, const string& src, c
 	float seconds = now / (float)CLOCKS_PER_SEC;
 
 	int hours = (int)(seconds / 3600.0f);
-	seconds -= hours;
+	seconds -= hours * 3600.0f;
 
 	int mins = (int)(seconds / 60.0f);
-	seconds -= mins;
+	seconds -= mins * 60.0f;
 
 	int secs = (int)seconds;
 	seconds -= secs;

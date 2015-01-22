@@ -16,7 +16,7 @@ public:
 
 	inline Camera( const GLfloat& width, const GLfloat& height, const vec3& pos, const vec3& dir, const vec3& up,
                    const GLfloat& fov, const GLfloat& vNear, const GLfloat& vFar, const GLfloat& speed )
-		: m_ProjUpdated		(true),
+		: m_ProjUpdated		(false),
 		  m_InitialFOV		(fov),
 		  m_InitialNear		(vNear),
 		  m_InitialFar		(vFar),
@@ -24,9 +24,12 @@ public:
 		  m_InitialPos		(pos),
 		  m_InitialUp		(up),
 		  m_InitialDir      (dir),
+		  m_AspectWidth		(width),
+		  m_AspectHeight	(height),
 		  m_Orient			(1, 0, 0, 0)
 	{
-		reset(width, height);
+		reset();
+		getProjectionMatrix();
 		getViewMatrix();
 	}
 
@@ -34,8 +37,23 @@ public:
 
 	virtual inline string getClassName( void ) const { return "Camera"; }
 
-	void reset( GLfloat width, GLfloat height );
-	inline void reset( void ) { reset(m_AspectWidth, m_AspectHeight); }
+	void resize( GLfloat width, GLfloat height );
+	inline void reset(void) 
+	{
+		setPos(m_InitialPos);
+		setDir(m_InitialDir);
+		setUp(m_InitialUp);
+		m_Near = m_InitialNear;
+		m_Far = m_InitialFar;
+		m_FOV = m_InitialFOV;
+
+		m_ProjUpdated = true;
+
+		m_Pitch = 0.0f;
+		m_Yaw = 0.0f;
+		m_Speed = m_InitialSpeed;
+		m_PosDelta = vec3(0.0f);
+	}
 
 	inline vec3 getPos( void ) const      { return m_Pos; }
 	inline void setPos( const vec3& pos ) { setPos(pos.x, pos.y, pos.z); }

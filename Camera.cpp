@@ -52,6 +52,7 @@ void Camera::setPerspective( const GLfloat& fov, const GLfloat& width, const GLf
 	m_AspectHeight = height;
 	m_Near = vNear;
 	m_Far = vFar;
+	m_ProjUpdated = true;
 }
 
 void Camera::setDir( const GLfloat& x, const GLfloat& y, const GLfloat& z )
@@ -76,18 +77,11 @@ mat4x4 Camera::getProjectionMatrix( void )
 	return m_Proj;
 }
 
-void Camera::reset( GLfloat width, GLfloat height )
+void Camera::resize(GLfloat width, GLfloat height)
 {
-	setPos(m_InitialPos);
-	setDir(m_InitialDir);
-	setUp(m_InitialUp);
-
-	setPerspective(m_InitialFOV, width, height, m_InitialNear, m_InitialFar);
-
-	m_Pitch = 0.0f;
-	m_Yaw = 0.0f;
-	m_Speed = m_InitialSpeed;
-	m_PosDelta = vec3(0.0f);
+	m_AspectWidth = width;
+	m_AspectHeight = height;
+	m_ProjUpdated = true;
 }
 
 //void Camera::rotate( const GLfloat& amount, const vec3& axis )

@@ -1,5 +1,7 @@
-#ifndef DUSK_OPENGL_H
-#define DUSK_OPENGL_H
+#ifndef DUSK_GRAPHICS_H
+#define DUSK_GRAPHICS_H
+
+#include <Arc/Platform.h>
 
 #if defined(ARC_OS_WINDOWS)
 
@@ -19,4 +21,14 @@ typedef GLuint GLProgram;
 typedef GLuint GLUniformLocation;
 typedef GLuint GLTexture;
 
-#endif // DUSK_OPENGL_H
+namespace Dusk
+{
+
+namespace Graphics
+{
+
+} // namespace Graphics
+
+} // namespace Dusk
+
+#endif // DUSK_GRAPHICS_H

@@ -7,14 +7,46 @@
 
 #include <string>
 
-#include "OpenGL.h"
-#include "Math.h"
+#include <Graphics/Graphics.h>
+#include <Math/Math.h>
 
 using std::string;
 using Arc::ArrayList;
 using Arc::Map;
 
-struct Shader;
+namespace Dusk
+{
+
+namespace Graphics
+{
+
+struct ShaderInfo :
+    public Arc::ManagedObject
+{
+public:
+
+	ShaderInfo( const GLenum& type, const string& filename ) :
+		Type(type),
+		Filename(filename)
+	{ }
+
+	ShaderInfo( const ShaderInfo& rhs ) :
+		Type(rhs.Type),
+		Filename(rhs.Filename)
+	{ }
+
+	void operator=( const ShaderInfo& rhs )
+	{
+		Type = rhs.Type;
+		Filename = rhs.Filename;
+	}
+
+	virtual inline string getClassName( void ) const { return "Shader Info"; }
+
+	GLenum Type;
+	string Filename;
+
+}; // struct ShaderInfo
 
 class ShaderManager :
     public Arc::ManagedObject
@@ -32,10 +64,8 @@ public:
 
 	virtual inline string getClassName( void ) const { return "Shader Manager"; }
 
-	bool loadProgram( const string& name, const ArrayList<Shader>& shaders );
-
+	bool loadProgram( const string& name, const ArrayList<ShaderInfo>& shaders );
 	bool useProgram( const string& name );
-	GLProgram getProgram( const string& name ) { return (m_Programs.containsKey(name) ? m_Programs[name] : -1); }
 
 	inline GLUniformLocation getUniformLocation( const string& uniformName ) { return getUniformLocation(m_CurrProgName, uniformName); }
 	GLUniformLocation getUniformLocation( const string& programName, const string& uniformName );
@@ -59,6 +89,11 @@ private:
 	GLProgram m_CurrProg;
 
 	string m_CurrProgName;
-};
+
+}; // class ShaderManager
+
+} // Graphics
+
+} // Dusk
 
 #endif // DUSK_SHADER_MANAGER_H

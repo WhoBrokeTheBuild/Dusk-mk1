@@ -11,12 +11,12 @@ using std::string;
 using Arc::Map;
 using Arc::ArrayList;
 
-Map<string, int> Log::s_InfoOutputs = Map<string, int>();
-Map<string, int> Log::s_ErrorOutputs = Map<string, int>();
+Map<string, int> Dusk::Logging::Log::s_InfoOutputs = Map<string, int>();
+Map<string, int> Dusk::Logging::Log::s_ErrorOutputs = Map<string, int>();
 
-ArrayList<std::ostream*> Log::s_Streams = ArrayList<std::ostream*>();
+ArrayList<std::ostream*> Dusk::Logging::Log::s_Streams = ArrayList<std::ostream*>();
 
-void Log::CloseOutputs( void )
+void Dusk::Logging::Log::CloseOutputs( void )
 {
 	for (int i = 0; i < (int)s_Streams.getSize(); ++i)
 	{
@@ -39,7 +39,7 @@ void Log::CloseOutputs( void )
 	s_Streams.clear();
 }
 
-bool Log::AddInfoOutput( const string& filename, bool append /*= true */ )
+bool Dusk::Logging::Log::AddInfoOutput( const string& filename, bool append /*= true */ )
 {
 	if (s_InfoOutputs.containsKey(filename))
 		return false;
@@ -72,7 +72,7 @@ bool Log::AddInfoOutput( const string& filename, bool append /*= true */ )
 	return true;
 }
 
-bool Log::RemoveInfoOutput( const string& filename )
+bool Dusk::Logging::Log::RemoveInfoOutput( const string& filename )
 {
 	int streamInd = s_InfoOutputs[filename];
 
@@ -87,7 +87,7 @@ bool Log::RemoveInfoOutput( const string& filename )
 	return true;
 }
 
-bool Log::AddErrorOutput( const string& filename, bool append /*= true */ )
+bool Dusk::Logging::Log::AddErrorOutput( const string& filename, bool append /*= true */ )
 {
 	if (s_ErrorOutputs.containsKey(filename))
 		return false;
@@ -120,7 +120,7 @@ bool Log::AddErrorOutput( const string& filename, bool append /*= true */ )
 	return true;
 }
 
-bool Log::RemoveErrorOutput( const string& filename )
+bool Dusk::Logging::Log::RemoveErrorOutput( const string& filename )
 {
 	int streamInd = s_ErrorOutputs[filename];
 
@@ -135,7 +135,7 @@ bool Log::RemoveErrorOutput( const string& filename )
 	return true;
 }
 
-void Log::ExtInfo( const string& src, const string& msg, const string& file, const int& line )
+void Dusk::Logging::Log::Info( const string& src, const string& msg, const string& file, const int& line )
 {
 	auto end = s_InfoOutputs.itEnd();
 	for (auto it = s_InfoOutputs.itBegin(); it != end; ++it)
@@ -144,7 +144,7 @@ void Log::ExtInfo( const string& src, const string& msg, const string& file, con
 	}
 }
 
-void Log::ExtError( const string& src, const string& msg, const string& file, const int& line )
+void Dusk::Logging::Log::Error( const string& src, const string& msg, const string& file, const int& line )
 {
 	auto end = s_ErrorOutputs.itEnd();
 	for (auto it = s_ErrorOutputs.itBegin(); it != end; ++it)
@@ -153,7 +153,7 @@ void Log::ExtError( const string& src, const string& msg, const string& file, co
 	}
 }
 
-void Log::ExtInfoFmt( const string& src, const string& fmt, const string& file, const int line, ... )
+void Dusk::Logging::Log::InfoFmt( const string& src, const string& fmt, const string& file, const int line, ... )
 {
 	va_list args;
 
@@ -168,7 +168,7 @@ void Log::ExtInfoFmt( const string& src, const string& fmt, const string& file, 
 	}
 }
 
-void Log::ExtErrorFmt( const string& src, const string& fmt, const string& file, const int line, ... )
+void Dusk::Logging::Log::ErrorFmt( const string& src, const string& fmt, const string& file, const int line, ... )
 {
 	va_list args;
 
@@ -183,7 +183,7 @@ void Log::ExtErrorFmt( const string& src, const string& fmt, const string& file,
 	}
 }
 
-void Log::Output( std::ostream& stream, const string& type, const string& src, const string& msg, const string& file, const int& line )
+void Dusk::Logging::Log::Output( std::ostream& stream, const string& type, const string& src, const string& msg, const string& file, const int& line )
 {
 	clock_t now = clock();
 	float seconds = now / (float)CLOCKS_PER_SEC;
@@ -202,7 +202,7 @@ void Log::Output( std::ostream& stream, const string& type, const string& src, c
 	stream << "+" << hours << "." << mins << "." << secs << "." << ms << " " << type << " <" << Arc::Arc_Basename(file) << ":" << line << "> " << src << ": " << msg << std::endl;
 }
 
-string Log::Format( const string& fmt, va_list args )
+string Dusk::Logging::Log::Format( const string& fmt, va_list args )
 {
 	const int BUFFER_MAX = 4096;
 	char buffer[BUFFER_MAX];

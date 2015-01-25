@@ -1,8 +1,10 @@
 #include <Arc/MemoryTracker.h>
 
-#include "Program.h"
-#include "Log.h"
-#include "ShaderManager.h"
+#include <Program.h>
+#include <Logging/Log.h>
+
+using namespace Dusk;
+using namespace Dusk::Logging;
 
 int main(int argc, char* argv[])
 {
@@ -11,9 +13,6 @@ int main(int argc, char* argv[])
 
     Log::AddInfoOutput("info.log", false);
     Log::AddErrorOutput("error.log", false);
-
-    Log::AddInfoOutput("combined.log", false);
-    Log::AddErrorOutput("combined.log", false);
 
     Arc::Arc_InitMemoryTracker();
 

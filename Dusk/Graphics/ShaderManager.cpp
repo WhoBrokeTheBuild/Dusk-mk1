@@ -1,15 +1,20 @@
 #include "ShaderManager.h"
 
-#include <fstream>
-#include "Shader.h"
-#include "Log.h"
+#include <Logging/Log.h>
 
-bool ShaderManager::loadProgram( const string& name, const ArrayList<Shader>& shaders )
+#include <fstream>
+#include <cstdarg>
+
+using namespace Dusk::Logging;
+
+bool Dusk::Graphics::ShaderManager::loadProgram( const string& name, const ArrayList<ShaderInfo>& shaders )
 {
+    LogInfoFmt(getClassName(), "Loading Shader Program: %s", name.c_str());
+
 	ArrayList<GLShader> shaderIDs;
 	for (unsigned int i = 0; i < shaders.getSize(); ++i)
 	{
-		const Shader& shader = shaders[i];
+		const ShaderInfo& shader = shaders[i];
 
 		shaderIDs.add(loadShaderFromFile(shader.Filename, shader.Type));
 	}
@@ -67,7 +72,7 @@ bool ShaderManager::loadProgram( const string& name, const ArrayList<Shader>& sh
 	return true;
 }
 
-bool ShaderManager::useProgram( const string& name )
+bool Dusk::Graphics::ShaderManager::useProgram( const string& name )
 {
 	if ( ! m_Programs.containsKey(name))
 	{
@@ -86,7 +91,7 @@ bool ShaderManager::useProgram( const string& name )
 	return true;
 }
 
-void ShaderManager::printProgramLog( const GLuint& program )
+void Dusk::Graphics::ShaderManager::printProgramLog( const GLuint& program )
 {
 	if( glIsProgram( program ) )
 	{
@@ -111,7 +116,7 @@ void ShaderManager::printProgramLog( const GLuint& program )
 	}
 }
 
-void ShaderManager::printShaderLog( const GLuint& shader )
+void Dusk::Graphics::ShaderManager::printShaderLog( const GLuint& shader )
 {
 	if( glIsShader( shader ) )
 	{
@@ -136,11 +141,10 @@ void ShaderManager::printShaderLog( const GLuint& shader )
 	}
 }
 
-GLShader ShaderManager::loadShaderFromFile( const string& filename, const GLenum& shaderType )
+GLShader Dusk::Graphics::ShaderManager::loadShaderFromFile( const string& filename, const GLenum& shaderType )
 {
 	LogInfoFmt(getClassName(), "Load from file \"%s\"", filename.c_str());
-	GLuint shader = 0;
-	string shaderString;
+	GLuint shader = 0;	string shaderString;
 	std::ifstream file(filename);
 
 	if (file)
@@ -173,7 +177,7 @@ GLShader ShaderManager::loadShaderFromFile( const string& filename, const GLenum
 	return shader;
 }
 
-GLUniformLocation ShaderManager::getUniformLocation( const string& programName, const string& uniformName )
+GLUniformLocation Dusk::Graphics::ShaderManager::getUniformLocation( const string& programName, const string& uniformName )
 {
 	if (m_CurrProg == 0)
 		return -1;
@@ -187,7 +191,7 @@ GLUniformLocation ShaderManager::getUniformLocation( const string& programName, 
 	return m_UniformLocations[programName][uniformName];
 }
 
-void ShaderManager::checkUniformError( void )
+void Dusk::Graphics::ShaderManager::checkUniformError( void )
 {
 	GLenum error = glGetError();
 

@@ -25,4 +25,14 @@ using glm::quat;
 
 using glm::radians;
 
+namespace Dusk
+{
+
+namespace Math
+{
+
+} // namespace Math
+
+} // namespace Dusk
+
 #endif // DUSK_MATH_H

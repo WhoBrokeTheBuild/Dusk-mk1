@@ -11,6 +11,12 @@
 using Arc::ArrayList;
 using Arc::Map;
 
+namespace Dusk
+{
+
+namespace Logging
+{
+
 class Log
 {
 public:
@@ -21,11 +27,11 @@ public:
 	static bool AddErrorOutput( const string& filename, bool append = true );
 	static bool RemoveErrorOutput( const string& filename );
 
-	static void ExtInfo( const string& src, const string& msg, const string& file, const int& line );
-	static void ExtError( const string& src, const string& msg, const string& file, const int& line );
+	static void Info( const string& src, const string& msg, const string& file, const int& line );
+	static void Error( const string& src, const string& msg, const string& file, const int& line );
 
-	static void ExtInfoFmt( const string& src, const string& fmt, const string& file, const int line, ... );
-	static void ExtErrorFmt( const string& src, const string& fmt, const string& file, const int line, ... );
+	static void InfoFmt( const string& src, const string& fmt, const string& file, const int line, ... );
+	static void ErrorFmt( const string& src, const string& fmt, const string& file, const int line, ... );
 
 	static void CloseOutputs( void );
 
@@ -45,10 +51,14 @@ private:
 
 };
 
-#define LogInfo(SRC, MSG) Log::ExtInfo(SRC, MSG, string(__FILE__), __LINE__);
-#define LogError(SRC, MSG) Log::ExtError(SRC, MSG, string(__FILE__), __LINE__);
+#define LogInfo(SRC, MSG) Log::Info(SRC, MSG, string(__FILE__), __LINE__);
+#define LogError(SRC, MSG) Log::Error(SRC, MSG, string(__FILE__), __LINE__);
 
-#define LogInfoFmt(SRC, FMT, ...) Log::ExtInfoFmt(SRC, FMT, string(__FILE__), __LINE__, __VA_ARGS__);
-#define LogErrorFmt(SRC, FMT, ...) Log::ExtErrorFmt(SRC, FMT, string(__FILE__), __LINE__, __VA_ARGS__);
+#define LogInfoFmt(SRC, FMT, ...) Log::InfoFmt(SRC, FMT, string(__FILE__), __LINE__, __VA_ARGS__);
+#define LogErrorFmt(SRC, FMT, ...) Log::ErrorFmt(SRC, FMT, string(__FILE__), __LINE__, __VA_ARGS__);
+
+} // Logging
+
+} // Dusk
 
 #endif // DUSK_LOG_H

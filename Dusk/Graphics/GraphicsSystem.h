@@ -28,11 +28,13 @@ public:
 
     virtual inline string getClassName( void ) const { return "Graphics"; }
 
-    bool init( const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen = false );
+    bool init( const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen = false, const bool& vsync = false );
 
     Window* getWindow( void );
     GraphicsContext* getGraphicsContext( void );
     ShaderManager* getShaderManager( void );
+
+    inline void setVsync( const bool& vsync ) { glfwSwapInterval( ( vsync ? 1 : 0) ); }
 
 private:
 

@@ -5,14 +5,21 @@
 #include <Graphics/GraphicsSystem.h>
 #include <Graphics/ShaderManager.h>
 #include <Graphics/GraphicsContext.h>
+#include <Graphics/Model.h>
 #include <World/Camera.h>
+#include <World/Skybox.h>
 #include <Timing/TimeInfo.h>
 
 using namespace Dusk::Logging;
 
 Dusk::Graphics::GraphicsSystem* Dusk::Program::getGraphicsSystem( void )
 {
-    return mp_Graphics;
+    return mp_GraphicsSystem;
+}
+
+Dusk::World::Camera* Dusk::Program::getCamera( void )
+{
+    return mp_Camera;
 }
 
 void Dusk::Program::start()
@@ -30,35 +37,32 @@ void Dusk::Program::start()
         return;
     }
 
-	float lastFrameTime = 0.0f;
 	TimeInfo timeInfo;
+    m_TargetFPS = 60.0f;
+    const double updateInterval = 1.0f / m_TargetFPS;
+    unsigned long long frameCount = 0;
 
-    float updateTimer = 0.0f;
+    double timeStart = glfwGetTime();
+    double lastTime = timeStart;
 	while ( ! getGraphicsSystem()->getWindow()->shouldClose() )
 	{
-		const float updateInt = 1.0f / 60.0f;
-
-		float currTime = (float)glfwGetTime();
-		float elapsedTime = currTime - lastFrameTime;
-		lastFrameTime = currTime;
-
-		updateTimer += elapsedTime;
+		double time = glfwGetTime();
+		double elapsedTime = time - lastTime;
+		lastTime = time;
 
         timeInfo.ElapsedSeconds = elapsedTime;
         timeInfo.ElapsedMilliseconds = timeInfo.ElapsedSeconds * 1000.0f;
         timeInfo.TotalSeconds += elapsedTime;
         timeInfo.TotalMilliseconds += timeInfo.ElapsedMilliseconds;
 
-        timeInfo.Delta = timeInfo.ElapsedMilliseconds / updateInt;
+        timeInfo.Delta = elapsedTime / updateInterval;
+        m_CurrentFPS = (updateInterval / elapsedTime) * m_TargetFPS;
 
-		if (updateTimer >= updateInt)
-		{
-			updateTimer = 0.0f;
+        update(timeInfo);
+        render();
+        getGraphicsSystem()->getGraphicsContext()->swapBuffers();
 
-            update(timeInfo);
-			render();
-			getGraphicsSystem()->getGraphicsContext()->swapBuffers();
-		}
+        ++frameCount;
 
 		glfwPollEvents();
 	}
@@ -70,94 +74,68 @@ bool Dusk::Program::init()
 {
     LogInfo(getClassName(), "Initializing");
 
-    mp_Graphics = New GraphicsSystem();
-    if ( ! mp_Graphics->init(640, 480, "Dusk Test", false) )
+    mp_GraphicsSystem = New GraphicsSystem();
+    if ( ! mp_GraphicsSystem->init(1024, 768, "Dusk Test", false) )
     {
         LogError(getClassName(), "Failed to initialize Graphics System");
         return false;
     }
 
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
-                           vec3(3.0f, 3.0f, 3.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
+                           vec3(5.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
 
     return true;
 }
 
 void Dusk::Program::term()
 {
+    delete mp_Cube;
+    delete mp_Skybox;
+
     delete mp_Camera;
-    delete mp_Graphics;
+    mp_Camera = nullptr;
+
+    delete mp_GraphicsSystem;
+    mp_GraphicsSystem = nullptr;
 }
 
 bool Dusk::Program::load()
 {
     LogInfo(getClassName(), "Loading Resources");
 
-    ArrayList<ShaderInfo> shaders;
-    shaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/flat.fs.glsl"));
-    shaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/flat.vs.glsl"));
-    getGraphicsSystem()->getShaderManager()->loadProgram("flat", shaders);
+    ArrayList<ShaderInfo> flatShaders;
+    flatShaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/flat.fs.glsl"));
+    flatShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/flat.vs.glsl"));
+    getGraphicsSystem()->getShaderManager()->loadProgram("flat", flatShaders);
 
-    const GLuint ATTR_VERTEX         = 0;
+    ArrayList<ShaderInfo> skyboxShaders;
+    skyboxShaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/skybox.fs.glsl"));
+    skyboxShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/skybox.vs.glsl"));
+    getGraphicsSystem()->getShaderManager()->loadProgram("skybox", skyboxShaders);
 
-	ArrayList<vec3> verts;
-	verts.add(vec3(0.0f, 0.0f, 0.0f)); verts.add(vec3(1.0f, 1.0f, 0.0f)); verts.add(vec3(1.0f, 0.0f, 0.0f));
-	verts.add(vec3(0.0f, 0.0f, 0.0f)); verts.add(vec3(0.0f, 1.0f, 0.0f)); verts.add(vec3(1.0f, 1.0f, 0.0f));
-	verts.add(vec3(0.0f, 0.0f, 0.0f)); verts.add(vec3(0.0f, 1.0f, 1.0f)); verts.add(vec3(0.0f, 1.0f, 0.0f));
-	verts.add(vec3(0.0f, 0.0f, 0.0f)); verts.add(vec3(0.0f, 0.0f, 1.0f)); verts.add(vec3(0.0f, 1.0f, 1.0f));
-	verts.add(vec3(0.0f, 1.0f, 0.0f)); verts.add(vec3(1.0f, 1.0f, 1.0f)); verts.add(vec3(1.0f, 1.0f, 0.0f));
-	verts.add(vec3(0.0f, 1.0f, 0.0f)); verts.add(vec3(0.0f, 1.0f, 1.0f)); verts.add(vec3(1.0f, 1.0f, 1.0f));
-	verts.add(vec3(1.0f, 0.0f, 0.0f)); verts.add(vec3(1.0f, 1.0f, 0.0f)); verts.add(vec3(1.0f, 1.0f, 1.0f));
-	verts.add(vec3(1.0f, 0.0f, 0.0f)); verts.add(vec3(1.0f, 1.0f, 1.0f)); verts.add(vec3(1.0f, 0.0f, 1.0f));
-	verts.add(vec3(0.0f, 0.0f, 0.0f)); verts.add(vec3(1.0f, 0.0f, 0.0f)); verts.add(vec3(1.0f, 0.0f, 1.0f));
-	verts.add(vec3(0.0f, 0.0f, 0.0f)); verts.add(vec3(1.0f, 0.0f, 1.0f)); verts.add(vec3(0.0f, 0.0f, 1.0f));
-	verts.add(vec3(0.0f, 0.0f, 1.0f)); verts.add(vec3(1.0f, 0.0f, 1.0f)); verts.add(vec3(1.0f, 1.0f, 1.0f));
-	verts.add(vec3(0.0f, 0.0f, 1.0f)); verts.add(vec3(1.0f, 1.0f, 1.0f)); verts.add(vec3(0.0f, 1.0f, 1.0f));
+    rotation = 0.0f;
 
-    GLfloat* pVerts = (GLfloat*)&verts[0];
+    mp_Cube = New Model();
+    mp_Cube->load("Assets/Models/mdl_cube.dskm");
 
-	m_NumVerts = verts.getSize();
-
-	GLuint m_VertBuffer = 0;
-	m_VertArray = 0;
-
-	glGenVertexArrays(1, &m_VertArray);
-	glBindVertexArray(m_VertArray);
-
-	if (m_VertBuffer == 0)
-	{
-		glGenBuffers(1, &m_VertBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3 * m_NumVerts, pVerts, GL_DYNAMIC_DRAW);
-	}
-	else
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertBuffer);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 3 * m_NumVerts, pVerts);
-	}
-
-
-	if (m_VertBuffer != 0)
-	{
-		glEnableVertexAttribArray(ATTR_VERTEX);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertBuffer);
-		glVertexAttribPointer(ATTR_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	}
-
-
-
+    mp_Skybox = New Skybox();
+    mp_Skybox->load("Assets/Skyboxes/tex_skybox_space.dskt");
 
     return true;
 }
 
 void Dusk::Program::update(const TimeInfo& timeInfo)
 {
+    rotation += 0.1f * timeInfo.Delta;
 }
 
 void Dusk::Program::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glClearDepth(1.0f);
+
+    mp_Skybox->render();
+
 
 	mat4x4 mView = mp_Camera->getViewMatrix();
 	mat4x4 mProj = mp_Camera->getProjectionMatrix();
@@ -170,14 +148,18 @@ void Dusk::Program::render()
 
 	glm::vec3 m_Pos = vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 m_Scale = vec3(1.0f);
-	glm::vec3 m_Rot = vec3(0.0f);
+	glm::vec3 m_Rot = vec3(0.0f, rotation, 0.0f);
 
 	mModel = glm::translate(mModel, m_Pos);
 	mModel = glm::scale(mModel, m_Scale);
 
+	mModel = glm::translate(mModel, vec3(0.5f, 0.0f, 0.5f));
+
 	mModel = glm::rotate(mModel, m_Rot.x, vec3(1.0f, 0.0f, 0.0f));
 	mModel = glm::rotate(mModel, m_Rot.y, vec3(0.0f, 1.0f, 0.0f));
 	mModel = glm::rotate(mModel, m_Rot.z, vec3(0.0f, 0.0f, 1.0f));
+
+	mModel = glm::translate(mModel, vec3(-0.5f, 0.0f, -0.5f));
 
 	mModelViewProj = mViewProj * mModel;
 
@@ -187,9 +169,5 @@ void Dusk::Program::render()
 	getGraphicsSystem()->getShaderManager()->setUniformMatrix4fv(m4ModelViewProjLoc, 1, &mModelViewProj);
 	getGraphicsSystem()->getShaderManager()->setUniform4f(v4FlatColorLoc, vec4(0.0f, 0.0f, 1.0f, 1.0f));
 
-	glBindVertexArray(m_VertArray);
-
-	glDrawArrays(GL_TRIANGLES, 0, m_NumVerts);
-
-	glBindVertexArray(0);
+    mp_Cube->render();
 }

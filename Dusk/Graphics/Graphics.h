@@ -20,6 +20,10 @@ typedef GLuint GLShader;
 typedef GLuint GLProgram;
 typedef GLuint GLUniformLocation;
 typedef GLuint GLTexture;
+typedef GLuint GLAttribute;
+typedef GLuint GLBuffer;
+typedef GLuint GLVertexArray;
+typedef GLenum GLPrimitiveType;
 
 namespace Dusk
 {

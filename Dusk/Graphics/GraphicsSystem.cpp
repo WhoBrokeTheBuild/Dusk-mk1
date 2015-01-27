@@ -17,7 +17,7 @@ Dusk::Graphics::GraphicsSystem::~GraphicsSystem()
     mp_Window = nullptr;
 }
 
-bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen)
+bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen /* = false */ , const bool& vsync /* = false */ )
 {
     mp_Window = New Window();
     if ( ! mp_Window->init(width, height, title, fullscreen))
@@ -27,6 +27,8 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
     }
 
     getGraphicsContext()->bind();
+
+    glfwSwapInterval( ( vsync ? 1 : 0) );
 
     glewExperimental = GL_TRUE;
 	GLenum ret = glewInit();
@@ -39,8 +41,6 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
 	glEnable(GL_DEPTH_TEST);
-
-	//glEnable(GL_CULL_FACE);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

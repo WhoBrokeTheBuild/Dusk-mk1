@@ -11,7 +11,7 @@ void main()
 	vec2 texCoord = vTexCoord;
 	texCoord.y = 1.0f - vTexCoord.y;;
 
-	oFragColor = texture(uTexDay, texCoord);
+	oFragColor = texture(uTex, texCoord);
 
 	return;
 }

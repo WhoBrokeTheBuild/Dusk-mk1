@@ -1,7 +1,7 @@
 #version 430 core
 
 layout (location = 0) in vec3 iVertexPosition;
-layout (location = 3) in vec2 iVertexTexCoord;
+layout (location = 2) in vec2 iVertexTexCoord;
 
 uniform mat4 uModelViewProj;
 

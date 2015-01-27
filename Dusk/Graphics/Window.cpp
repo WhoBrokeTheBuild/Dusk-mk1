@@ -1,9 +1,12 @@
 #include "Window.h"
 
+#include <Program.h>
+#include <World/Camera.h>
 #include <Graphics/GraphicsContext.h>
 #include <Logging/Log.h>
 
 using namespace Dusk::Logging;
+using namespace Dusk::World;
 
 Map<GLFWwindow*, Dusk::Graphics::Window*> Dusk::Graphics::g_Windows = Map<GLFWwindow*, Dusk::Graphics::Window*>();
 
@@ -14,6 +17,7 @@ Dusk::Graphics::Window::~Window()
 
     g_Windows.removeKey(mp_GLFWWindow);
 
+    glfwHideWindow(mp_GLFWWindow);
     glfwDestroyWindow(mp_GLFWWindow);
     mp_GLFWWindow = nullptr;
 }
@@ -42,6 +46,7 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
     //    m_Height = mode->height;
     //}
 
+    m_Title = title;
     m_Width = width;
     m_Height = height;
 	mp_GLFWWindow = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), (m_Fullscreen ? pMonitor : NULL), NULL);
@@ -74,6 +79,8 @@ bool Dusk::Graphics::Window::resize( const unsigned int& width, const unsigned i
     m_Height = height;
 
     glfwSetWindowSize(mp_GLFWWindow, (int)width, (int)height);
+
+    Program::getInstance().getCamera()->resize(width, height);
 
     return true;
 }

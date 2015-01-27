@@ -5,7 +5,6 @@
 		<Option title="dusk" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Project/;Project/Assets/;Project/Assets/Logs/;Project/Assets/Shaders/;Project/Graphics/;Project/Assets/Models/;Project/Assets/Textures/;Project/Logging/;Project/Timing/;Project/Math/;Project/Audio/;Project/Input/;Project/World/;Project/Graphics/GraphicsSystem/;Project/Graphics/ShaderManager/;Project/Graphics/GraphicsContext/;Project/Graphics/Window/;Project/Graphics/Texture/;Project/Graphics/Model/;Project/Logging/Log/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="dusk" prefix_auto="1" extension_auto="1" />
@@ -61,90 +60,67 @@
 			<Add directory="Libraries/Arc/lib" />
 			<Add directory="/usr/lib64" />
 		</Linker>
-		<Unit filename="Dusk/Graphics/Graphics.h">
-			<Option virtualFolder="Project/Graphics/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/GraphicsContext.cpp">
-			<Option virtualFolder="Project/Graphics/GraphicsContext/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/GraphicsContext.h">
-			<Option virtualFolder="Project/Graphics/GraphicsContext/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/GraphicsSystem.cpp">
-			<Option virtualFolder="Project/Graphics/GraphicsSystem/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/GraphicsSystem.h">
-			<Option virtualFolder="Project/Graphics/GraphicsSystem/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/ShaderManager.Uniforms.inc.h">
-			<Option virtualFolder="Project/Graphics/ShaderManager/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/ShaderManager.cpp">
-			<Option virtualFolder="Project/Graphics/ShaderManager/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/ShaderManager.h">
-			<Option virtualFolder="Project/Graphics/ShaderManager/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/Window.cpp">
-			<Option virtualFolder="Project/Graphics/Window/" />
-		</Unit>
-		<Unit filename="Dusk/Graphics/Window.h">
-			<Option virtualFolder="Project/Graphics/Window/" />
-		</Unit>
-		<Unit filename="Dusk/Logging/Log.cpp">
-			<Option virtualFolder="Project/Logging/Log/" />
-		</Unit>
-		<Unit filename="Dusk/Logging/Log.h">
-			<Option virtualFolder="Project/Logging/Log/" />
-		</Unit>
-		<Unit filename="Dusk/Main.cpp">
-			<Option virtualFolder="Project/" />
-		</Unit>
-		<Unit filename="Dusk/Math/Math.h">
-			<Option virtualFolder="Project/Math/" />
-		</Unit>
-		<Unit filename="Dusk/Program.cpp">
-			<Option virtualFolder="Project/" />
-		</Unit>
-		<Unit filename="Dusk/Program.h">
-			<Option virtualFolder="Project/" />
-		</Unit>
-		<Unit filename="Dusk/Timing/TimeInfo.cpp">
-			<Option virtualFolder="Project/Timing/" />
-		</Unit>
-		<Unit filename="Dusk/Timing/TimeInfo.h">
-			<Option virtualFolder="Project/Timing/" />
-		</Unit>
-		<Unit filename="Dusk/Timing/Timer.cpp">
-			<Option virtualFolder="Project/Timing/" />
-		</Unit>
-		<Unit filename="Dusk/Timing/Timer.h">
-			<Option virtualFolder="Project/Timing/" />
-		</Unit>
-		<Unit filename="Dusk/World/Camera.cpp">
-			<Option virtualFolder="Project/World/" />
-		</Unit>
-		<Unit filename="Dusk/World/Camera.h">
-			<Option virtualFolder="Project/World/" />
-		</Unit>
-		<Unit filename="Shaders/flat.fs.glsl">
-			<Option virtualFolder="Project/Assets/Shaders/" />
-		</Unit>
-		<Unit filename="Shaders/flat.vs.glsl">
-			<Option virtualFolder="Project/Assets/Shaders/" />
-		</Unit>
-		<Unit filename="Shaders/skybox.fs.glsl">
-			<Option virtualFolder="Project/Assets/Shaders/" />
-		</Unit>
-		<Unit filename="Shaders/skybox.vs.glsl">
-			<Option virtualFolder="Project/Assets/Shaders/" />
-		</Unit>
-		<Unit filename="error.log">
-			<Option virtualFolder="Project/Assets/Logs/" />
-		</Unit>
-		<Unit filename="info.log">
-			<Option virtualFolder="Project/Assets/Logs/" />
-		</Unit>
+		<Unit filename="Assets/Models/behemoth/mat_behemoth.mtl" />
+		<Unit filename="Assets/Models/behemoth/mdl_behemoth.dskm" />
+		<Unit filename="Assets/Models/behemoth/mdl_behemoth.obj" />
+		<Unit filename="Assets/Models/behemoth/tex_behemoth_armor.tga" />
+		<Unit filename="Assets/Models/behemoth/tex_behemoth_firehydrant.tga" />
+		<Unit filename="Assets/Models/behemoth/tex_behemoth_skin.tga" />
+		<Unit filename="Assets/Models/bridge/mat_bridge.mtl" />
+		<Unit filename="Assets/Models/bridge/mdl_bridge.obj" />
+		<Unit filename="Assets/Models/bridge/tex_bridge.jpg" />
+		<Unit filename="Assets/Models/bridge/tex_bridge_bump.tga" />
+		<Unit filename="Assets/Models/bridge/tex_bridge_norm.jpg" />
+		<Unit filename="Assets/Models/bridge/tex_bridge_spec.jpg" />
+		<Unit filename="Assets/Models/mdl_cube.dskm" />
+		<Unit filename="Assets/Models/mdl_cube.obj" />
+		<Unit filename="Assets/Models/mdl_monkey.dskm" />
+		<Unit filename="Assets/Models/mdl_monkey.obj" />
+		<Unit filename="Assets/Models/mdl_test.obj" />
+		<Unit filename="Assets/Models/mdl_test2.dskm" />
+		<Unit filename="Assets/Models/mdl_test2.obj" />
+		<Unit filename="Assets/Models/mdl_torus.obj" />
+		<Unit filename="Assets/Shaders/flat.fs.glsl" />
+		<Unit filename="Assets/Shaders/flat.vs.glsl" />
+		<Unit filename="Assets/Shaders/skybox.fs.glsl" />
+		<Unit filename="Assets/Shaders/skybox.vs.glsl" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_abstract.png" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_clouds.jpg" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_grimmnight.jpg" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_nebula.png" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_nightcity.jpg" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_space.png" />
+		<Unit filename="Assets/Skyboxes/tex_skybox_stormydays.jpg" />
+		<Unit filename="Dusk/Graphics/Graphics.h" />
+		<Unit filename="Dusk/Graphics/GraphicsContext.cpp" />
+		<Unit filename="Dusk/Graphics/GraphicsContext.h" />
+		<Unit filename="Dusk/Graphics/GraphicsSystem.cpp" />
+		<Unit filename="Dusk/Graphics/GraphicsSystem.h" />
+		<Unit filename="Dusk/Graphics/Mesh.cpp" />
+		<Unit filename="Dusk/Graphics/Mesh.h" />
+		<Unit filename="Dusk/Graphics/Model.cpp" />
+		<Unit filename="Dusk/Graphics/Model.h" />
+		<Unit filename="Dusk/Graphics/ShaderManager.Uniforms.inc.h" />
+		<Unit filename="Dusk/Graphics/ShaderManager.cpp" />
+		<Unit filename="Dusk/Graphics/ShaderManager.h" />
+		<Unit filename="Dusk/Graphics/Window.cpp" />
+		<Unit filename="Dusk/Graphics/Window.h" />
+		<Unit filename="Dusk/Logging/Log.cpp" />
+		<Unit filename="Dusk/Logging/Log.h" />
+		<Unit filename="Dusk/Main.cpp" />
+		<Unit filename="Dusk/Math/Math.h" />
+		<Unit filename="Dusk/Program.cpp" />
+		<Unit filename="Dusk/Program.h" />
+		<Unit filename="Dusk/Timing/TimeInfo.cpp" />
+		<Unit filename="Dusk/Timing/TimeInfo.h" />
+		<Unit filename="Dusk/Timing/Timer.cpp" />
+		<Unit filename="Dusk/Timing/Timer.h" />
+		<Unit filename="Dusk/World/Camera.cpp" />
+		<Unit filename="Dusk/World/Camera.h" />
+		<Unit filename="Dusk/World/Skybox.cpp" />
+		<Unit filename="Dusk/World/Skybox.h" />
+		<Unit filename="error.log" />
+		<Unit filename="info.log" />
 		<Extensions>
 			<code_completion />
 			<debugger />

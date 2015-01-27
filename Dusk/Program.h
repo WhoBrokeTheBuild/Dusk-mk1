@@ -10,11 +10,13 @@ namespace Dusk
 namespace Graphics
 {
     class GraphicsSystem;
+    class Model;
 }
 
 namespace World
 {
     class Camera;
+    class Skybox;
 }
 
 namespace Timing
@@ -48,6 +50,7 @@ public:
     void render();
 
     GraphicsSystem* getGraphicsSystem( void );
+    Camera* getCamera( void );
 
 private:
 
@@ -59,14 +62,17 @@ private:
     void term();
     bool load();
 
-    GraphicsSystem*     mp_Graphics;
+    GraphicsSystem*     mp_GraphicsSystem;
     Camera*             mp_Camera;
 
+    float               m_TargetFPS;
+    float               m_CurrentFPS;
 
 
     // Temporary
-    int m_NumVerts;
-    GLuint m_VertArray;
+    Skybox* mp_Skybox;
+    Model* mp_Cube;
+    float rotation;
 
 }; // class Program
 

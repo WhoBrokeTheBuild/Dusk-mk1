@@ -3,6 +3,8 @@
 #include <Program.h>
 #include <Logging/Log.h>
 
+#include <limits>
+
 using namespace Dusk;
 using namespace Dusk::Logging;
 
@@ -19,7 +21,12 @@ int main(int argc, char* argv[])
     Program::getInstance().start();
 
     if (Arc::Arc_GetMemoryAllocationCount() > 0)
+    {
         Arc::Arc_PrintMemoryAllocations();
+
+        std::cout << "Press Enter to continue...";
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    }
 
     Arc::Arc_CleanupMemoryTracker();
 

@@ -98,7 +98,7 @@ bool Dusk::Graphics::Model::load( const string& filename )
 	if (texCoordCount > 0)
 	{
 		texCoordList.resize(texCoordCount);
-		file.read((char*)&texCoordList[0], sizeof(vec3) * texCoordCount);
+		file.read((char*)&texCoordList[0], sizeof(vec2) * texCoordCount);
 	}
 
     unsigned int texCoordIndCount = 0;
@@ -110,10 +110,12 @@ bool Dusk::Graphics::Model::load( const string& filename )
 		file.read((char*)&texCoordInds[0], sizeof(int) * texCoordIndCount);
 	}
 
-
     ArrayList<vec3> verts;
+    verts.resize(vertIndCount);
     ArrayList<vec3> norms;
+    norms.resize(normIndCount);
     ArrayList<vec2> texCoords;
+    texCoords.resize(texCoordIndCount);
 
     for (unsigned int i = 0; i < vertInds.getSize(); ++i)
         verts.add(vertList[vertInds[i]]);

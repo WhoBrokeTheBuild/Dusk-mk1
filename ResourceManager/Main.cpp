@@ -5,11 +5,8 @@
 #include <sstream>
 #include <algorithm>
 
-extern "C"
-{
-    #include <SDL.h>
-    #include <SDL_image.h>
-}
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include <Arc/Map.h>
 
@@ -86,8 +83,8 @@ int main( int argc, char* argv[] )
 		importFuncs.add("model/wavefront-obj", ImportOBJ);
 		importFuncs.add("model/dusk-engine-binary", ImportDSKM);
 
-		importFuncs.add("model/wavefront-obj", ExportOBJ);
-		importFuncs.add("model/dusk-engine-binary", ExportDSKM);
+		exportFuncs.add("model/wavefront-obj", ExportOBJ);
+		exportFuncs.add("model/dusk-engine-binary", ExportDSKM);
 
 		if (!importFuncs.containsKey(args.InputType) || !exportFuncs.containsKey(args.OutputType))
 		{
@@ -97,7 +94,7 @@ int main( int argc, char* argv[] )
 
 		InterModel model;
 		importFuncs[args.InputType](args.InputFilename, &model);
-		exportFuncs[args.OutputType](args.InputFilename, &model);
+		exportFuncs[args.OutputType](args.OutputFilename, &model);
 	}
 	else if (in_type_cat == "texture")
 	{
@@ -108,9 +105,9 @@ int main( int argc, char* argv[] )
 		importFuncs.add("texture/jpg", ImportJPG);
 		importFuncs.add("texture/dusk-engine-binary", ImportDSKT);
 
-		importFuncs.add("texture/png", ExportPNG);
-		importFuncs.add("texture/jpg", ExportJPG);
-		importFuncs.add("texture/dusk-engine-binary", ExportDSKT);
+		exportFuncs.add("texture/png", ExportPNG);
+		exportFuncs.add("texture/jpg", ExportJPG);
+		exportFuncs.add("texture/dusk-engine-binary", ExportDSKT);
 
 		if (!importFuncs.containsKey(args.InputType) || !exportFuncs.containsKey(args.OutputType))
 		{
@@ -120,7 +117,7 @@ int main( int argc, char* argv[] )
 
 		InterTexture texture;
 		importFuncs[args.InputType](args.InputFilename, &texture);
-		exportFuncs[args.OutputType](args.InputFilename, &texture);
+		exportFuncs[args.OutputType](args.OutputFilename, &texture);
 	}
 
     return 0;

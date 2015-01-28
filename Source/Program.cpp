@@ -82,7 +82,7 @@ bool Dusk::Program::init()
     }
 
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
-                           vec3(5.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
+                           vec3(20.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
 
     return true;
 }
@@ -113,10 +113,15 @@ bool Dusk::Program::load()
     skyboxShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/skybox.vs.glsl"));
     getGraphicsSystem()->getShaderManager()->loadProgram("skybox", skyboxShaders);
 
+    ArrayList<ShaderInfo> entityShaders;
+    entityShaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/entity.fs.glsl"));
+    entityShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/entity.vs.glsl"));
+    getGraphicsSystem()->getShaderManager()->loadProgram("entity", entityShaders);
+
     rotation = 0.0f;
 
     mp_Cube = New Model();
-    mp_Cube->load("Assets/Models/mdl_cube.dskm");
+    mp_Cube->load("Assets/Models/behemoth/mdl_behemoth.dskm");
 
     mp_Skybox = New Skybox();
     mp_Skybox->load("Assets/Skyboxes/tex_skybox_space.dskt");
@@ -126,7 +131,7 @@ bool Dusk::Program::load()
 
 void Dusk::Program::update(const TimeInfo& timeInfo)
 {
-    rotation += 0.1f * timeInfo.Delta;
+    rotation += 0.01f * timeInfo.Delta;
 }
 
 void Dusk::Program::render()
@@ -136,12 +141,13 @@ void Dusk::Program::render()
 
     mp_Skybox->render();
 
+    ShaderManager* pShaderManager = Program::getInstance().getGraphicsSystem()->getShaderManager();
 
 	mat4x4 mView = mp_Camera->getViewMatrix();
 	mat4x4 mProj = mp_Camera->getProjectionMatrix();
 	mat4x4 mViewProj = mProj * mView;
 
-	getGraphicsSystem()->getShaderManager()->useProgram("flat");
+	getGraphicsSystem()->getShaderManager()->useProgram("entity");
 
 	glm::mat4x4 mModel = mat4(1.0f);
 	glm::mat4x4 mModelView, mModelViewProj;
@@ -161,13 +167,21 @@ void Dusk::Program::render()
 
 	mModel = glm::translate(mModel, vec3(-0.5f, 0.0f, -0.5f));
 
+    mModelView = mView * mModel;
 	mModelViewProj = mViewProj * mModel;
 
-	GLint m4ModelViewProjLoc  = getGraphicsSystem()->getShaderManager()->getUniformLocation("uModelViewProj");
-	GLint v4FlatColorLoc  = getGraphicsSystem()->getShaderManager()->getUniformLocation("uFlatColor");
+	static GLint m4ModelViewLoc      = pShaderManager->getUniformLocation("uModelView");
+	static GLint m4ModelViewProjLoc  = pShaderManager->getUniformLocation("uModelViewProj");
+	static GLint v3GlobalAmbientLoc  = pShaderManager->getUniformLocation("uGlobalAmbient");
+	static GLint v3LightColorLoc     = pShaderManager->getUniformLocation("uLightColor");
+	static GLint v3LightDirectionLoc = pShaderManager->getUniformLocation("uLightDirection");
 
-	getGraphicsSystem()->getShaderManager()->setUniformMatrix4fv(m4ModelViewProjLoc, 1, &mModelViewProj);
-	getGraphicsSystem()->getShaderManager()->setUniform4f(v4FlatColorLoc, vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	pShaderManager->setUniformMatrix4fv(m4ModelViewProjLoc, 1, &mModelViewProj);
+	pShaderManager->setUniformMatrix4fv(m4ModelViewLoc,     1, &mModelView);
+
+	pShaderManager->setUniform3f(v3GlobalAmbientLoc,  vec3(1.0f));
+	pShaderManager->setUniform3f(v3LightColorLoc,     vec3(1.0f));
+	pShaderManager->setUniform3f(v3LightDirectionLoc, vec3(-1.0f));
 
     mp_Cube->render();
 }

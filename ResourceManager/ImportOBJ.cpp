@@ -83,11 +83,15 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 				count++;
 
 				bool vertAndNorm = (piece.find("//") != string::npos);
+				unsigned short slashCount = 0;
 
 				for (unsigned int j = 0; j < piece.size(); ++j)
 				{
 					if (piece[j] == '/')
+					{
 						piece[j] = ' ';
+                        ++slashCount;
+					}
 				}
 
 				std::stringstream ssPiece(piece);
@@ -103,11 +107,15 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 				{
 					ssPiece >> tmpVertInds[i];
 					ssPiece >> tmpTexCoordInds[i];
-					ssPiece >> tmpNormInds[i];
 
 					--tmpVertInds[i];
 					--tmpTexCoordInds[i];
-					--tmpNormInds[i];
+
+					if (slashCount == 2)
+					{
+                        ssPiece >> tmpNormInds[i];
+                        --tmpNormInds[i];
+					}
 				}
 			}
 

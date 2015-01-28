@@ -1,7 +1,8 @@
 #include "ExportDSKT.h"
 
+#include "ExportPNG.h"
+
 bool ExportDSKT(const string& filename, InterTexture* pTexture)
 {
-
-	return true;
+    return ExportPNG(filename, pTexture);
 }

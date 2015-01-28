@@ -17,11 +17,6 @@ bool ExportDSKM( const string& filename, InterModel* pModel )
         error("Cannot open file");
     }
 
-    if (pModel->VertInds.getSize() != pModel->NormInds.getSize())
-    {
-        error("Vertex/Normal count mismatch");
-    }
-
     file.write("DSKM", 4);
 
     unsigned short nameLength = pModel->Name.size();
@@ -42,7 +37,7 @@ bool ExportDSKM( const string& filename, InterModel* pModel )
 
 	unsigned int normCount = pModel->Norms.getSize();
 	file.write((const char*)&normCount, sizeof(unsigned int));
-	
+
 	if (!pModel->Norms.isEmpty())
 		file.write((const char*)&pModel->Norms[0], sizeof(vec3) * normCount);
 

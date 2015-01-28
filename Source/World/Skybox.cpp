@@ -29,7 +29,7 @@ bool Dusk::World::Skybox::load( const string& filename )
         return false;
     }
 
-	const GLfloat SKYBOX_SCALE = 100.0f;
+	const GLfloat SKYBOX_SCALE = 1000.0f;
 
 	const unsigned int SKYBOX_VERT_COUNT = 24;
 

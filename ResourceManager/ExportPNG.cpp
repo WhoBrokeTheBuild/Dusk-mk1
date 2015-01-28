@@ -4,6 +4,9 @@
 
 bool ExportPNG(const string& filename, InterTexture* pTexture)
 {
+    if (pTexture->Width == 0 || pTexture->Height == 0)
+        return false;
+
     Uint32 rmask, gmask, bmask, amask;
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN

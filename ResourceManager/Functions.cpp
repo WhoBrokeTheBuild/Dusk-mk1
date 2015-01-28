@@ -25,34 +25,6 @@ string parse_ext( const string& str )
     return ext;
 }
 
-void copy_pixels( unsigned char* source, unsigned char* dest, const unsigned int& x, const unsigned int& y,
-                  const unsigned int& pitch, const unsigned short& bytesPerPixel, const bool& reverse )
-{
-    unsigned int sourceOffset = ( (y * pitch) + x ) * bytesPerPixel;
-    unsigned int destOffset = ( (y * pitch) + x ) * 4;
-
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-        if (reverse)
-        {
-            dest[destOffset + i] = source[sourceOffset + ( 2 - i)];
-        }
-        else
-        {
-            dest[destOffset + i] = source[sourceOffset + i];
-        }
-    }
-
-    if (bytesPerPixel == 4)
-    {
-        dest[destOffset + 3] = source[sourceOffset + 3];
-    }
-    else
-    {
-        dest[destOffset + 3] = 255;
-    }
-}
-
 bool import_image( const string& filename, InterTexture* pTexture )
 {
     string ext = Arc::Arc_FileExtension(filename);
@@ -74,12 +46,35 @@ bool import_image( const string& filename, InterTexture* pTexture )
     pTexture->Height = height;
     pTexture->Pixels.resize(width * height * 4);
     unsigned char* pDest = &pTexture->Pixels[0];
+    unsigned char* pSource = (unsigned char*)pSurface->pixels;
 
     for (unsigned int y = 0; y < height; ++y)
     {
         for (unsigned int x = 0; x < width; ++x)
         {
-            copy_pixels((unsigned char*)pSurface->pixels, pDest, x, y, pSurface->pitch, bytesPerPixel, reverseBytes);
+            unsigned int sourceOffset = ( (y * pSurface->pitch) + (x * bytesPerPixel) );
+            unsigned int destOffset = ( (y * (width * 4)) + (x * 4) );
+
+            for (unsigned int i = 0; i < 3; ++i)
+            {
+                if (reverseBytes)
+                {
+                    pDest[destOffset + i] = pSource[sourceOffset + ( 2 - i)];
+                }
+                else
+                {
+                    pDest[destOffset + i] = pSource[sourceOffset + i];
+                }
+            }
+
+            if (bytesPerPixel == 4)
+            {
+                pDest[destOffset + 3] = pSource[sourceOffset + 3];
+            }
+            else
+            {
+                pDest[destOffset + 3] = 255;
+            }
         }
     }
 

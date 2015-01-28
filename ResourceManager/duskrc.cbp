@@ -12,7 +12,7 @@
 				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="assets/cube.obj assets/test.dskm" />
+				<Option parameters="/home/stephen/Downloads/small-test.png /home/stephen/Downloads/test.png" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -37,11 +37,16 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add directory="../Libraries/glm/include" />
+			<Add directory="../Libraries/Arc/include" />
 			<Add directory="/usr/include/SDL2" />
 		</Compiler>
 		<Linker>
 			<Add library="SDL2" />
 			<Add library="SDL2main" />
+			<Add library="SDL2_image" />
+			<Add library="ArcCore" />
+			<Add library="png" />
+			<Add directory="../Libraries/Arc/lib" />
 		</Linker>
 		<Unit filename="ArrayList.h">
 			<Option virtualFolder="Project/Collections/" />
@@ -74,6 +79,12 @@
 			<Option virtualFolder="Project/Export/Textures/" />
 		</Unit>
 		<Unit filename="ExportPNG.h">
+			<Option virtualFolder="Project/Export/Textures/" />
+		</Unit>
+		<Unit filename="ExportTGA.cpp">
+			<Option virtualFolder="Project/Export/Textures/" />
+		</Unit>
+		<Unit filename="ExportTGA.h">
 			<Option virtualFolder="Project/Export/Textures/" />
 		</Unit>
 		<Unit filename="ExtensionTypeMap.cpp">
@@ -118,6 +129,12 @@
 		<Unit filename="ImportPNG.h">
 			<Option virtualFolder="Project/Import/Textures/" />
 		</Unit>
+		<Unit filename="ImportTGA.cpp">
+			<Option virtualFolder="Project/Import/Textures/" />
+		</Unit>
+		<Unit filename="ImportTGA.h">
+			<Option virtualFolder="Project/Import/Textures/" />
+		</Unit>
 		<Unit filename="InterModel.cpp">
 			<Option virtualFolder="Project/Intermediate/" />
 		</Unit>
@@ -142,12 +159,11 @@
 		<Unit filename="Map.h">
 			<Option virtualFolder="Project/Collections/" />
 		</Unit>
-		<Unit filename="MathFunctions.h">
-			<Option virtualFolder="Project/Util/" />
-		</Unit>
 		<Unit filename="Usage.h">
 			<Option virtualFolder="Project/Util/" />
 		</Unit>
+		<Unit filename="savepng.cpp" />
+		<Unit filename="savepng.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

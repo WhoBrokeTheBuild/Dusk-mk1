@@ -1,7 +1,8 @@
 #include "ImportJPG.h"
 
+#include "Functions.h"
+
 bool ImportJPG(const string& filename, InterTexture* pTexture)
 {
-
-	return true;
+	return import_image(filename, pTexture);
 }

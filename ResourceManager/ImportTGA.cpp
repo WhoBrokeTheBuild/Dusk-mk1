@@ -1,7 +1,8 @@
 #include "ImportTGA.h"
 
+#include "Functions.h"
+
 bool ImportTGA(const string& filename, InterTexture* pTexture)
 {
-
-	return true;
+    return import_image(filename, pTexture);
 }

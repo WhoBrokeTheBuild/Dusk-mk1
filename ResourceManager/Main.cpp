@@ -101,13 +101,15 @@ int main( int argc, char* argv[] )
 		Map<string, InportTextureFunc> importFuncs;
 		Map<string, ExportTextureFunc> exportFuncs;
 
-		importFuncs.add("texture/png", ImportPNG);
-		importFuncs.add("texture/jpg", ImportJPG);
-		importFuncs.add("texture/dusk-engine-binary", ImportDSKT);
+		importFuncs.add("texture/png",                  ImportPNG);
+		importFuncs.add("texture/jpg",                  ImportJPG);
+		importFuncs.add("texture/targa",                ImportTGA);
+		importFuncs.add("texture/dusk-engine-binary",   ImportDSKT);
 
-		exportFuncs.add("texture/png", ExportPNG);
-		exportFuncs.add("texture/jpg", ExportJPG);
-		exportFuncs.add("texture/dusk-engine-binary", ExportDSKT);
+		exportFuncs.add("texture/png",                  ExportPNG);
+		exportFuncs.add("texture/jpg",                  ExportJPG);
+		exportFuncs.add("texture/targa",                ExportTGA);
+		exportFuncs.add("texture/dusk-engine-binary",   ExportDSKT);
 
 		if (!importFuncs.containsKey(args.InputType) || !exportFuncs.containsKey(args.OutputType))
 		{

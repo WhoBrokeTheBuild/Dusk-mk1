@@ -41,7 +41,7 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
 	LogInfoFmt(getClassName(), "Running OpenGL Version %s", glGetString(GL_VERSION));
 	LogInfoFmt(getClassName(), "Running OpenGL Shading Language Version %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	glEnable(GL_DEPTH_TEST);
 

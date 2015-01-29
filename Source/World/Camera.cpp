@@ -1,5 +1,8 @@
 #include "Camera.h"
 
+#undef far
+#undef near
+
 mat4x4 Dusk::World::Camera::getViewMatrix( void )
 {
     if ( ! m_ViewUpdated)

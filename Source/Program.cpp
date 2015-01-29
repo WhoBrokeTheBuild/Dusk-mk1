@@ -11,6 +11,7 @@
 #include <Timing/TimeInfo.h>
 
 using namespace Dusk::Logging;
+using namespace Dusk::Timing;
 
 Dusk::Graphics::GraphicsSystem* Dusk::Program::getGraphicsSystem( void )
 {
@@ -56,7 +57,7 @@ void Dusk::Program::start()
         timeInfo.TotalMilliseconds += timeInfo.ElapsedMilliseconds;
 
         timeInfo.Delta = elapsedTime / updateInterval;
-        m_CurrentFPS = (updateInterval / elapsedTime) * m_TargetFPS;
+        m_CurrentFPS = (float)((updateInterval / elapsedTime) * m_TargetFPS);
 
         update(timeInfo);
         render();

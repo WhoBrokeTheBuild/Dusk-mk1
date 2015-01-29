@@ -10,6 +10,42 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Libraries\lodepng\include\lodepng\lodepng.h" />
+    <ClInclude Include="Source\Graphics\Graphics.h" />
+    <ClInclude Include="Source\Graphics\GraphicsContext.h" />
+    <ClInclude Include="Source\Graphics\GraphicsSystem.h" />
+    <ClInclude Include="Source\Graphics\Mesh.h" />
+    <ClInclude Include="Source\Graphics\Model.h" />
+    <ClInclude Include="Source\Graphics\ShaderManager.h" />
+    <ClInclude Include="Source\Graphics\ShaderManager.Uniforms.inc.h" />
+    <ClInclude Include="Source\Graphics\Texture.h" />
+    <ClInclude Include="Source\Graphics\Window.h" />
+    <ClInclude Include="Source\Logging\Log.h" />
+    <ClInclude Include="Source\Math\Math.h" />
+    <ClInclude Include="Source\Program.h" />
+    <ClInclude Include="Source\Timing\TimeInfo.h" />
+    <ClInclude Include="Source\Timing\Timer.h" />
+    <ClInclude Include="Source\World\Camera.h" />
+    <ClInclude Include="Source\World\Skybox.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Libraries\lodepng\include\lodepng\lodepng.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsContext.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsSystem.cpp" />
+    <ClCompile Include="Source\Graphics\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\Model.cpp" />
+    <ClCompile Include="Source\Graphics\ShaderManager.cpp" />
+    <ClCompile Include="Source\Graphics\Texture.cpp" />
+    <ClCompile Include="Source\Graphics\Window.cpp" />
+    <ClCompile Include="Source\Logging\Log.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Program.cpp" />
+    <ClCompile Include="Source\Timing\TimeInfo.cpp" />
+    <ClCompile Include="Source\Timing\Timer.cpp" />
+    <ClCompile Include="Source\World\Camera.cpp" />
+    <ClCompile Include="Source\World\Skybox.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BC076450-7212-46F4-9CFC-0FF1F8454CDC}</ProjectGuid>
     <RootNamespace>dusk</RootNamespace>
@@ -44,7 +80,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Libraries/glm/include;Libraries/GLFW/include;Libraries/Arc/include;Libraries/GLEW/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Libraries/glm/include;Libraries/GLFW/include;Libraries/Arc/include;Libraries/GLEW/include/;Libraries/SDL/include/;Libraries/lodepng/include;Source/</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;NOMINMAX;WIN32_LEAN_AND_MEAN%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,41 +104,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Log.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Program.cpp" />
-    <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="TimeInfo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="OpenGL.h" />
-    <ClInclude Include="Program.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="ShaderManager.Uniforms.inc.h" />
-    <ClInclude Include="TimeInfo.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="combined.log" />
-    <Text Include="error.log" />
-    <Text Include="info.log" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\behemoth\mdl_behemoth.dskm" />
-    <None Include="Assets\mdl_cube.dskm" />
-    <None Include="Assets\mdl_monkey.dskm" />
-    <None Include="Assets\mdl_test2.dskm" />
-    <None Include="Shaders\flat.fs.glsl" />
-    <None Include="Shaders\flat.vs.glsl" />
-    <None Include="Shaders\skybox.fs.glsl" />
-    <None Include="Shaders\skybox.vs.glsl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

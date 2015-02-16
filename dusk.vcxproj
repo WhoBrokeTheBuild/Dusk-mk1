@@ -24,6 +24,8 @@
     <ClInclude Include="Source\Logging\Log.h" />
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Program.h" />
+    <ClInclude Include="Source\Scripting\Scripting.h" />
+    <ClInclude Include="Source\Scripting\ScriptingSystem.h" />
     <ClInclude Include="Source\Timing\TimeInfo.h" />
     <ClInclude Include="Source\Timing\Timer.h" />
     <ClInclude Include="Source\World\Camera.h" />
@@ -41,6 +43,7 @@
     <ClCompile Include="Source\Logging\Log.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Program.cpp" />
+    <ClCompile Include="Source\Scripting\ScriptingSystem.cpp" />
     <ClCompile Include="Source\Timing\TimeInfo.cpp" />
     <ClCompile Include="Source\Timing\Timer.cpp" />
     <ClCompile Include="Source\World\Camera.cpp" />
@@ -80,13 +83,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Libraries/glm/include;Libraries/GLFW/include;Libraries/Arc/include;Libraries/GLEW/include/;Libraries/SDL/include/;Libraries/lodepng/include;Source/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Libraries/glm/include;Libraries/GLFW/include;Libraries/Arc/include;Libraries/GLEW/include/;Libraries/SDL/include/;Libraries/lodepng/include;Libraries/lua/include;Source/</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;NOMINMAX;WIN32_LEAN_AND_MEAN%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ArcCore.lib;OpenGL32.lib;GLu32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>Libraries/GLFW/lib/;Libraries/Arc/lib/;Libraries/GLEW/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ArcCore.lib;OpenGL32.lib;GLu32.lib;glew32.lib;glfw3.lib;lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Libraries/GLFW/lib/;Libraries/Arc/lib/;Libraries/GLEW/lib/;Libraries/lua/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>

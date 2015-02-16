@@ -13,6 +13,11 @@ namespace Graphics
     class Model;
 }
 
+namespace Scripting
+{
+	class ScriptingSystem;
+}
+
 namespace World
 {
     class Camera;
@@ -25,6 +30,7 @@ namespace Timing
 }
 
 using namespace Dusk::Graphics;
+using namespace Dusk::Scripting;
 using namespace Dusk::Timing;
 using namespace Dusk::World;
 
@@ -34,7 +40,7 @@ class Program :
 
 public:
 
-    static inline Program& getInstance()
+    static inline Program& Inst()
     {
         static Program prog;
 
@@ -50,6 +56,7 @@ public:
     void render();
 
     GraphicsSystem* getGraphicsSystem( void );
+	ScriptingSystem* getScriptingSystem( void );
     Camera* getCamera( void );
 
 private:
@@ -64,6 +71,8 @@ private:
 
     GraphicsSystem*     mp_GraphicsSystem;
     Camera*             mp_Camera;
+
+	ScriptingSystem*	mp_ScriptingSystem;
 
     float               m_TargetFPS;
     float               m_CurrentFPS;

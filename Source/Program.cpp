@@ -6,6 +6,7 @@
 #include <Graphics/ShaderManager.h>
 #include <Graphics/GraphicsContext.h>
 #include <Graphics/Model.h>
+#include <Scripting/ScriptingSystem.h>
 #include <World/Camera.h>
 #include <World/Skybox.h>
 #include <Timing/TimeInfo.h>
@@ -16,6 +17,11 @@ using namespace Dusk::Timing;
 Dusk::Graphics::GraphicsSystem* Dusk::Program::getGraphicsSystem( void )
 {
     return mp_GraphicsSystem;
+}
+
+Dusk::Scripting::ScriptingSystem* Dusk::Program::getScriptingSystem(void)
+{
+	return mp_ScriptingSystem;
 }
 
 Dusk::World::Camera* Dusk::Program::getCamera( void )
@@ -85,6 +91,12 @@ bool Dusk::Program::init()
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
                            vec3(20.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
 
+	mp_ScriptingSystem = New ScriptingSystem();
+	mp_ScriptingSystem->init();
+	Log::InitScripting();
+	//GraphicsSystem::InitScripting();
+	//Camera::InitScripting();
+
     return true;
 }
 
@@ -132,7 +144,7 @@ bool Dusk::Program::load()
 
 void Dusk::Program::update(const TimeInfo& timeInfo)
 {
-    rotation += 0.01f * timeInfo.Delta;
+    rotation += 0.01f * (float)timeInfo.Delta;
 }
 
 void Dusk::Program::render()
@@ -142,7 +154,7 @@ void Dusk::Program::render()
 
     mp_Skybox->render();
 
-    ShaderManager* pShaderManager = Program::getInstance().getGraphicsSystem()->getShaderManager();
+    ShaderManager* pShaderManager = Program::Inst().getGraphicsSystem()->getShaderManager();
 
 	mat4x4 mView = mp_Camera->getViewMatrix();
 	mat4x4 mProj = mp_Camera->getProjectionMatrix();

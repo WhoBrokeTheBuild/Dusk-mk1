@@ -1,6 +1,8 @@
 #include "Log.h"
 
 #include <Arc/StringFunctions.h>
+#include <Scripting/ScriptingSystem.h>
+#include <Program.h>
 
 #include <string>
 #include <fstream>
@@ -10,6 +12,8 @@
 using std::string;
 using Arc::Map;
 using Arc::ArrayList;
+
+using namespace Dusk::Scripting;
 
 Map<string, int> Dusk::Logging::Log::s_InfoOutputs = Map<string, int>();
 Map<string, int> Dusk::Logging::Log::s_ErrorOutputs = Map<string, int>();
@@ -39,7 +43,7 @@ void Dusk::Logging::Log::CloseOutputs( void )
 	s_Streams.clear();
 }
 
-bool Dusk::Logging::Log::AddInfoOutput( const string& filename, bool append /*= true */ )
+bool Dusk::Logging::Log::AddInfoOutput(const string& filename, bool append /*= true */)
 {
 	if (s_InfoOutputs.containsKey(filename))
 		return false;
@@ -210,4 +214,27 @@ string Dusk::Logging::Log::Format( const string& fmt, va_list args )
 	vsnprintf(buffer, BUFFER_MAX, fmt.c_str(), args);
 
 	return string(buffer);
+}
+
+void Dusk::Logging::Log::InitScripting(void)
+{
+	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+}
+
+int Dusk::Logging::Log::Script_LogInfo(lua_State* pState)
+{
+	int argc = lua_gettop(pState);
+
+	LogInfo("Script", lua_tostring(pState, 1));
+
+	return 0;
+}
+
+int Dusk::Logging::Log::Script_LogError(lua_State* pState)
+{
+	int argc = lua_gettop(pState);
+
+	LogError("Script", lua_tostring(pState, 1));
+
+	return 0;
 }

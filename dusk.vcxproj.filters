@@ -18,6 +18,8 @@
     <ClInclude Include="Source\World\Camera.h" />
     <ClInclude Include="Source\World\Skybox.h" />
     <ClInclude Include="Libraries\lodepng\include\lodepng\lodepng.h" />
+    <ClInclude Include="Source\Scripting\ScriptingSystem.h" />
+    <ClInclude Include="Source\Scripting\Scripting.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Graphics\GraphicsContext.cpp" />
@@ -35,5 +37,6 @@
     <ClCompile Include="Source\World\Camera.cpp" />
     <ClCompile Include="Source\World\Skybox.cpp" />
     <ClCompile Include="Libraries\lodepng\include\lodepng\lodepng.cpp" />
+    <ClCompile Include="Source\Scripting\ScriptingSystem.cpp" />
   </ItemGroup>
 </Project>

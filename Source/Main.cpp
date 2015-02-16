@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 
     Arc::Arc_InitMemoryTracker();
 
-    Program::getInstance().start();
+    Program::Inst().start();
 
     if (Arc::Arc_GetMemoryAllocationCount() > 0)
     {

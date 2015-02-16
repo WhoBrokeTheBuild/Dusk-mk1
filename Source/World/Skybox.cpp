@@ -68,8 +68,8 @@ bool Dusk::World::Skybox::load( const string& filename )
 
 void Dusk::World::Skybox::render( void )
 {
-    ShaderManager* pShaderManager = Program::getInstance().getGraphicsSystem()->getShaderManager();
-    Camera* pCamera = Program::getInstance().getCamera();
+    ShaderManager* pShaderManager = Program::Inst().getGraphicsSystem()->getShaderManager();
+    Camera* pCamera = Program::Inst().getCamera();
 
     pShaderManager->useProgram("skybox");
 

@@ -8,6 +8,8 @@
 #include <Arc/ArrayList.h>
 #include <Arc/Map.h>
 
+#include <Scripting/Scripting.h>
+
 using Arc::ArrayList;
 using Arc::Map;
 
@@ -34,6 +36,10 @@ public:
 	static void ErrorFmt( const string& src, const string& fmt, const string& file, const int line, ... );
 
 	static void CloseOutputs( void );
+
+	static void InitScripting( void );
+	static int Script_LogInfo( lua_State* pState );
+	static int Script_LogError( lua_State* pState );
 
 private:
 

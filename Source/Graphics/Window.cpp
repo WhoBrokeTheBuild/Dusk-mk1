@@ -80,7 +80,7 @@ bool Dusk::Graphics::Window::resize( const unsigned int& width, const unsigned i
 
     glfwSetWindowSize(mp_GLFWWindow, (int)width, (int)height);
 
-    Program::getInstance().getCamera()->resize(width, height);
+	Program::Inst().getCamera()->resize((float)width, (float)height);
 
     return true;
 }
@@ -93,7 +93,7 @@ void Dusk::Graphics::Window::setTitle( const string& title )
 
 bool Dusk::Graphics::Window::shouldClose( void )
 {
-    return glfwWindowShouldClose(mp_GLFWWindow);
+    return ( glfwWindowShouldClose(mp_GLFWWindow) == 0 );
 }
 
 Dusk::Graphics::GraphicsContext* Dusk::Graphics::Window::getGraphicsContext( void )

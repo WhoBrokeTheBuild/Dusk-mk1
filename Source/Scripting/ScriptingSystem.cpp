@@ -36,3 +36,18 @@ bool Dusk::Scripting::ScriptingSystem::registerFunction(const string& func, LuaC
 	lua_register(mp_LuaState, func.c_str(), callback);
 	return true;
 }
+
+bool Dusk::Scripting::ScriptingSystem::runScript(const string& script)
+{
+	int status = luaL_loadfile(mp_LuaState, script.c_str());
+
+	if (status == 0)
+	{
+		status = lua_pcall(mp_LuaState, 0, LUA_MULTRET, 0);
+	}
+	else
+	{
+		LogErrorFmt("Script", "%s", lua_tostring(mp_LuaState, -1));
+		lua_pop(mp_LuaState, 1); // remove error message
+	}
+}

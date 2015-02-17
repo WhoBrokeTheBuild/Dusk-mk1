@@ -21,11 +21,11 @@ public:
 
 	virtual inline string getClassName( void ) const { return "Scripting System"; }
 
-	bool init( void );
+	bool init(void);
+	bool registerFunction(const string& func, LuaCallback callback);
+	bool runScript(const string& script);
 
 	inline lua_State* getLuaState(void) { return mp_LuaState; }
-
-	bool registerFunction(const string& func, LuaCallback callback);
 
 private:
 

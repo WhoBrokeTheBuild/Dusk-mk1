@@ -86,7 +86,7 @@ bool Dusk::Program::init()
 	Log::InitScripting();
 
     mp_GraphicsSystem = New GraphicsSystem();
-    if ( ! mp_GraphicsSystem->init(300, 600, "Dusk Test", false) )
+    if ( ! mp_GraphicsSystem->init(640, 480, "Dusk", false) )
     {
         LogError(getClassName(), "Failed to initialize Graphics System");
         return false;
@@ -97,7 +97,7 @@ bool Dusk::Program::init()
                            vec3(20.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
 
 	mp_ScriptingSystem->runScript("Assets/Scripts/Dusk.lua");
-	mp_ScriptingSystem->runScript("Assets/Scripts/Main.lua");
+	mp_ScriptingSystem->runScript("Assets/Scripts/Setup.lua");
 
     return true;
 }
@@ -121,20 +121,7 @@ bool Dusk::Program::load()
 {
     LogInfo(getClassName(), "Loading Resources");
 
-    ArrayList<ShaderInfo> flatShaders;
-    flatShaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/flat.fs.glsl"));
-    flatShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/flat.vs.glsl"));
-    getGraphicsSystem()->getShaderManager()->loadProgram("flat", flatShaders);
-
-    ArrayList<ShaderInfo> skyboxShaders;
-    skyboxShaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/skybox.fs.glsl"));
-    skyboxShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/skybox.vs.glsl"));
-    getGraphicsSystem()->getShaderManager()->loadProgram("skybox", skyboxShaders);
-
-    ArrayList<ShaderInfo> entityShaders;
-    entityShaders.add(ShaderInfo(GL_FRAGMENT_SHADER, "Assets/Shaders/entity.fs.glsl"));
-    entityShaders.add(ShaderInfo(GL_VERTEX_SHADER, "Assets/Shaders/entity.vs.glsl"));
-    getGraphicsSystem()->getShaderManager()->loadProgram("entity", entityShaders);
+	mp_ScriptingSystem->runScript("Assets/Scripts/Resources.lua");
 
     rotation = 0.0f;
 
@@ -203,3 +190,11 @@ void Dusk::Program::render()
 
     mp_Cube->render();
 }
+
+int Dusk::Program::Script_GetCamera( lua_State* pState )
+{
+    lua_pushinteger(pState, (unsigned long)Program::Inst().getCamera());
+
+	return 1;
+}
+

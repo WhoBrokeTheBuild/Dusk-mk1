@@ -229,7 +229,9 @@ int Dusk::Logging::Log::Script_LogInfo(lua_State* pState)
     lua_getstack(pState, 1, &ar);
     lua_getinfo(pState, "nSl", &ar);
 
-	Log::Info("Script", lua_tostring(pState, 1), "Main.lua", ar.currentline);
+	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+
+	Log::Info("Script", lua_tostring(pState, 1), Arc::Arc_Basename(pScriptingSystem->getCurrentScript()), ar.currentline);
 
 	return 0;
 }
@@ -240,7 +242,9 @@ int Dusk::Logging::Log::Script_LogError(lua_State* pState)
     lua_getstack(pState, 1, &ar);
     lua_getinfo(pState, "nSl", &ar);
 
-	Log::Error("Script", lua_tostring(pState, 1), "Main.lua", ar.currentline);
+	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+
+	Log::Error("Script", lua_tostring(pState, 1), Arc::Arc_Basename(pScriptingSystem->getCurrentScript()), ar.currentline);
 
 	return 0;
 }

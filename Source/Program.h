@@ -3,6 +3,7 @@
 
 #include <Arc/ManagedObject.h>
 #include <Graphics/Graphics.h>
+#include <Scripting/Scripting.h>
 
 namespace Dusk
 {
@@ -58,6 +59,9 @@ public:
     GraphicsSystem* getGraphicsSystem( void );
 	ScriptingSystem* getScriptingSystem( void );
     Camera* getCamera( void );
+
+
+	static int Script_GetCamera( lua_State* pState );
 
 private:
 

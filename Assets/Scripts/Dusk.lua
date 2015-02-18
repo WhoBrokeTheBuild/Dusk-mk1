@@ -1,49 +1,86 @@
 dusk_log_info("Initializing Dusk Classes");
-dusk_log_info("Test?");
 
-Dusk_Window = { }
+Dusk = { }
+Dusk.Graphics = { }
 
-Dusk_Window_methods = {
+-- Dusk::Graphics::GraphicsSystem
+
+Dusk.Graphics.GraphicsSystem = {
+
+    getWindow = function()
+
+        local win = Dusk.Graphics.Window();
+        rawset(rawget(getmetatable(win), "private"), "dusk_ptr", dusk_graphics_system_get_window());
+
+        return win;
+
+        end,
+    getShaderManager = function()
+
+        local sm = Dusk.Graphics.ShaderManager();
+        rawset(rawget(getmetatable(sm), "private"), "dusk_ptr", dusk_graphics_system_get_shader_manager());
+
+        return sm;
+
+        end
+}
+
+-- Dusk::Graphics::Window
+
+Dusk.Graphics.Window = { }
+Dusk.Graphics.Window.methods = {
 
     getWidth = function( self )
 
-        ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
         return dusk_window_get_width(ptr);
 
         end,
     getHeight = function( self )
 
-        ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
         return dusk_window_get_height(ptr);
 
         end,
     setWidth = function( self, width )
 
-        ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
         dusk_window_set_width(ptr, width);
 
         end,
     setHeight = function( self, height )
 
-        ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
         dusk_window_set_height(ptr, height);
+
+        end,
+    getTitle = function( self )
+
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        return dusk_window_get_title(ptr);
+
+        end,
+    setTitle = function( self, title )
+
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        dusk_window_set_title(ptr, title);
 
         end
 }
 
-function Dusk_Window:new_field( key, value )
-	dusk_log_error("Dusk_Window does not support new fields");
+function Dusk.Graphics.Window:new_field( key, value )
+	dusk_log_error("Dusk.Graphics.Window does not support new fields");
 end
 
-function Dusk_Window:dtor()
+function Dusk.Graphics.Window:dtor()
 end
 
-function Dusk_Window:ctor()
+function Dusk.Graphics.Window:ctor()
 	local c = { }
 	local c_mt = {
-					__index = Dusk_Window_methods,
-					__newindex = Dusk_Window.new_field,
-					__gc = Dusk_Window.dtor,
+					__index = Dusk.Graphics.Window.methods,
+					__newindex = Dusk.Graphics.Window.new_field,
+					__gc = Dusk.Graphics.Window.dtor,
 					private = { }
 				 }
 	setmetatable(c, c_mt);
@@ -53,16 +90,42 @@ function Dusk_Window:ctor()
 	return c
 end
 
-setmetatable(Dusk_Window, {__call = Dusk_Window.ctor});
+setmetatable(Dusk.Graphics.Window, {__call = Dusk.Graphics.Window.ctor});
 
-Dusk_GS = {
+-- Dusk.Graphics.ShaderManager
 
-    getWindow = function()
+Dusk.Graphics.ShaderManager = { }
+Dusk.Graphics.ShaderManager.methods = {
 
-        win = Dusk_Window();
-        rawset(rawget(getmetatable(win), "private"), "dusk_ptr", dusk_graphics_system_get_window());
+    loadProgram = function( self, name, verts, frags )
 
-        return win;
+        local ptr = rawget(rawget(getmetatable(self), "private"), "dusk_ptr");
+        dusk_shader_manager_load_program(ptr, name, verts, frags);
 
         end
+
 }
+
+function Dusk.Graphics.ShaderManager:new_field( key, value )
+	dusk_log_error("Dusk.Graphics.ShaderManager does not support new fields");
+end
+
+function Dusk.Graphics.ShaderManager:dtor()
+end
+
+function Dusk.Graphics.ShaderManager:ctor()
+	local c = { }
+	local c_mt = {
+					__index = Dusk.Graphics.ShaderManager.methods,
+					__newindex = Dusk.Graphics.ShaderManager.new_field,
+					__gc = Dusk.Graphics.ShaderManager.dtor,
+					private = { }
+				 }
+	setmetatable(c, c_mt);
+
+	rawset(rawget(getmetatable(c), "private"), "dusk_ptr", 0);
+
+	return c
+end
+
+setmetatable(Dusk.Graphics.ShaderManager, {__call = Dusk.Graphics.ShaderManager.ctor});

@@ -148,11 +148,12 @@ void Dusk::Graphics::Window::InitScripting( void )
 	pScriptingSystem->registerFunction("dusk_window_get_height", &Window::Script_GetHeight);
 	pScriptingSystem->registerFunction("dusk_window_set_width",  &Window::Script_SetWidth);
 	pScriptingSystem->registerFunction("dusk_window_set_height", &Window::Script_SetHeight);
+	pScriptingSystem->registerFunction("dusk_window_get_title", &Window::Script_GetTitle);
+	pScriptingSystem->registerFunction("dusk_window_set_title", &Window::Script_SetTitle);
 }
 
 int Dusk::Graphics::Window::Script_GetWidth( lua_State* pState )
 {
-    LogInfo("Test", "Width");
 	Window* pWindow = (Window*)lua_tointeger(pState, 1);
     lua_pushinteger(pState, (int)pWindow->getWidth());
 
@@ -161,7 +162,6 @@ int Dusk::Graphics::Window::Script_GetWidth( lua_State* pState )
 
 int Dusk::Graphics::Window::Script_GetHeight( lua_State* pState )
 {
-    LogInfo("Test", "Height");
 	Window* pWindow = (Window*)lua_tointeger(pState, 1);
     lua_pushinteger(pState, (int)pWindow->getHeight());
 
@@ -182,6 +182,24 @@ int Dusk::Graphics::Window::Script_SetHeight( lua_State* pState )
 	Window* pWindow = (Window*)lua_tointeger(pState, 1);
     int height = lua_tointeger(pState, 2);
     pWindow->setHeight(height);
+
+	return 0;
+}
+
+int Dusk::Graphics::Window::Script_GetTitle( lua_State* pState )
+{
+    LogInfo("Test", "Height");
+	Window* pWindow = (Window*)lua_tointeger(pState, 1);
+    lua_pushstring(pState, pWindow->getTitle().c_str());
+
+	return 1;
+}
+
+int Dusk::Graphics::Window::Script_SetTitle( lua_State* pState )
+{
+	Window* pWindow = (Window*)lua_tointeger(pState, 1);
+    string title = lua_tostring(pState, 2);
+    pWindow->setTitle(title);
 
 	return 0;
 }

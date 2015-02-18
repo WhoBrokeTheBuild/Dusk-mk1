@@ -4,6 +4,7 @@
 #include <Arc/ManagedObject.h>
 
 #include <Graphics/Graphics.h>
+#include <Scripting/Scripting.h>
 #include <Math/Math.h>
 
 #define _USE_MATH_DEFINES
@@ -98,6 +99,12 @@ public:
 
 	mat4x4 getViewMatrix( void );
 	mat4x4 getProjectionMatrix( void );
+
+	static void InitScripting( void );
+	static int Script_GetPos( lua_State* pState );
+	static int Script_SetPos( lua_State* pState );
+	static int Script_GetDir( lua_State* pState );
+	static int Script_SetDir( lua_State* pState );
 
 private:
 

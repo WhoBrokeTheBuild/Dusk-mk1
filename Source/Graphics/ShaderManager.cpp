@@ -1,10 +1,13 @@
 #include "ShaderManager.h"
 
+#include <Program.h>
+#include <Scripting/ScriptingSystem.h>
 #include <Logging/Log.h>
 
 #include <fstream>
 #include <cstdarg>
 
+using namespace Dusk::Scripting;
 using namespace Dusk::Logging;
 
 bool Dusk::Graphics::ShaderManager::loadProgram( const string& name, const ArrayList<ShaderInfo>& shaders )
@@ -199,4 +202,38 @@ void Dusk::Graphics::ShaderManager::checkUniformError( void )
 	{
 		LogErrorFmt(getClassName(), "Uniform Error, #%d %s", error, gluGetString(error));
 	}
+}
+
+void Dusk::Graphics::ShaderManager::InitScripting(void)
+{
+	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	pScriptingSystem->registerFunction("dusk_shader_manager_load_program",  &ShaderManager::Script_LoadProgram);
+}
+
+int Dusk::Graphics::ShaderManager::Script_LoadProgram(lua_State* pState)
+{
+	ShaderManager* pShaderManager = (ShaderManager*)lua_tointeger(pState, 1);
+	string name = lua_tostring(pState, 2);
+
+    ArrayList<ShaderInfo> shaders;
+
+    if (lua_istable(pState, 3))
+    {
+    }
+    else if (lua_isstring(pState, 3))
+    {
+        shaders.add(ShaderInfo(GL_FRAGMENT_SHADER, lua_tostring(pState, 3)));
+    }
+
+    if (lua_istable(pState, 4))
+    {
+    }
+    else if (lua_isstring(pState, 4))
+    {
+        shaders.add(ShaderInfo(GL_VERTEX_SHADER, lua_tostring(pState, 4)));
+    }
+
+    pShaderManager->loadProgram(name, shaders);
+
+	return 0;
 }

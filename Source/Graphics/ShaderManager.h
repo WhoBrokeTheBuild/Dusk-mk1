@@ -8,6 +8,7 @@
 #include <string>
 
 #include <Graphics/Graphics.h>
+#include <Scripting/Scripting.h>
 #include <Math/Math.h>
 
 using std::string;
@@ -71,6 +72,9 @@ public:
 	GLUniformLocation getUniformLocation( const string& programName, const string& uniformName );
 
     #include "ShaderManager.Uniforms.inc.h"
+
+	static void InitScripting( void );
+	static int Script_LoadProgram( lua_State* pState );
 
 private:
 

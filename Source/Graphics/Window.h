@@ -66,6 +66,8 @@ public:
 	static int Script_GetHeight( lua_State* pState );
 	static int Script_SetWidth( lua_State* pState );
 	static int Script_SetHeight( lua_State* pState );
+	static int Script_GetTitle( lua_State* pState );
+	static int Script_SetTitle( lua_State* pState );
 
 private:
 

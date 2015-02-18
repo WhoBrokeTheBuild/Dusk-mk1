@@ -26,10 +26,12 @@ public:
 	bool runScript(const string& script);
 
 	inline lua_State* getLuaState(void) { return mp_LuaState; }
+	inline string getCurrentScript(void) { return m_CurrentScript; }
 
 private:
 
 	lua_State*		mp_LuaState;
+    string          m_CurrentScript;
 
 };
 

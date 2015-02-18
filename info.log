@@ -1,22 +1,19 @@
-+0.0.0.11 INF <Program.cpp:34> Program: Starting
-+0.0.0.11 INF <Program.cpp:82> Program: Initializing
-+0.0.0.11 INF <Window.cpp:29> Window: Initializing Window
-+0.0.0.71 INF <GraphicsSystem.cpp:43> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
-+0.0.0.71 INF <GraphicsSystem.cpp:44> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
-+0.0.0.71 INF <Main.lua:1> Script: Initializing Dusk Classes
-+0.0.0.71 INF <Main.lua:2> Script: Test?
-+0.0.0.71 INF <Main.lua:1> Script: Running Main
-+0.0.0.71 INF <Main.lua:8> Script: Finished Main
-+0.0.0.71 INF <Program.cpp:122> Program: Loading Resources
-+0.0.0.71 INF <ShaderManager.cpp:12> Shader Manager: Loading Shader Program: flat
-+0.0.0.71 INF <ShaderManager.cpp:146> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
-+0.0.0.72 INF <ShaderManager.cpp:146> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
-+0.0.0.72 INF <ShaderManager.cpp:12> Shader Manager: Loading Shader Program: skybox
-+0.0.0.72 INF <ShaderManager.cpp:146> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
-+0.0.0.72 INF <ShaderManager.cpp:146> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
-+0.0.0.72 INF <ShaderManager.cpp:12> Shader Manager: Loading Shader Program: entity
-+0.0.0.72 INF <ShaderManager.cpp:146> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
-+0.0.0.72 INF <ShaderManager.cpp:146> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
-+0.0.0.72 INF <Model.cpp:21> Model: Load from file "Assets/Models/behemoth/mdl_behemoth.dskm"
-+0.0.0.87 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_space.dskt"
-+0.0.0.87 INF <Texture.cpp:16> Texture[load]: Load from file "Assets/Skyboxes/tex_skybox_space.dskt"
++0.0.0.10 INF <Program.cpp:34> Program: Starting
++0.0.0.10 INF <Program.cpp:82> Program: Initializing
++0.0.0.10 INF <Window.cpp:29> Window: Initializing Window
++0.0.0.75 INF <GraphicsSystem.cpp:43> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
++0.0.0.75 INF <GraphicsSystem.cpp:44> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
++0.0.0.75 INF <Dusk.lua:1> Script: Initializing Dusk Classes
++0.0.0.76 INF <Program.cpp:122> Program: Loading Resources
++0.0.0.76 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: flat
++0.0.0.76 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
++0.0.0.76 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
++0.0.0.76 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: skybox
++0.0.0.76 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
++0.0.0.76 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
++0.0.0.76 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: entity
++0.0.0.76 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
++0.0.0.76 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
++0.0.0.76 INF <Model.cpp:21> Model: Load from file "Assets/Models/behemoth/mdl_behemoth.dskm"
++0.0.0.91 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_space.dskt"
++0.0.0.91 INF <Texture.cpp:16> Texture[load]: Load from file "Assets/Skyboxes/tex_skybox_space.dskt"

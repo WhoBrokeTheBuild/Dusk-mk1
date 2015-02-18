@@ -78,6 +78,7 @@ void Dusk::Graphics::GraphicsSystem::InitScripting( void )
 	pScriptingSystem->registerFunction("dusk_graphics_system_get_shader_manager",   &GraphicsSystem::Script_GetShaderManager);
 
 	Window::InitScripting();
+	ShaderManager::InitScripting();
 }
 
 int Dusk::Graphics::GraphicsSystem::Script_GetWindow( lua_State* pState )

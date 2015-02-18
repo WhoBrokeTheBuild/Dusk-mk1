@@ -22,11 +22,15 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 	int triCount = 0;
 
+	pModel->Meshes.add(InterMesh());
+
     string line;
     while (std::getline(file, line))
     {
         if (line.size() < 2 || line[0] == '#')
             continue;
+
+        InterMesh& mesh = pModel->Meshes.getBack();
 
         size_t spacePos = line.find(' ');
 		if (spacePos == string::npos)
@@ -46,7 +50,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 			ss >> vert.x >> vert.y >> vert.z;
 
-			pModel->Verts.add(vert);
+			mesh.Verts.add(vert);
 		}
 		else if (cmd == "vt")
 		{
@@ -54,7 +58,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 			ss >> coord.x >> coord.y;
 
-			pModel->TexCoords.add(coord);
+			mesh.TexCoords.add(coord);
 		}
 		else if (cmd == "vn")
 		{
@@ -62,7 +66,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 			ss >> norm.x >> norm.y >> norm.z;
 
-			pModel->Norms.add(norm);
+			mesh.Norms.add(norm);
 		}
 		else if (cmd == "f")
 		{
@@ -125,23 +129,23 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 				if (tmpVertInds[0] != -1 && tmpVertInds[1] != -1 && tmpVertInds[2] != -1)
 				{
-					pModel->VertInds.add(tmpVertInds[0]);
-					pModel->VertInds.add(tmpVertInds[1]);
-					pModel->VertInds.add(tmpVertInds[2]);
+					mesh.VertInds.add(tmpVertInds[0]);
+					mesh.VertInds.add(tmpVertInds[1]);
+					mesh.VertInds.add(tmpVertInds[2]);
 				}
 
 				if (tmpNormInds[0] != -1 && tmpNormInds[1] != -1 && tmpNormInds[2] != -1)
 				{
-					pModel->NormInds.add(tmpNormInds[0]);
-					pModel->NormInds.add(tmpNormInds[1]);
-					pModel->NormInds.add(tmpNormInds[2]);
+					mesh.NormInds.add(tmpNormInds[0]);
+					mesh.NormInds.add(tmpNormInds[1]);
+					mesh.NormInds.add(tmpNormInds[2]);
 				}
 
 				if (tmpTexCoordInds[0] != -1 && tmpTexCoordInds[1] != -1 && tmpTexCoordInds[2] != -1)
 				{
-					pModel->TexCoordInds.add(tmpTexCoordInds[0]);
-					pModel->TexCoordInds.add(tmpTexCoordInds[1]);
-					pModel->TexCoordInds.add(tmpTexCoordInds[2]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[1]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
 				}
 			}
 			else if (count == 4)
@@ -150,41 +154,47 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 				if (tmpVertInds[0] != -1 && tmpVertInds[1] != -1 && tmpVertInds[2] != -1 && tmpVertInds[3] != -1)
 				{
-					pModel->VertInds.add(tmpVertInds[0]);
-					pModel->VertInds.add(tmpVertInds[1]);
-					pModel->VertInds.add(tmpVertInds[2]);
+					mesh.VertInds.add(tmpVertInds[0]);
+					mesh.VertInds.add(tmpVertInds[1]);
+					mesh.VertInds.add(tmpVertInds[2]);
 
-					pModel->VertInds.add(tmpVertInds[0]);
-					pModel->VertInds.add(tmpVertInds[2]);
-					pModel->VertInds.add(tmpVertInds[3]);
+					mesh.VertInds.add(tmpVertInds[0]);
+					mesh.VertInds.add(tmpVertInds[2]);
+					mesh.VertInds.add(tmpVertInds[3]);
 				}
 
 				if (tmpNormInds[0] != -1 && tmpNormInds[1] != -1 && tmpNormInds[2] != -1 && tmpNormInds[3] != -1)
 				{
-					pModel->NormInds.add(tmpNormInds[0]);
-					pModel->NormInds.add(tmpNormInds[1]);
-					pModel->NormInds.add(tmpNormInds[2]);
+					mesh.NormInds.add(tmpNormInds[0]);
+					mesh.NormInds.add(tmpNormInds[1]);
+					mesh.NormInds.add(tmpNormInds[2]);
 
-					pModel->NormInds.add(tmpNormInds[0]);
-					pModel->NormInds.add(tmpNormInds[2]);
-					pModel->NormInds.add(tmpNormInds[3]);
+					mesh.NormInds.add(tmpNormInds[0]);
+					mesh.NormInds.add(tmpNormInds[2]);
+					mesh.NormInds.add(tmpNormInds[3]);
 				}
 
 				if (tmpTexCoordInds[0] != -1 && tmpTexCoordInds[1] != -1 && tmpTexCoordInds[2] != -1 && tmpTexCoordInds[3] != -1)
 				{
-					pModel->TexCoordInds.add(tmpTexCoordInds[0]);
-					pModel->TexCoordInds.add(tmpTexCoordInds[1]);
-					pModel->TexCoordInds.add(tmpTexCoordInds[2]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[1]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
 
-					pModel->TexCoordInds.add(tmpTexCoordInds[0]);
-					pModel->TexCoordInds.add(tmpTexCoordInds[2]);
-					pModel->TexCoordInds.add(tmpTexCoordInds[3]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[3]);
 				}
 			}
 		}
 		else if (cmd == "o" || cmd == "g")
 		{
-            pModel->Name = data;
+            if (mesh.VertInds.isEmpty())
+                mesh.Name = data;
+            else
+            {
+                pModel->Meshes.add(InterMesh());
+                pModel->Meshes.getLast().Name = data;
+            }
 		}
 		else if (cmd == "mtllib")
 		{

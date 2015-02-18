@@ -219,22 +219,28 @@ string Dusk::Logging::Log::Format( const string& fmt, va_list args )
 void Dusk::Logging::Log::InitScripting(void)
 {
 	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	pScriptingSystem->registerFunction("dusk_log_info",  &Log::Script_LogInfo);
+	pScriptingSystem->registerFunction("dusk_log_error", &Log::Script_LogError);
 }
 
 int Dusk::Logging::Log::Script_LogInfo(lua_State* pState)
 {
-	int argc = lua_gettop(pState);
+    lua_Debug ar;
+    lua_getstack(pState, 1, &ar);
+    lua_getinfo(pState, "nSl", &ar);
 
-	LogInfo("Script", lua_tostring(pState, 1));
+	Log::Info("Script", lua_tostring(pState, 1), "Main.lua", ar.currentline);
 
 	return 0;
 }
 
 int Dusk::Logging::Log::Script_LogError(lua_State* pState)
 {
-	int argc = lua_gettop(pState);
+    lua_Debug ar;
+    lua_getstack(pState, 1, &ar);
+    lua_getinfo(pState, "nSl", &ar);
 
-	LogError("Script", lua_tostring(pState, 1));
+	Log::Error("Script", lua_tostring(pState, 1), "Main.lua", ar.currentline);
 
 	return 0;
 }

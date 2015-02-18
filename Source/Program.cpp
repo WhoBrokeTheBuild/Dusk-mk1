@@ -81,21 +81,23 @@ bool Dusk::Program::init()
 {
     LogInfo(getClassName(), "Initializing");
 
+	mp_ScriptingSystem = New ScriptingSystem();
+	mp_ScriptingSystem->init();
+	Log::InitScripting();
+
     mp_GraphicsSystem = New GraphicsSystem();
-    if ( ! mp_GraphicsSystem->init(1024, 768, "Dusk Test", false) )
+    if ( ! mp_GraphicsSystem->init(300, 600, "Dusk Test", false) )
     {
         LogError(getClassName(), "Failed to initialize Graphics System");
         return false;
     }
+	GraphicsSystem::InitScripting();
 
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
                            vec3(20.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
 
-	mp_ScriptingSystem = New ScriptingSystem();
-	mp_ScriptingSystem->init();
-	Log::InitScripting();
-	//GraphicsSystem::InitScripting();
-	//Camera::InitScripting();
+	mp_ScriptingSystem->runScript("Assets/Scripts/Dusk.lua");
+	mp_ScriptingSystem->runScript("Assets/Scripts/Main.lua");
 
     return true;
 }
@@ -110,6 +112,9 @@ void Dusk::Program::term()
 
     delete mp_GraphicsSystem;
     mp_GraphicsSystem = nullptr;
+
+    delete mp_ScriptingSystem;
+    mp_ScriptingSystem = nullptr;
 }
 
 bool Dusk::Program::load()

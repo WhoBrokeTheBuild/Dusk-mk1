@@ -4,6 +4,7 @@
 #include <Arc/ManagedObject.h>
 #include <Arc/Map.h>
 #include <Graphics/Graphics.h>
+#include <Scripting/Scripting.h>
 
 using Arc::Map;
 
@@ -59,6 +60,12 @@ public:
     void hookMouseDown( const int& button );
     void hookMouseMove( const double& x, const double& y );
     void hookMouseScroll( const double& x, const double& y );
+
+	static void InitScripting( void );
+	static int Script_GetWidth( lua_State* pState );
+	static int Script_GetHeight( lua_State* pState );
+	static int Script_SetWidth( lua_State* pState );
+	static int Script_SetHeight( lua_State* pState );
 
 private:
 

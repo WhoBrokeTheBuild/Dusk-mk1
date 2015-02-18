@@ -4,8 +4,10 @@
 #include <Graphics/Window.h>
 #include <Graphics/GraphicsContext.h>
 #include <Graphics/ShaderManager.h>
+#include <Scripting/ScriptingSystem.h>
 #include <Logging/Log.h>
 
+using namespace Dusk::Scripting;
 using namespace Dusk::Logging;
 
 Dusk::Graphics::GraphicsSystem::~GraphicsSystem()
@@ -66,4 +68,35 @@ Dusk::Graphics::GraphicsContext* Dusk::Graphics::GraphicsSystem::getGraphicsCont
 Dusk::Graphics::ShaderManager* Dusk::Graphics::GraphicsSystem::getShaderManager(void)
 {
     return mp_ShaderManager;
+}
+
+void Dusk::Graphics::GraphicsSystem::InitScripting( void )
+{
+	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	pScriptingSystem->registerFunction("dusk_graphics_system_get_window",           &GraphicsSystem::Script_GetWindow);
+	pScriptingSystem->registerFunction("dusk_graphics_system_get_graphics_context", &GraphicsSystem::Script_GetGraphicsContext);
+	pScriptingSystem->registerFunction("dusk_graphics_system_get_shader_manager",   &GraphicsSystem::Script_GetShaderManager);
+
+	Window::InitScripting();
+}
+
+int Dusk::Graphics::GraphicsSystem::Script_GetWindow( lua_State* pState )
+{
+    lua_pushinteger(pState, (unsigned long)Program::Inst().getGraphicsSystem()->getWindow());
+
+	return 1;
+}
+
+int Dusk::Graphics::GraphicsSystem::Script_GetGraphicsContext( lua_State* pState )
+{
+    lua_pushinteger(pState, (unsigned long)Program::Inst().getGraphicsSystem()->getGraphicsContext());
+
+	return 1;
+}
+
+int Dusk::Graphics::GraphicsSystem::Script_GetShaderManager( lua_State* pState )
+{
+    lua_pushinteger(pState, (unsigned long)Program::Inst().getGraphicsSystem()->getShaderManager());
+
+	return 1;
 }

@@ -3,6 +3,7 @@
 
 #include <Arc/ManagedObject.h>
 #include <Graphics/Graphics.h>
+#include <Scripting/Scripting.h>
 
 namespace Dusk
 {
@@ -35,6 +36,11 @@ public:
     ShaderManager* getShaderManager( void );
 
     inline void setVsync( const bool& vsync ) { glfwSwapInterval( ( vsync ? 1 : 0) ); }
+
+	static void InitScripting( void );
+	static int Script_GetWindow( lua_State* pState );
+	static int Script_GetGraphicsContext( lua_State* pState );
+	static int Script_GetShaderManager( lua_State* pState );
 
 private:
 

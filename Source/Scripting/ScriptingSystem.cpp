@@ -7,10 +7,10 @@ using namespace Dusk::Logging;
 bool Dusk::Scripting::ScriptingSystem::init(void)
 {
 	mp_LuaState = luaL_newstate();
-	
+
 	if (!mp_LuaState)
 	{
-		LogErrorFmt(getClassName(), "Failed to create Lua State");
+		LogError(getClassName(), "Failed to create Lua State");
 		return false;
 	}
 
@@ -21,15 +21,15 @@ bool Dusk::Scripting::ScriptingSystem::init(void)
 
 bool Dusk::Scripting::ScriptingSystem::registerFunction(const string& func, LuaCallback callback)
 {
-	if (func.empty() == 0)
+	if (func.empty())
 	{
-		LogErrorFmt(getClassName(), "Cannot register function with no name");
+		LogError(getClassName(), "Cannot register function with no name");
 		return false;
 	}
 
 	if (callback == nullptr)
 	{
-		LogErrorFmt(getClassName(), "Cannot register function with null callback");
+		LogError(getClassName(), "Cannot register function with null callback");
 		return false;
 	}
 
@@ -49,5 +49,8 @@ bool Dusk::Scripting::ScriptingSystem::runScript(const string& script)
 	{
 		LogErrorFmt("Script", "%s", lua_tostring(mp_LuaState, -1));
 		lua_pop(mp_LuaState, 1); // remove error message
+        return false;
 	}
+
+	return true;
 }

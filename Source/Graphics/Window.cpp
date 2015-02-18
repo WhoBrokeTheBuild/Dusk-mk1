@@ -1,12 +1,14 @@
 #include "Window.h"
 
 #include <Program.h>
-#include <World/Camera.h>
 #include <Graphics/GraphicsContext.h>
+#include <Scripting/ScriptingSystem.h>
+#include <World/Camera.h>
 #include <Logging/Log.h>
 
-using namespace Dusk::Logging;
+using namespace Dusk::Scripting;
 using namespace Dusk::World;
+using namespace Dusk::Logging;
 
 Map<GLFWwindow*, Dusk::Graphics::Window*> Dusk::Graphics::g_Windows = Map<GLFWwindow*, Dusk::Graphics::Window*>();
 
@@ -93,7 +95,7 @@ void Dusk::Graphics::Window::setTitle( const string& title )
 
 bool Dusk::Graphics::Window::shouldClose( void )
 {
-    return ( glfwWindowShouldClose(mp_GLFWWindow) == 0 );
+    return ( glfwWindowShouldClose(mp_GLFWWindow) > 0 );
 }
 
 Dusk::Graphics::GraphicsContext* Dusk::Graphics::Window::getGraphicsContext( void )
@@ -137,6 +139,51 @@ void Dusk::Graphics::Window::hookMouseMove( const double& x, const double& y )
 void Dusk::Graphics::Window::hookMouseScroll( const double& x, const double& y )
 {
 
+}
+
+void Dusk::Graphics::Window::InitScripting( void )
+{
+	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	pScriptingSystem->registerFunction("dusk_window_get_width",  &Window::Script_GetWidth);
+	pScriptingSystem->registerFunction("dusk_window_get_height", &Window::Script_GetHeight);
+	pScriptingSystem->registerFunction("dusk_window_set_width",  &Window::Script_SetWidth);
+	pScriptingSystem->registerFunction("dusk_window_set_height", &Window::Script_SetHeight);
+}
+
+int Dusk::Graphics::Window::Script_GetWidth( lua_State* pState )
+{
+    LogInfo("Test", "Width");
+	Window* pWindow = (Window*)lua_tointeger(pState, 1);
+    lua_pushinteger(pState, (int)pWindow->getWidth());
+
+	return 1;
+}
+
+int Dusk::Graphics::Window::Script_GetHeight( lua_State* pState )
+{
+    LogInfo("Test", "Height");
+	Window* pWindow = (Window*)lua_tointeger(pState, 1);
+    lua_pushinteger(pState, (int)pWindow->getHeight());
+
+	return 1;
+}
+
+int Dusk::Graphics::Window::Script_SetWidth( lua_State* pState )
+{
+	Window* pWindow = (Window*)lua_tointeger(pState, 1);
+    int width = lua_tointeger(pState, 2);
+    pWindow->setWidth(width);
+
+	return 0;
+}
+
+int Dusk::Graphics::Window::Script_SetHeight( lua_State* pState )
+{
+	Window* pWindow = (Window*)lua_tointeger(pState, 1);
+    int height = lua_tointeger(pState, 2);
+    pWindow->setHeight(height);
+
+	return 0;
 }
 
 void Dusk::Graphics::glfwError( int error, const char* description )

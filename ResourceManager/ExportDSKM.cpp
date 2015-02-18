@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 
 #include "Functions.h"
+#include "InterMesh.h"
 
 using glm::vec3;
 using glm::vec2;

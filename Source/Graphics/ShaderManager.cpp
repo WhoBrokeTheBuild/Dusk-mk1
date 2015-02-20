@@ -206,7 +206,7 @@ void Dusk::Graphics::ShaderManager::checkUniformError( void )
 
 void Dusk::Graphics::ShaderManager::InitScripting(void)
 {
-	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	ScriptingSystem* pScriptingSystem = Program::Inst()->getScriptingSystem();
 	pScriptingSystem->registerFunction("dusk_shader_manager_load_program",  &ShaderManager::Script_LoadProgram);
 }
 

@@ -9,10 +9,14 @@
 #include <Scripting/ScriptingSystem.h>
 #include <World/Camera.h>
 #include <World/Skybox.h>
+#include <Input/InputSystem.h>
 #include <Timing/TimeInfo.h>
 
 using namespace Dusk::Logging;
 using namespace Dusk::Timing;
+
+const Dusk::Events::EventID Dusk::Program::EVT_UPDATE = 1;
+const Dusk::Events::EventID Dusk::Program::EVT_RENDER = 2;
 
 Dusk::Graphics::GraphicsSystem* Dusk::Program::getGraphicsSystem( void )
 {
@@ -29,7 +33,7 @@ Dusk::World::Camera* Dusk::Program::getCamera( void )
     return mp_Camera;
 }
 
-void Dusk::Program::start()
+void Dusk::Program::run()
 {
     LogInfo(getClassName(), "Starting");
 
@@ -93,6 +97,8 @@ bool Dusk::Program::init()
     }
 	GraphicsSystem::InitScripting();
 
+	mp_InputSystem = New InputSystem();
+
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
                            vec3(20.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
 
@@ -109,6 +115,9 @@ void Dusk::Program::term()
 
     delete mp_Camera;
     mp_Camera = nullptr;
+
+    delete mp_InputSystem;
+    mp_InputSystem = nullptr;
 
     delete mp_GraphicsSystem;
     mp_GraphicsSystem = nullptr;
@@ -134,8 +143,11 @@ bool Dusk::Program::load()
     return true;
 }
 
-void Dusk::Program::update(const TimeInfo& timeInfo)
+void Dusk::Program::update(TimeInfo& timeInfo)
 {
+    UpdateEventData evtData(&timeInfo);
+    dispatch(Event(Program::EVT_UPDATE, evtData));
+
     rotation += 0.01f * (float)timeInfo.Delta;
 }
 
@@ -144,9 +156,11 @@ void Dusk::Program::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glClearDepth(1.0f);
 
+	dispatch(Event(Program::EVT_RENDER, RenderEventData()));
+
     mp_Skybox->render();
 
-    ShaderManager* pShaderManager = Program::Inst().getGraphicsSystem()->getShaderManager();
+    ShaderManager* pShaderManager = Program::Inst()->getGraphicsSystem()->getShaderManager();
 
 	mat4x4 mView = mp_Camera->getViewMatrix();
 	mat4x4 mProj = mp_Camera->getProjectionMatrix();
@@ -193,7 +207,7 @@ void Dusk::Program::render()
 
 int Dusk::Program::Script_GetCamera( lua_State* pState )
 {
-    lua_pushinteger(pState, (unsigned long)Program::Inst().getCamera());
+    lua_pushinteger(pState, (unsigned long)Program::Inst()->getCamera());
 
 	return 1;
 }

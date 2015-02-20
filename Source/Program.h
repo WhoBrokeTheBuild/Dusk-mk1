@@ -2,6 +2,7 @@
 #define DUSK_PROGRAM_H
 
 #include <Arc/ManagedObject.h>
+#include <Events/IEventDispatcher.h>
 #include <Graphics/Graphics.h>
 #include <Scripting/Scripting.h>
 
@@ -30,30 +31,41 @@ namespace Timing
     class TimeInfo;
 }
 
+namespace Input
+{
+    class InputSystem;
+}
+
+using namespace Dusk::Events;
 using namespace Dusk::Graphics;
 using namespace Dusk::Scripting;
 using namespace Dusk::Timing;
 using namespace Dusk::World;
+using namespace Dusk::Input;
 
 class Program :
-    public Arc::ManagedObject
+    public Arc::ManagedObject,
+    public IEventDispatcher
 {
 
 public:
 
-    static inline Program& Inst()
-    {
-        static Program prog;
+    static const EventID  EVT_UPDATE;
+    static const EventID  EVT_RENDER;
 
-        return prog;
+    static inline Program* Inst()
+    {
+        static Program* pProgram = New Program();
+
+        return pProgram;
     }
 
     virtual inline ~Program() { }
 
     virtual inline string getClassName( void ) const { return "Program"; }
 
-    void start();
-    void update(const TimeInfo& timeInfo);
+    void run();
+    void update(TimeInfo& timeInfo);
     void render();
 
     GraphicsSystem* getGraphicsSystem( void );
@@ -78,6 +90,8 @@ private:
 
 	ScriptingSystem*	mp_ScriptingSystem;
 
+	InputSystem*        mp_InputSystem;
+
     float               m_TargetFPS;
     float               m_CurrentFPS;
 
@@ -88,6 +102,34 @@ private:
     float rotation;
 
 }; // class Program
+
+class UpdateEventData :
+    public EventData
+{
+public:
+
+    inline UpdateEventData( TimeInfo* pTimeInfo ) :
+        mp_TimeInfo(pTimeInfo)
+    { }
+
+    inline UpdateEventData( UpdateEventData& rhs ) :
+        mp_TimeInfo(rhs.mp_TimeInfo)
+    { }
+
+    virtual EventData* clone( void ) const { return New UpdateEventData(mp_TimeInfo); };
+
+    virtual inline TimeInfo* getTimeInfo( void ) const { return mp_TimeInfo; }
+
+private:
+
+    TimeInfo*   mp_TimeInfo;
+
+}; // class UpdateEventData
+
+class RenderEventData :
+    public EventData
+{
+}; // class RenderEventData
 
 } // namespace Dusk
 

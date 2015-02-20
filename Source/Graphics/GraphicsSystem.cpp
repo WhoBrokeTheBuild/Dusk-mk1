@@ -72,7 +72,7 @@ Dusk::Graphics::ShaderManager* Dusk::Graphics::GraphicsSystem::getShaderManager(
 
 void Dusk::Graphics::GraphicsSystem::InitScripting( void )
 {
-	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	ScriptingSystem* pScriptingSystem = Program::Inst()->getScriptingSystem();
 	pScriptingSystem->registerFunction("dusk_graphics_system_get_window",           &GraphicsSystem::Script_GetWindow);
 	pScriptingSystem->registerFunction("dusk_graphics_system_get_graphics_context", &GraphicsSystem::Script_GetGraphicsContext);
 	pScriptingSystem->registerFunction("dusk_graphics_system_get_shader_manager",   &GraphicsSystem::Script_GetShaderManager);
@@ -83,21 +83,21 @@ void Dusk::Graphics::GraphicsSystem::InitScripting( void )
 
 int Dusk::Graphics::GraphicsSystem::Script_GetWindow( lua_State* pState )
 {
-    lua_pushinteger(pState, (unsigned long)Program::Inst().getGraphicsSystem()->getWindow());
+    lua_pushinteger(pState, (unsigned long)Program::Inst()->getGraphicsSystem()->getWindow());
 
 	return 1;
 }
 
 int Dusk::Graphics::GraphicsSystem::Script_GetGraphicsContext( lua_State* pState )
 {
-    lua_pushinteger(pState, (unsigned long)Program::Inst().getGraphicsSystem()->getGraphicsContext());
+    lua_pushinteger(pState, (unsigned long)Program::Inst()->getGraphicsSystem()->getGraphicsContext());
 
 	return 1;
 }
 
 int Dusk::Graphics::GraphicsSystem::Script_GetShaderManager( lua_State* pState )
 {
-    lua_pushinteger(pState, (unsigned long)Program::Inst().getGraphicsSystem()->getShaderManager());
+    lua_pushinteger(pState, (unsigned long)Program::Inst()->getGraphicsSystem()->getShaderManager());
 
 	return 1;
 }

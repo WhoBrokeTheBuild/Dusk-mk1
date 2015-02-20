@@ -10,6 +10,14 @@ using namespace Dusk::Scripting;
 using namespace Dusk::World;
 using namespace Dusk::Logging;
 
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_RESIZE          = 1;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_KEY_UP          = 2;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_KEY_DOWN        = 3;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_UP        = 4;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_DOWN      = 5;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_MOVE      = 6;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_SCROLL    = 7;
+
 Map<GLFWwindow*, Dusk::Graphics::Window*> Dusk::Graphics::g_Windows = Map<GLFWwindow*, Dusk::Graphics::Window*>();
 
 Dusk::Graphics::Window::~Window()
@@ -77,12 +85,16 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
 
 bool Dusk::Graphics::Window::resize( const unsigned int& width, const unsigned int& height )
 {
-    m_Width = width;
+    int deltaWidth = width - m_Width;
+    int deltaHeight = height - m_Height;
+
+	m_Width = width;
     m_Height = height;
 
-    glfwSetWindowSize(mp_GLFWWindow, (int)width, (int)height);
+    glfwSetWindowSize(mp_GLFWWindow, (int)m_Width, (int)m_Height);
+	glViewport(0, 0, (int)m_Width, (int)m_Height);
 
-	Program::Inst().getCamera()->resize((float)width, (float)height);
+	dispatch(Event(Window::EVT_RESIZE, WindowResizeEventData(width, height, deltaWidth, deltaHeight)));
 
     return true;
 }
@@ -105,35 +117,39 @@ Dusk::Graphics::GraphicsContext* Dusk::Graphics::Window::getGraphicsContext( voi
 
 void Dusk::Graphics::Window::hookResize( const int& width, const int& height )
 {
+    int deltaWidth = width - m_Width;
+    int deltaHeight = height - m_Height;
+
 	m_Width = width;
 	m_Height = height;
+	glViewport(0, 0, (int)m_Width, (int)m_Height);
 
-	glViewport(0, 0, m_Width, m_Height);
+	dispatch(Event(Window::EVT_RESIZE, WindowResizeEventData(width, height, deltaWidth, deltaHeight)));
 }
 
 void Dusk::Graphics::Window::hookKeyUp( const int& key )
 {
-
+	dispatch(Event(Window::EVT_KEY_UP, WindowKeyEventData(key)));
 }
 
 void Dusk::Graphics::Window::hookKeyDown( const int& key )
 {
-
+	dispatch(Event(Window::EVT_KEY_DOWN, WindowKeyEventData(key)));
 }
 
 void Dusk::Graphics::Window::hookMouseUp( const int& button )
 {
-
+	dispatch(Event(Window::EVT_MOUSE_UP, WindowMouseEventData(button)));
 }
 
 void Dusk::Graphics::Window::hookMouseDown( const int& button )
 {
-
+	dispatch(Event(Window::EVT_MOUSE_DOWN, WindowMouseEventData(button)));
 }
 
 void Dusk::Graphics::Window::hookMouseMove( const double& x, const double& y )
 {
-
+	dispatch(Event(Window::EVT_MOUSE_MOVE, WindowMouseMoveEventData(x, y, 0, 0)));
 }
 
 void Dusk::Graphics::Window::hookMouseScroll( const double& x, const double& y )
@@ -143,7 +159,7 @@ void Dusk::Graphics::Window::hookMouseScroll( const double& x, const double& y )
 
 void Dusk::Graphics::Window::InitScripting( void )
 {
-	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	ScriptingSystem* pScriptingSystem = Program::Inst()->getScriptingSystem();
 	pScriptingSystem->registerFunction("dusk_window_get_width",  &Window::Script_GetWidth);
 	pScriptingSystem->registerFunction("dusk_window_get_height", &Window::Script_GetHeight);
 	pScriptingSystem->registerFunction("dusk_window_set_width",  &Window::Script_SetWidth);

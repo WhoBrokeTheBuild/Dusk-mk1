@@ -6,9 +6,12 @@
 #include <Graphics/Graphics.h>
 #include <Scripting/Scripting.h>
 #include <Math/Math.h>
+#include <Events/Event.h>
 
 #define _USE_MATH_DEFINES
 #include <cmath>
+
+using namespace Dusk::Events;
 
 namespace Dusk
 {
@@ -21,27 +24,14 @@ class Camera :
 {
 public:
 
-	inline Camera( const GLfloat& width, const GLfloat& height, const vec3& pos, const vec3& dir, const vec3& up,
-                   const GLfloat& fov, const GLfloat& near, const GLfloat& far )
-		: m_ProjUpdated		(true),
-          m_ViewUpdated     (true),
-		  m_FOV             (fov),
-		  m_AspectWidth		(width),
-		  m_AspectHeight	(height),
-		  m_Near            (near),
-		  m_Far             (far),
-		  m_Pos             (pos),
-		  m_Dir             (dir),
-		  m_Up              (up),
-		  m_Orient			(1, 0, 0, 0)
-	{
-    }
+    Camera( const unsigned int& width, const unsigned int& height, const vec3& pos, const vec3& dir,
+            const vec3& up, const GLfloat& fov, const GLfloat& near, const GLfloat& far );
 
 	virtual inline ~Camera( void ) { }
 
 	virtual inline string getClassName( void ) const { return "Camera"; }
 
-	void resize( GLfloat width, GLfloat height );
+	void resize( const unsigned int& width, const unsigned int& height );
 
 	inline vec3 getPos( void ) const      { return m_Pos; }
 	inline void setPos( const vec3& pos ) { setPos(pos.x, pos.y, pos.z); }
@@ -83,10 +73,10 @@ public:
 		m_ProjUpdated = true;
 	}
 
-	inline void setAspect( const GLfloat& width, const GLfloat& height )
+	inline void setAspect( const unsigned int& width, const unsigned int& height )
 	{
-		m_AspectWidth = width;
-		m_AspectHeight = height;
+		m_Width = width;
+		m_Height = height;
 		m_ProjUpdated = true;
 	}
 
@@ -95,10 +85,12 @@ public:
         m_Dir = center - m_Pos;
 	}
 
-	void setPerspective( const GLfloat& fov, const GLfloat& width, const GLfloat& height, const GLfloat& vNear, const GLfloat& vFar );
+	void setPerspective( const GLfloat& fov, const unsigned int& width, const unsigned int& height, const GLfloat& vNear, const GLfloat& vFar );
 
 	mat4x4 getViewMatrix( void );
 	mat4x4 getProjectionMatrix( void );
+
+	void handleWindowResize( const Event& event );
 
 	static void InitScripting( void );
 	static int Script_GetPos( lua_State* pState );
@@ -111,9 +103,10 @@ private:
 	bool			m_ProjUpdated,
                     m_ViewUpdated;
 
+    unsigned int    m_Width,
+                    m_Height;
+
 	GLfloat			m_FOV,
-					m_AspectWidth,
-					m_AspectHeight,
 					m_Near,
 					m_Far,
 					m_Pitch,

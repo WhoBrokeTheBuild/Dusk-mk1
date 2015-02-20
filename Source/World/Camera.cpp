@@ -4,9 +4,29 @@
 #undef near
 
 #include <Program.h>
+#include <Graphics/GraphicsSystem.h>
+#include <Graphics/Window.h>
 #include <Scripting/ScriptingSystem.h>
 
 using namespace Dusk::Scripting;
+using namespace Dusk::Graphics;
+
+Dusk::World::Camera::Camera( const unsigned int& width, const unsigned int& height, const vec3& pos, const vec3& dir,
+               const vec3& up, const GLfloat& fov, const GLfloat& near, const GLfloat& far )
+    : m_ProjUpdated		(true),
+      m_ViewUpdated     (true),
+      m_Width   		(width),
+      m_Height	        (height),
+      m_FOV             (fov),
+      m_Near            (near),
+      m_Far             (far),
+      m_Pos             (pos),
+      m_Dir             (dir),
+      m_Up              (up),
+      m_Orient			(1, 0, 0, 0)
+{
+    Program::Inst()->getGraphicsSystem()->getWindow()->addEventListener(Window::EVT_RESIZE, this, &Camera::handleWindowResize);
+}
 
 mat4x4 Dusk::World::Camera::getViewMatrix( void )
 {
@@ -20,11 +40,11 @@ mat4x4 Dusk::World::Camera::getViewMatrix( void )
 	return m_View;
 }
 
-void Dusk::World::Camera::setPerspective( const GLfloat& fov, const GLfloat& width, const GLfloat& height, const GLfloat& near, const GLfloat& far )
+void Dusk::World::Camera::setPerspective( const GLfloat& fov, const unsigned int& width, const unsigned int& height, const GLfloat& near, const GLfloat& far )
 {
 	m_FOV = fov;
-	m_AspectWidth = width;
-	m_AspectHeight = height;
+	m_Width = width;
+	m_Height = height;
 	m_Near = near;
 	m_Far = far;
 	m_ProjUpdated = true;
@@ -35,24 +55,30 @@ mat4x4 Dusk::World::Camera::getProjectionMatrix( void )
 	if ( ! m_ProjUpdated)
 		return m_Proj;
 
-	if (m_AspectWidth <= 0.0f || m_AspectHeight <= 0.0f || m_FOV <= 0.0f)
+	if (m_Width <= 0 || m_Height <= 0 || m_FOV <= 0.0f)
 		return mat4(1.0f);
 
-	m_Proj = glm::perspectiveFov(m_FOV, m_AspectWidth, m_AspectHeight, m_Near, m_Far);
+	m_Proj = glm::perspectiveFov(m_FOV, (GLfloat)m_Width, (GLfloat)m_Height, m_Near, m_Far);
 
 	return m_Proj;
 }
 
-void Dusk::World::Camera::resize(GLfloat width, GLfloat height)
+void Dusk::World::Camera::resize(const unsigned int& width, const unsigned int& height)
 {
-	m_AspectWidth = width;
-	m_AspectHeight = height;
+	m_Width = width;
+	m_Height = height;
 	m_ProjUpdated = true;
+}
+
+void Dusk::World::Camera::handleWindowResize( const Event& event )
+{
+    const WindowResizeEventData* pData = event.getDataAs<WindowResizeEventData>();
+    resize(pData->getWidth(), pData->getHeight());
 }
 
 void Dusk::World::Camera::InitScripting( void )
 {
-	ScriptingSystem* pScriptingSystem = Program::Inst().getScriptingSystem();
+	ScriptingSystem* pScriptingSystem = Program::Inst()->getScriptingSystem();
 	pScriptingSystem->registerFunction("dusk_camera_get_pos",  &Camera::Script_GetPos);
 }
 

@@ -7,48 +7,100 @@
 
 using namespace Dusk::Logging;
 
+const Dusk::Events::EventID Dusk::Input::InputSystem::EVT_KEY_UP         = 1;
+const Dusk::Events::EventID Dusk::Input::InputSystem::EVT_KEY_DOWN       = 2;
+const Dusk::Events::EventID Dusk::Input::InputSystem::EVT_MOUSE_UP       = 3;
+const Dusk::Events::EventID Dusk::Input::InputSystem::EVT_MOUSE_DOWN     = 4;
+const Dusk::Events::EventID Dusk::Input::InputSystem::EVT_MOUSE_MOVE     = 5;
+const Dusk::Events::EventID Dusk::Input::InputSystem::EVT_MOUSE_SCROLL   = 6;
+
 Dusk::Input::InputSystem::InputSystem( void )
 {
-    Window* pWindow = Program::Inst()->getGraphicsSystem()->getWindow();
-    pWindow->addEventListener(Window::EVT_KEY_UP,       this, &InputSystem::handleKeyUp);
-    pWindow->addEventListener(Window::EVT_KEY_DOWN,     this, &InputSystem::handleKeyDown);
-    pWindow->addEventListener(Window::EVT_MOUSE_UP,     this, &InputSystem::handleMouseUp);
-    pWindow->addEventListener(Window::EVT_MOUSE_DOWN,   this, &InputSystem::handleMouseDown);
-    pWindow->addEventListener(Window::EVT_MOUSE_MOVE,   this, &InputSystem::handleMouseMove);
-    pWindow->addEventListener(Window::EVT_MOUSE_SCROLL, this, &InputSystem::handleMouseScroll);
 }
 
-void Dusk::Input::InputSystem::handleKeyUp(const Event& event)
+void Dusk::Input::InputSystem::hookKeyUp( const int& key )
 {
-    WindowKeyEventData* pData = event.getDataAs<WindowKeyEventData>();
-    //LogInfoFmt(getClassName(), "Key Up: %d", pData->getKey());
+    dispatch(Event(InputSystem::EVT_KEY_UP, KeyEventData(GLFW2DuskKey(key))));
 }
 
-void Dusk::Input::InputSystem::handleKeyDown(const Event& event)
+void Dusk::Input::InputSystem::hookKeyDown( const int& key )
 {
-    WindowKeyEventData* pData = event.getDataAs<WindowKeyEventData>();
-    //LogInfoFmt(getClassName(), "Key Down: %d", pData->getKey());
+    dispatch(Event(InputSystem::EVT_KEY_DOWN, KeyEventData(GLFW2DuskKey(key))));
 }
 
-void Dusk::Input::InputSystem::handleMouseUp(const Event& event)
+void Dusk::Input::InputSystem::hookMouseUp( const int& button )
 {
-    WindowMouseEventData* pData = event.getDataAs<WindowMouseEventData>();
-    //LogInfoFmt(getClassName(), "Mouse Up: %d", pData->getMouseButton());
 }
 
-void Dusk::Input::InputSystem::handleMouseDown(const Event& event)
+void Dusk::Input::InputSystem::hookMouseDown( const int& button )
 {
-    WindowMouseEventData* pData = event.getDataAs<WindowMouseEventData>();
-    //LogInfoFmt(getClassName(), "Mouse Down: %d", pData->getMouseButton());
 }
 
-void Dusk::Input::InputSystem::handleMouseMove(const Event& event)
+void Dusk::Input::InputSystem::hookMouseMove( const double& x, const double& y )
 {
-    WindowMouseMoveEventData* pData = event.getDataAs<WindowMouseMoveEventData>();
-    //LogInfoFmt(getClassName(), "Mouse Move: %d, %d", pData->getX(), pData->getY());
+    int deltaX = x - m_MouseX;
+    int deltaY = y - m_MouseY;
+
+	m_MouseX = x;
+	m_MouseY = y;
+
 }
 
-void Dusk::Input::InputSystem::handleMouseScroll(const Event& event)
+void Dusk::Input::InputSystem::hookMouseScroll( const double& x, const double& y )
 {
-    WindowMouseScrollEventData* pData = event.getDataAs<WindowMouseScrollEventData>();
+
+}
+
+void Dusk::Input::glfwKey( GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods )
+{
+    InputSystem* pInputSystem = Program::Inst()->getInputSystem();
+
+	switch (action)
+	{
+	case GLFW_PRESS:
+
+        pInputSystem->hookKeyDown(key);
+
+		break;
+	case GLFW_RELEASE:
+
+        pInputSystem->hookKeyUp(key);
+
+		break;
+	case GLFW_REPEAT:
+
+
+		break;
+	}
+}
+
+void Dusk::Input::glfwMouseMove( GLFWwindow* pGLFWWindow, double x, double y )
+{
+    InputSystem* pInputSystem = Program::Inst()->getInputSystem();
+    pInputSystem->hookMouseMove(x, y);
+}
+
+void Dusk::Input::glfwMouse( GLFWwindow* pGLFWWindow, int button, int action, int mods )
+{
+    InputSystem* pInputSystem = Program::Inst()->getInputSystem();
+
+	switch (action)
+	{
+	case GLFW_PRESS:
+
+        pInputSystem->hookMouseDown(button);
+
+		break;
+	case GLFW_RELEASE:
+
+        pInputSystem->hookMouseUp(button);
+
+		break;
+	}
+}
+
+void Dusk::Input::glfwMouseScroll( GLFWwindow* pGLFWWindow, double x, double y )
+{
+    InputSystem* pInputSystem = Program::Inst()->getInputSystem();
+    pInputSystem->hookMouseScroll(x, y);
 }

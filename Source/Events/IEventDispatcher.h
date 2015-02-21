@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef DUSK_EVENT_DISPATCHER_H
 #define DUSK_EVENT_DISPATCHER_H
 

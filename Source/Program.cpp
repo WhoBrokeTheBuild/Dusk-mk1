@@ -28,6 +28,11 @@ Dusk::Scripting::ScriptingSystem* Dusk::Program::getScriptingSystem(void)
 	return mp_ScriptingSystem;
 }
 
+Dusk::Input::InputSystem* Dusk::Program::getInputSystem(void)
+{
+	return mp_InputSystem;
+}
+
 Dusk::World::Camera* Dusk::Program::getCamera( void )
 {
     return mp_Camera;

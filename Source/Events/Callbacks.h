@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef DUSK_CALLBACKS_H
 #define DUSK_CALLBACKS_H
 

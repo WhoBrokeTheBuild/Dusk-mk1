@@ -1,31 +1,24 @@
 #include "Window.h"
 
 #include <Program.h>
+#include <Graphics/GraphicsSystem.h>
 #include <Graphics/GraphicsContext.h>
+#include <Input/InputSystem.h>
 #include <Scripting/ScriptingSystem.h>
 #include <World/Camera.h>
 #include <Logging/Log.h>
 
+using namespace Dusk::Input;
 using namespace Dusk::Scripting;
 using namespace Dusk::World;
 using namespace Dusk::Logging;
 
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_RESIZE          = 1;
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_KEY_UP          = 2;
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_KEY_DOWN        = 3;
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_UP        = 4;
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_DOWN      = 5;
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_MOVE      = 6;
-const Dusk::Events::EventID Dusk::Graphics::Window::EVT_MOUSE_SCROLL    = 7;
-
-Map<GLFWwindow*, Dusk::Graphics::Window*> Dusk::Graphics::g_Windows = Map<GLFWwindow*, Dusk::Graphics::Window*>();
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_RESIZE = 1;
 
 Dusk::Graphics::Window::~Window()
 {
     delete mp_GraphicsContext;
     mp_GraphicsContext = nullptr;
-
-    g_Windows.removeKey(mp_GLFWWindow);
 
     glfwHideWindow(mp_GLFWWindow);
     glfwDestroyWindow(mp_GLFWWindow);
@@ -68,8 +61,6 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
 	}
 
 	mp_GraphicsContext = New GraphicsContext(mp_GLFWWindow);
-
-	g_Windows.add(mp_GLFWWindow, this);
 
 	if (mp_GLFWWindow != nullptr)
 	{
@@ -125,36 +116,6 @@ void Dusk::Graphics::Window::hookResize( const int& width, const int& height )
 	glViewport(0, 0, (int)m_Width, (int)m_Height);
 
 	dispatch(Event(Window::EVT_RESIZE, WindowResizeEventData(width, height, deltaWidth, deltaHeight)));
-}
-
-void Dusk::Graphics::Window::hookKeyUp( const int& key )
-{
-	dispatch(Event(Window::EVT_KEY_UP, WindowKeyEventData(key)));
-}
-
-void Dusk::Graphics::Window::hookKeyDown( const int& key )
-{
-	dispatch(Event(Window::EVT_KEY_DOWN, WindowKeyEventData(key)));
-}
-
-void Dusk::Graphics::Window::hookMouseUp( const int& button )
-{
-	dispatch(Event(Window::EVT_MOUSE_UP, WindowMouseEventData(button)));
-}
-
-void Dusk::Graphics::Window::hookMouseDown( const int& button )
-{
-	dispatch(Event(Window::EVT_MOUSE_DOWN, WindowMouseEventData(button)));
-}
-
-void Dusk::Graphics::Window::hookMouseMove( const double& x, const double& y )
-{
-	dispatch(Event(Window::EVT_MOUSE_MOVE, WindowMouseMoveEventData(x, y, 0, 0)));
-}
-
-void Dusk::Graphics::Window::hookMouseScroll( const double& x, const double& y )
-{
-
 }
 
 void Dusk::Graphics::Window::InitScripting( void )
@@ -227,69 +188,6 @@ void Dusk::Graphics::glfwError( int error, const char* description )
 
 void Dusk::Graphics::glfwResize( GLFWwindow* pGLFWWindow, int width, int height )
 {
-    Window* pWindow = (g_Windows.containsKey(pGLFWWindow) ? g_Windows[pGLFWWindow] : nullptr);
-    if (pWindow == nullptr) return;
-
+    Window* pWindow = Program::Inst()->getGraphicsSystem()->getWindow();
     pWindow->hookResize(width, height);
 }
-
-void Dusk::Graphics::glfwKey( GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods )
-{
-    Window* pWindow = (g_Windows.containsKey(pGLFWWindow) ? g_Windows[pGLFWWindow] : nullptr);
-    if (pWindow == nullptr) return;
-
-	switch (action)
-	{
-	case GLFW_PRESS:
-
-        pWindow->hookKeyDown(key);
-
-		break;
-	case GLFW_RELEASE:
-
-        pWindow->hookKeyUp(key);
-
-		break;
-	case GLFW_REPEAT:
-
-
-		break;
-	}
-}
-
-void Dusk::Graphics::glfwMouseMove( GLFWwindow* pGLFWWindow, double x, double y )
-{
-    Window* pWindow = (g_Windows.containsKey(pGLFWWindow) ? g_Windows[pGLFWWindow] : nullptr);
-    if (pWindow == nullptr) return;
-
-    pWindow->hookMouseMove(x, y);
-}
-
-void Dusk::Graphics::glfwMouse( GLFWwindow* pGLFWWindow, int button, int action, int mods )
-{
-    Window* pWindow = (g_Windows.containsKey(pGLFWWindow) ? g_Windows[pGLFWWindow] : nullptr);
-    if (pWindow == nullptr) return;
-
-	switch (action)
-	{
-	case GLFW_PRESS:
-
-        pWindow->hookMouseDown(button);
-
-		break;
-	case GLFW_RELEASE:
-
-        pWindow->hookMouseUp(button);
-
-		break;
-	}
-}
-
-void Dusk::Graphics::glfwMouseScroll( GLFWwindow* pGLFWWindow, double x, double y )
-{
-    Window* pWindow = (g_Windows.containsKey(pGLFWWindow) ? g_Windows[pGLFWWindow] : nullptr);
-    if (pWindow == nullptr) return;
-
-    pWindow->hookMouseScroll(x, y);
-}
-

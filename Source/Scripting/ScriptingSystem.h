@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef DUSK_SCRIPTING_SYSTEM_H
 #define DUSK_SCRIPTING_SYSTEM_H
 

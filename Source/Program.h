@@ -70,6 +70,7 @@ public:
 
     GraphicsSystem* getGraphicsSystem( void );
 	ScriptingSystem* getScriptingSystem( void );
+	InputSystem* getInputSystem( void );
     Camera* getCamera( void );
 
 

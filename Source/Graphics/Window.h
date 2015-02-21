@@ -4,6 +4,7 @@
 #include <Arc/ManagedObject.h>
 #include <Events/IEventDispatcher.h>
 #include <Graphics/Graphics.h>
+#include <Input/Input.h>
 #include <Scripting/Scripting.h>
 
 #include <Arc/Map.h>
@@ -11,6 +12,7 @@
 using Arc::Map;
 
 using namespace Dusk::Events;
+using namespace Dusk::Input;
 
 namespace Dusk
 {
@@ -27,12 +29,6 @@ class Window :
 public:
 
     static const EventID    EVT_RESIZE;
-    static const EventID    EVT_KEY_UP;
-    static const EventID    EVT_KEY_DOWN;
-    static const EventID    EVT_MOUSE_UP;
-    static const EventID    EVT_MOUSE_DOWN;
-    static const EventID    EVT_MOUSE_MOVE;
-    static const EventID    EVT_MOUSE_SCROLL;
 
     inline Window( void ) :
         mp_GLFWWindow(nullptr),
@@ -67,12 +63,6 @@ public:
     GraphicsContext* getGraphicsContext( void );
 
     void hookResize( const int& width, const int& height );
-    void hookKeyUp( const int& key );
-    void hookKeyDown( const int& key );
-    void hookMouseUp( const int& button );
-    void hookMouseDown( const int& button );
-    void hookMouseMove( const double& x, const double& y );
-    void hookMouseScroll( const double& x, const double& y );
 
 	static void InitScripting( void );
 	static int Script_GetWidth( lua_State* pState );
@@ -136,100 +126,8 @@ private:
 
 }; // WindowResizeEventData
 
-class WindowKeyEventData :
-    public EventData
-{
-public:
-
-    inline WindowKeyEventData( const unsigned int& key ) :
-        m_Key(key)
-    { }
-
-    inline WindowKeyEventData( WindowKeyEventData& rhs ) :
-        m_Key(rhs.m_Key)
-    { }
-
-    virtual EventData* clone( void ) const { return New WindowKeyEventData(m_Key); };
-
-    virtual inline unsigned int getKey( void ) const { return m_Key; }
-
-private:
-
-    unsigned int    m_Key;
-
-}; // WindowKeyEventData
-
-class WindowMouseEventData :
-    public EventData
-{
-public:
-
-    inline WindowMouseEventData( const unsigned int& mouseButton ) :
-        m_MouseButton(mouseButton)
-    { }
-
-    inline WindowMouseEventData( WindowMouseEventData& rhs ) :
-        m_MouseButton(rhs.m_MouseButton)
-    { }
-
-    virtual EventData* clone( void ) const { return New WindowMouseEventData(m_MouseButton); };
-
-    virtual inline unsigned int getMouseButton( void ) const { return m_MouseButton; }
-
-private:
-
-    unsigned int    m_MouseButton;
-
-}; // WindowMouseEventData
-
-class WindowMouseMoveEventData :
-    public EventData
-{
-public:
-
-    inline WindowMouseMoveEventData( const int& x, const int& y, const int& dx, const int& dy ) :
-        m_X(x),
-        m_Y(y),
-        m_DeltaX(dx),
-        m_DeltaY(dy)
-    { }
-
-    inline WindowMouseMoveEventData( WindowMouseMoveEventData& rhs ) :
-        m_X(rhs.m_X),
-        m_Y(rhs.m_Y),
-        m_DeltaX(rhs.m_DeltaX),
-        m_DeltaY(rhs.m_DeltaY)
-    { }
-
-    virtual EventData* clone( void ) const { return New WindowMouseMoveEventData(m_X, m_Y, m_DeltaX, m_DeltaY); };
-
-    virtual inline int getX( void ) const { return m_X; }
-    virtual inline int getY( void ) const { return m_Y; }
-    virtual inline int getDeltaX( void ) const { return m_DeltaX; }
-    virtual inline int getDeltaY( void ) const { return m_DeltaY; }
-
-private:
-
-    int     m_X,
-            m_Y,
-            m_DeltaX,
-            m_DeltaY;
-
-}; // WindowMouseEventData
-
-class WindowMouseScrollEventData :
-    public EventData
-{
-}; // WindowMouseEventData
-
-extern Map<GLFWwindow*, Dusk::Graphics::Window*> g_Windows;
-
 void glfwError( int error, const char* description );
 void glfwResize( GLFWwindow* pGLFWWindow, int width, int height );
-void glfwKey( GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods );
-void glfwMouseMove( GLFWwindow* pGLFWWindow, double x, double y );
-void glfwMouse( GLFWwindow* pGLFWWindow, int button, int action, int mods );
-void glfwMouseScroll( GLFWwindow* pGLFWWindow, double x, double y );
 
 } // namespace Graphics
 

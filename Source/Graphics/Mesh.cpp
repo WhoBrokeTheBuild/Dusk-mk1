@@ -1,8 +1,8 @@
 #include "Mesh.h"
 
-const GLAttribute Dusk::Graphics::Mesh::ATTR_VERTEX     = 0;
-const GLAttribute Dusk::Graphics::Mesh::ATTR_NORMAL     = 1;
-const GLAttribute Dusk::Graphics::Mesh::ATTR_TEX_COORD  = 2;
+const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_VERTEX     = 0;
+const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_NORMAL     = 1;
+const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_TEX_COORD  = 2;
 
 bool Dusk::Graphics::Mesh::init( const GLPrimitiveType& primitiveType, const ArrayList<vec3>& vertexes, const ArrayList<vec3>& normals /* = ArrayList<vec3>() */, const ArrayList<vec2>& texCoords /* = ArrayList<vec2>() */ )
 {

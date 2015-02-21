@@ -144,7 +144,7 @@ void Dusk::Graphics::ShaderManager::printShaderLog( const GLuint& shader )
 	}
 }
 
-GLShader Dusk::Graphics::ShaderManager::loadShaderFromFile( const string& filename, const GLenum& shaderType )
+Dusk::Graphics::GLShader Dusk::Graphics::ShaderManager::loadShaderFromFile( const string& filename, const GLenum& shaderType )
 {
 	LogInfoFmt(getClassName(), "Load from file \"%s\"", filename.c_str());
 	GLuint shader = 0;	string shaderString;
@@ -180,7 +180,7 @@ GLShader Dusk::Graphics::ShaderManager::loadShaderFromFile( const string& filena
 	return shader;
 }
 
-GLUniformLocation Dusk::Graphics::ShaderManager::getUniformLocation( const string& programName, const string& uniformName )
+Dusk::Graphics::GLUniformLocation Dusk::Graphics::ShaderManager::getUniformLocation( const string& programName, const string& uniformName )
 {
 	if (m_CurrProg == 0)
 		return -1;

@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef DUSK_DELEGATE_H
 #define DUSK_DELEGATE_H
 

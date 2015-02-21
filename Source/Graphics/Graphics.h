@@ -16,6 +16,12 @@
 #include <GL/glu.h>
 #include <GLFW/glfw3.h>
 
+namespace Dusk
+{
+
+namespace Graphics
+{
+
 typedef GLuint GLShader;
 typedef GLuint GLProgram;
 typedef GLuint GLUniformLocation;
@@ -24,12 +30,6 @@ typedef GLuint GLAttribute;
 typedef GLuint GLBuffer;
 typedef GLuint GLVertexArray;
 typedef GLenum GLPrimitiveType;
-
-namespace Dusk
-{
-
-namespace Graphics
-{
 
 } // namespace Graphics
 

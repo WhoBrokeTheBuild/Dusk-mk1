@@ -111,6 +111,13 @@ bool Dusk::Program::init()
 	mp_ScriptingSystem->runScript("Assets/Scripts/Dusk.lua");
 	mp_ScriptingSystem->runScript("Assets/Scripts/Setup.lua");
 
+	mp_InputSystem->addEventListener(InputSystem::EVT_KEY_DOWN, this, &Program::handleKeyDown);
+	mp_InputSystem->addEventListener(InputSystem::EVT_KEY_UP, this, &Program::handleKeyUp);
+
+
+    rotation = 0.0f;
+    rotationSpeed = 0.0f;
+
     return true;
 }
 
@@ -154,7 +161,7 @@ void Dusk::Program::update(TimeInfo& timeInfo)
     UpdateEventData evtData(&timeInfo);
     dispatch(Event(Program::EVT_UPDATE, evtData));
 
-    rotation += 0.01f * (float)timeInfo.Delta;
+    rotation += rotationSpeed * (float)timeInfo.Delta;
 }
 
 void Dusk::Program::render()
@@ -223,4 +230,19 @@ void Dusk::Program::handleKeyDown( const Event& event )
     const KeyEventData* pData = event.getDataAs<KeyEventData>();
     if (pData->getKey() == KEY_ESCAPE)
         m_ShouldExit = true;
+
+    if (pData->getKey() == KEY_LEFT)
+        rotationSpeed = -0.1f;
+    else if (pData->getKey() == KEY_RIGHT)
+        rotationSpeed = 0.1f;
+}
+
+void Dusk::Program::handleKeyUp( const Event& event )
+{
+    const KeyEventData* pData = event.getDataAs<KeyEventData>();
+
+    if (pData->getKey() == KEY_LEFT && rotationSpeed < 0.0f)
+        rotationSpeed = 0.0f;
+    else if (pData->getKey() == KEY_RIGHT && rotationSpeed > 0.0f)
+        rotationSpeed = 0.0f;
 }

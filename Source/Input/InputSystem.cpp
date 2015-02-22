@@ -30,10 +30,12 @@ void Dusk::Input::InputSystem::hookKeyDown( const int& key )
 
 void Dusk::Input::InputSystem::hookMouseUp( const int& button )
 {
+    dispatch(Event(InputSystem::EVT_MOUSE_UP, MouseEventData(GLFW2DuskMouseButton(button))));
 }
 
 void Dusk::Input::InputSystem::hookMouseDown( const int& button )
 {
+    dispatch(Event(InputSystem::EVT_MOUSE_DOWN, MouseEventData(GLFW2DuskMouseButton(button))));
 }
 
 void Dusk::Input::InputSystem::hookMouseMove( const double& x, const double& y )
@@ -44,6 +46,7 @@ void Dusk::Input::InputSystem::hookMouseMove( const double& x, const double& y )
 	m_MouseX = x;
 	m_MouseY = y;
 
+    dispatch(Event(InputSystem::EVT_MOUSE_UP, MouseMoveEventData(m_MouseX, m_MouseY, deltaX, deltaY)));
 }
 
 void Dusk::Input::InputSystem::hookMouseScroll( const double& x, const double& y )

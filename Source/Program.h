@@ -77,6 +77,7 @@ public:
 	static int Script_GetCamera( lua_State* pState );
 
 	void handleKeyDown( const Event& event );
+	void handleKeyUp( const Event& event );
 
 private:
 
@@ -105,6 +106,7 @@ private:
     Skybox* mp_Skybox;
     Model* mp_Cube;
     float rotation;
+    float rotationSpeed;
 
 }; // class Program
 

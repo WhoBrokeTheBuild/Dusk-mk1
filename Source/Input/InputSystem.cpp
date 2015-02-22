@@ -46,7 +46,7 @@ void Dusk::Input::InputSystem::hookMouseMove( const double& x, const double& y )
 	m_MouseX = x;
 	m_MouseY = y;
 
-    dispatch(Event(InputSystem::EVT_MOUSE_UP, MouseMoveEventData(m_MouseX, m_MouseY, deltaX, deltaY)));
+    dispatch(Event(InputSystem::EVT_MOUSE_MOVE, MouseMoveEventData(m_MouseX, m_MouseY, deltaX, deltaY)));
 }
 
 void Dusk::Input::InputSystem::hookMouseScroll( const double& x, const double& y )

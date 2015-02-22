@@ -111,9 +111,17 @@ bool Dusk::Program::init()
 	mp_ScriptingSystem->runScript("Assets/Scripts/Dusk.lua");
 	mp_ScriptingSystem->runScript("Assets/Scripts/Setup.lua");
 
-	mp_InputSystem->addEventListener(InputSystem::EVT_KEY_DOWN, this, &Program::handleKeyDown);
-	mp_InputSystem->addEventListener(InputSystem::EVT_KEY_UP, this, &Program::handleKeyUp);
+	mp_InputSystem->addEventListener(InputSystem::EVT_KEY_DOWN,   this, &Program::handleKeyDown);
+	mp_InputSystem->addEventListener(InputSystem::EVT_KEY_UP,     this, &Program::handleKeyUp);
+	mp_InputSystem->addEventListener(InputSystem::EVT_MOUSE_DOWN, this, &Program::handleMouseDown);
+	mp_InputSystem->addEventListener(InputSystem::EVT_MOUSE_UP,   this, &Program::handleMouseUp);
+	mp_InputSystem->addEventListener(InputSystem::EVT_MOUSE_MOVE, this, &Program::handleMouseMove);
 
+    m_MovingWindow = false;
+    m_MouseX = m_MouseY =INT_MAX;
+    m_WindowX = m_WindowY =INT_MAX;
+    m_WindowUpdateTimeoutMax = 50;
+    m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
 
     rotation = 0.0f;
     rotationSpeed = 0.0f;
@@ -151,7 +159,7 @@ bool Dusk::Program::load()
     mp_Cube->load("Assets/Models/behemoth/mdl_behemoth.dskm");
 
     mp_Skybox = New Skybox();
-    mp_Skybox->load("Assets/Skyboxes/tex_skybox_space.dskt");
+    mp_Skybox->load("Assets/Skyboxes/tex_skybox_stormydays.dskt");
 
     return true;
 }
@@ -160,6 +168,24 @@ void Dusk::Program::update(TimeInfo& timeInfo)
 {
     UpdateEventData evtData(&timeInfo);
     dispatch(Event(Program::EVT_UPDATE, evtData));
+
+    m_WindowUpdateTimeout -= timeInfo.ElapsedMilliseconds;
+    if (m_WindowUpdateTimeout <= 0)
+    {
+        m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
+
+        Window* pWindow = getGraphicsSystem()->getWindow();
+
+        int x = pWindow->getX();
+        int y = pWindow->getY();
+
+        if (m_WindowX == INT_MAX)
+            m_WindowX = x;
+        if (m_WindowY == INT_MAX)
+            m_WindowY = y;
+
+        pWindow->setPos(m_WindowX, m_WindowY);
+    }
 
     rotation += rotationSpeed * (float)timeInfo.Delta;
 }
@@ -245,4 +271,68 @@ void Dusk::Program::handleKeyUp( const Event& event )
         rotationSpeed = 0.0f;
     else if (pData->getKey() == KEY_RIGHT && rotationSpeed > 0.0f)
         rotationSpeed = 0.0f;
+}
+
+void Dusk::Program::handleMouseDown( const Event& event )
+{
+    const MouseEventData* pData = event.getDataAs<MouseEventData>();
+    Window* pWindow = getGraphicsSystem()->getWindow();
+
+    if (pData->getMouseButton() == MOUSE_BUTTON_LEFT)
+    {
+        if ((m_MouseY - m_WindowY) <= 50)
+        {
+            int relX = m_MouseX - m_WindowX;
+            if (relX >= pWindow->getWidth() - 50)
+            {
+                m_ShouldExit = true;
+            }
+            else
+            {
+                m_MovingWindow = true;
+            }
+        }
+    }
+}
+
+void Dusk::Program::handleMouseUp( const Event& event )
+{
+    const MouseEventData* pData = event.getDataAs<MouseEventData>();
+
+    if (m_MovingWindow && pData->getMouseButton() == MOUSE_BUTTON_LEFT)
+        m_MovingWindow = false;
+}
+
+void Dusk::Program::handleMouseMove( const Event& event )
+{
+    const MouseMoveEventData* pData = event.getDataAs<MouseMoveEventData>();
+    Window* pWindow = getGraphicsSystem()->getWindow();
+
+    if (m_MouseX == INT_MAX)
+        m_MouseX = pData->getX();
+    if (m_MouseY == INT_MAX)
+        m_MouseY = pData->getY();
+
+    int winX = pWindow->getX();
+    int winY = pWindow->getY();
+
+    int newMouseX = pData->getX() + winX;
+    int newMouseY = pData->getY() + winY;
+    int dX = newMouseX - m_MouseX;
+    int dY = newMouseY - m_MouseY;
+    m_MouseX = newMouseX;
+    m_MouseY = newMouseY;
+
+    if (m_MovingWindow)
+    {
+        if (m_WindowX == INT_MAX)
+            m_WindowX = winX;
+        if (m_WindowY == INT_MAX)
+            m_WindowY = winY;
+
+        if (dX != 0)
+            m_WindowX += dX;
+        if (dY != 0)
+            m_WindowY += dY;
+    }
 }

@@ -38,6 +38,9 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
 	glfwSetErrorCallback(glfwError);
 
 	glfwWindowHint(GLFW_DEPTH_BITS, 16);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+	glfwWindowHint(GLFW_FOCUSED, GL_TRUE);
 
 	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
 

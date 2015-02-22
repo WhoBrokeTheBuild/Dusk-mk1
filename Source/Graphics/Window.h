@@ -53,10 +53,21 @@ public:
     inline unsigned int getHeight( void ) const { return m_Height; }
     inline void setHeight( const unsigned int& height ) { resize(m_Width, height); }
 
+    inline int getX( void ) { int x; int y; glfwGetWindowPos(mp_GLFWWindow, &x, &y); return x; }
+    inline int getY( void ) { int x; int y; glfwGetWindowPos(mp_GLFWWindow, &x, &y); return y; }
+
+    inline int setX( const int& x ) { glfwSetWindowPos(mp_GLFWWindow, x, getY()); }
+    inline int setY( const int& y ) { glfwSetWindowPos(mp_GLFWWindow, getX(), y); }
+    inline int setPos( const int& x, const int& y ) { glfwSetWindowPos(mp_GLFWWindow, x, y); }
+
     inline string getTitle( void ) const { return m_Title; }
     void setTitle( const string& title );
 
     inline bool isFullscreen( void ) const { return m_Fullscreen; }
+    inline void setFullscreen( const bool& fullscreen ) { m_Fullscreen = true; }
+
+    inline bool isDecorated( void ) const { return m_Decorated; }
+    inline bool setDecorated( const bool& decorated ) { m_Decorated = decorated; }
 
     bool shouldClose( void );
 
@@ -83,7 +94,8 @@ private:
 
     string              m_Title;
 
-    bool                m_Fullscreen;
+    bool                m_Fullscreen,
+                        m_Decorated;
 
     bool                m_Error;
 

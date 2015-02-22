@@ -22,6 +22,7 @@ Dusk::Graphics::GraphicsSystem::~GraphicsSystem()
 bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen /* = false */ , const bool& vsync /* = false */ )
 {
     mp_Window = New Window();
+    mp_Window->setDecorated(false);
     if ( ! mp_Window->init(width, height, title, fullscreen))
     {
         LogError(getClassName(), "Failed to initialize Window");

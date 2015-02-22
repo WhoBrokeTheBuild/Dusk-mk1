@@ -1,19 +1,19 @@
-+0.0.0.9 INF <Program.cpp:43> Program: Starting
-+0.0.0.9 INF <Program.cpp:92> Program: Initializing
-+0.0.0.9 INF <Window.cpp:30> Window: Initializing Window
-+0.0.0.51 INF <GraphicsSystem.cpp:43> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
-+0.0.0.51 INF <GraphicsSystem.cpp:44> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
-+0.0.0.51 INF <Dusk.lua:1> Script: Initializing Dusk Classes
-+0.0.0.52 INF <Program.cpp:144> Program: Loading Resources
-+0.0.0.52 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: flat
-+0.0.0.52 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
-+0.0.0.52 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
-+0.0.0.52 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: skybox
-+0.0.0.52 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
-+0.0.0.52 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
-+0.0.0.52 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: entity
-+0.0.0.52 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
-+0.0.0.53 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
-+0.0.0.53 INF <Model.cpp:21> Model: Load from file "Assets/Models/behemoth/mdl_behemoth.dskm"
-+0.0.0.68 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_space.dskt"
-+0.0.0.68 INF <Texture.cpp:16> Texture[load]: Load from file "Assets/Skyboxes/tex_skybox_space.dskt"
++0.0.0.10 INF <Program.cpp:43> Program: Starting
++0.0.0.10 INF <Program.cpp:92> Program: Initializing
++0.0.0.10 INF <Window.cpp:30> Window: Initializing Window
++0.0.0.45 INF <GraphicsSystem.cpp:44> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
++0.0.0.45 INF <GraphicsSystem.cpp:45> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
++0.0.0.45 INF <Dusk.lua:1> Script: Initializing Dusk Classes
++0.0.0.45 INF <Program.cpp:152> Program: Loading Resources
++0.0.0.45 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: flat
++0.0.0.45 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
++0.0.0.45 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
++0.0.0.45 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: skybox
++0.0.0.46 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
++0.0.0.46 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
++0.0.0.46 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: entity
++0.0.0.46 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
++0.0.0.46 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
++0.0.0.46 INF <Model.cpp:21> Model: Load from file "Assets/Models/behemoth/mdl_behemoth.dskm"
++0.0.0.62 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
++0.0.0.62 INF <Texture.cpp:16> Texture[load]: Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"

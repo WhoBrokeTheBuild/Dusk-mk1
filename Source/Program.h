@@ -78,6 +78,9 @@ public:
 
 	void handleKeyDown( const Event& event );
 	void handleKeyUp( const Event& event );
+	void handleMouseDown( const Event& event );
+	void handleMouseUp( const Event& event );
+	void handleMouseMove( const Event& event );
 
 private:
 
@@ -101,6 +104,13 @@ private:
 
     bool                m_ShouldExit;
 
+    bool                m_MovingWindow;
+    int                 m_MouseX,
+                        m_MouseY,
+                        m_WindowX,
+                        m_WindowY,
+                        m_WindowUpdateTimeout,
+                        m_WindowUpdateTimeoutMax;
 
     // Temporary
     Skybox* mp_Skybox;

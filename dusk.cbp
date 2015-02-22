@@ -42,6 +42,7 @@
 			<Add directory="Libraries/Arc/include" />
 			<Add directory="Libraries/lodepng/include" />
 			<Add directory="Source" />
+			<Add directory="/usr/include/lua5.2/" />
 		</Compiler>
 		<Linker>
 			<Add library="m" />
@@ -55,6 +56,7 @@
 			<Add library="Xrandr" />
 			<Add library="pthread" />
 			<Add library="ArcCore" />
+			<Add library="lua5.2" />
 			<Add directory="Libraries/Arc/lib" />
 			<Add directory="/usr/lib64" />
 		</Linker>
@@ -95,6 +97,12 @@
 		<Unit filename="Libraries/lodepng/include/lodepng/lodepng.h">
 			<Option virtualFolder="External/" />
 		</Unit>
+		<Unit filename="Source/Events/Callbacks.h" />
+		<Unit filename="Source/Events/Delegate.h" />
+		<Unit filename="Source/Events/Event.cpp" />
+		<Unit filename="Source/Events/Event.h" />
+		<Unit filename="Source/Events/IEventDispatcher.cpp" />
+		<Unit filename="Source/Events/IEventDispatcher.h" />
 		<Unit filename="Source/Graphics/Graphics.h" />
 		<Unit filename="Source/Graphics/GraphicsContext.cpp" />
 		<Unit filename="Source/Graphics/GraphicsContext.h" />
@@ -111,12 +119,20 @@
 		<Unit filename="Source/Graphics/Texture.h" />
 		<Unit filename="Source/Graphics/Window.cpp" />
 		<Unit filename="Source/Graphics/Window.h" />
+		<Unit filename="Source/Input/Input.h" />
+		<Unit filename="Source/Input/InputSystem.cpp" />
+		<Unit filename="Source/Input/InputSystem.h" />
+		<Unit filename="Source/Input/Key.h" />
+		<Unit filename="Source/Input/MouseButton.h" />
 		<Unit filename="Source/Logging/Log.cpp" />
 		<Unit filename="Source/Logging/Log.h" />
 		<Unit filename="Source/Main.cpp" />
 		<Unit filename="Source/Math/Math.h" />
 		<Unit filename="Source/Program.cpp" />
 		<Unit filename="Source/Program.h" />
+		<Unit filename="Source/Scripting/Scripting.h" />
+		<Unit filename="Source/Scripting/ScriptingSystem.cpp" />
+		<Unit filename="Source/Scripting/ScriptingSystem.h" />
 		<Unit filename="Source/Timing/TimeInfo.cpp" />
 		<Unit filename="Source/Timing/TimeInfo.h" />
 		<Unit filename="Source/Timing/Timer.cpp" />

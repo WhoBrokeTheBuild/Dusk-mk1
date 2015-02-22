@@ -76,6 +76,8 @@ public:
 
 	static int Script_GetCamera( lua_State* pState );
 
+	void handleKeyDown( const Event& event );
+
 private:
 
     Program() {};
@@ -95,6 +97,8 @@ private:
 
     float               m_TargetFPS;
     float               m_CurrentFPS;
+
+    bool                m_ShouldExit;
 
 
     // Temporary

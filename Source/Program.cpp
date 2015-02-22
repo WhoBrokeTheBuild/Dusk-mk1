@@ -60,7 +60,8 @@ void Dusk::Program::run()
 
     double timeStart = glfwGetTime();
     double lastTime = timeStart;
-	while ( ! getGraphicsSystem()->getWindow()->shouldClose() )
+    m_ShouldExit = false;
+	while ( ! getGraphicsSystem()->getWindow()->shouldClose() && ! m_ShouldExit )
 	{
 		double time = glfwGetTime();
 		double elapsedTime = time - lastTime;
@@ -217,3 +218,9 @@ int Dusk::Program::Script_GetCamera( lua_State* pState )
 	return 1;
 }
 
+void Dusk::Program::handleKeyDown( const Event& event )
+{
+    const KeyEventData* pData = event.getDataAs<KeyEventData>();
+    if (pData->getKey() == KEY_ESCAPE)
+        m_ShouldExit = true;
+}

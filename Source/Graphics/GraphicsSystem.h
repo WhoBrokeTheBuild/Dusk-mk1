@@ -2,8 +2,11 @@
 #define DUSK_GRAPHICS_SYSTEM_H
 
 #include <Arc/ManagedObject.h>
+#include <Events/IEventDispatcher.h>
 #include <Graphics/Graphics.h>
 #include <Scripting/Scripting.h>
+
+using namespace Dusk::Events;
 
 namespace Dusk
 {
@@ -16,9 +19,12 @@ class GraphicsContext;
 class ShaderManager;
 
 class GraphicsSystem :
-    public Arc::ManagedObject
+    public Arc::ManagedObject,
+    public IEventDispatcher
 {
 public:
+
+    static const EventID    EVT_RESET;
 
     inline GraphicsSystem( void ) :
         mp_Window(nullptr),
@@ -35,7 +41,14 @@ public:
     GraphicsContext* getGraphicsContext( void );
     ShaderManager* getShaderManager( void );
 
-    inline void setVsync( const bool& vsync ) { glfwSwapInterval( ( vsync ? 1 : 0) ); }
+    inline int getMonitorWidth( void ) const { return m_MonitorWidth; }
+    inline int getMonitorHeight( void ) const { return m_MonitorHeight; }
+    inline int getMonitorX( void ) const { return m_MonitorX; }
+    inline int getMonitorY( void ) const { return m_MonitorY; }
+
+    inline void setVsync( const bool& vsync ) { m_Vsync = vsync; glfwSwapInterval( ( m_Vsync ? 1 : 0) ); }
+
+    void handleReset( const Event& event );
 
 	static void InitScripting( void );
 	static int Script_GetWindow( lua_State* pState );
@@ -44,10 +57,21 @@ public:
 
 private:
 
+    bool initGL( void );
+
     Window*             mp_Window;
     ShaderManager*      mp_ShaderManager;
 
+    int                 m_MonitorWidth,
+                        m_MonitorHeight,
+                        m_MonitorX,
+                        m_MonitorY;
+
+    bool                m_Vsync;
+
 }; // class GraphicsSystem
+
+void glfwError( int error, const char* description );
 
 } // namespace Graphics
 

@@ -29,6 +29,7 @@ class Window :
 public:
 
     static const EventID    EVT_RESIZE;
+    static const EventID    EVT_RESET;
 
     inline Window( void ) :
         mp_GLFWWindow(nullptr),
@@ -46,6 +47,7 @@ public:
     virtual inline string getClassName( void ) const { return "Window"; }
 
     bool resize( const unsigned int& width, const unsigned int& height );
+    void reset( void );
 
     inline unsigned int getWidth( void ) const { return m_Width; }
     inline void setWidth( const unsigned int& width ) { resize(width, m_Height); }
@@ -56,18 +58,21 @@ public:
     inline int getX( void ) { int x; int y; glfwGetWindowPos(mp_GLFWWindow, &x, &y); return x; }
     inline int getY( void ) { int x; int y; glfwGetWindowPos(mp_GLFWWindow, &x, &y); return y; }
 
-    inline int setX( const int& x ) { glfwSetWindowPos(mp_GLFWWindow, x, getY()); }
-    inline int setY( const int& y ) { glfwSetWindowPos(mp_GLFWWindow, getX(), y); }
-    inline int setPos( const int& x, const int& y ) { glfwSetWindowPos(mp_GLFWWindow, x, y); }
+    inline void setX( const int& x ) { glfwSetWindowPos(mp_GLFWWindow, x, getY()); }
+    inline void setY( const int& y ) { glfwSetWindowPos(mp_GLFWWindow, getX(), y); }
+    inline void setPos( const int& x, const int& y ) { glfwSetWindowPos(mp_GLFWWindow, x, y); }
 
     inline string getTitle( void ) const { return m_Title; }
     void setTitle( const string& title );
 
     inline bool isFullscreen( void ) const { return m_Fullscreen; }
-    inline void setFullscreen( const bool& fullscreen ) { m_Fullscreen = true; }
+    inline void setFullscreen( const bool& fullscreen ) { m_Fullscreen = fullscreen; }
 
     inline bool isDecorated( void ) const { return m_Decorated; }
-    inline bool setDecorated( const bool& decorated ) { m_Decorated = decorated; }
+    inline void setDecorated( const bool& decorated ) { m_Decorated = decorated; }
+
+    inline bool isResizable( void ) const { return m_Resizable; }
+    inline void setResizable( const bool& resizeable ) { m_Resizable = resizeable; }
 
     bool shouldClose( void );
 
@@ -85,6 +90,8 @@ public:
 
 private:
 
+    bool init( void );
+
     GLFWwindow*         mp_GLFWWindow;
 
     GraphicsContext*    mp_GraphicsContext;
@@ -95,7 +102,8 @@ private:
     string              m_Title;
 
     bool                m_Fullscreen,
-                        m_Decorated;
+                        m_Decorated,
+                        m_Resizable;
 
     bool                m_Error;
 
@@ -138,7 +146,6 @@ private:
 
 }; // WindowResizeEventData
 
-void glfwError( int error, const char* description );
 void glfwResize( GLFWwindow* pGLFWWindow, int width, int height );
 
 } // namespace Graphics

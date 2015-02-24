@@ -120,12 +120,39 @@ public:
 
 private:
 
-    float   m_X,
+    int     m_X,
             m_Y,
             m_DeltaX,
             m_DeltaY;
 
 }; // MouseMoveEventData
+
+class MouseScrollEventData :
+    public EventData
+{
+public:
+
+    inline MouseScrollEventData( const int& x, const int& y ) :
+        m_X(x),
+        m_Y(y)
+    { }
+
+    inline MouseScrollEventData( MouseScrollEventData& rhs ) :
+        m_X(rhs.m_X),
+        m_Y(rhs.m_Y)
+    { }
+
+    virtual EventData* clone( void ) const { return New MouseScrollEventData(m_X, m_Y); };
+
+    virtual inline int getX( void ) const { return m_X; }
+    virtual inline int getY( void ) const { return m_Y; }
+
+private:
+
+    int     m_X,
+            m_Y;
+
+}; // MouseScrollEventData
 
 void glfwKey( GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods );
 void glfwMouseMove( GLFWwindow* pGLFWWindow, double x, double y );

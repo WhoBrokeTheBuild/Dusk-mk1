@@ -51,7 +51,7 @@ void Dusk::Input::InputSystem::hookMouseMove( const double& x, const double& y )
 
 void Dusk::Input::InputSystem::hookMouseScroll( const double& x, const double& y )
 {
-
+    dispatch(Event(InputSystem::EVT_MOUSE_DOWN, MouseScrollEventData((int)x, (int)y)));
 }
 
 void Dusk::Input::glfwKey( GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods )

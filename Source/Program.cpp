@@ -103,6 +103,10 @@ bool Dusk::Program::init()
     }
 	GraphicsSystem::InitScripting();
 
+    getGraphicsSystem()->getWindow()->setDecorated(false);
+    getGraphicsSystem()->getWindow()->setResizable(false);
+    getGraphicsSystem()->getWindow()->reset();
+
 	mp_InputSystem = New InputSystem();
 
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
@@ -120,7 +124,7 @@ bool Dusk::Program::init()
     m_MovingWindow = false;
     m_MouseX = m_MouseY =INT_MAX;
     m_WindowX = m_WindowY =INT_MAX;
-    m_WindowUpdateTimeoutMax = 50;
+    m_WindowUpdateTimeoutMax = 20;
     m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
 
     rotation = 0.0f;
@@ -169,22 +173,25 @@ void Dusk::Program::update(TimeInfo& timeInfo)
     UpdateEventData evtData(&timeInfo);
     dispatch(Event(Program::EVT_UPDATE, evtData));
 
-    m_WindowUpdateTimeout -= timeInfo.ElapsedMilliseconds;
-    if (m_WindowUpdateTimeout <= 0)
+    Window* pWindow = getGraphicsSystem()->getWindow();
+
+    int x = pWindow->getX();
+    int y = pWindow->getY();
+
+    if (m_WindowX == INT_MAX)
+        m_WindowX = x;
+    if (m_WindowY == INT_MAX)
+        m_WindowY = y;
+
+    if (m_MovingWindow)
     {
-        m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
+        m_WindowUpdateTimeout -= timeInfo.ElapsedMilliseconds;
+        if (m_WindowUpdateTimeout <= 0)
+        {
+            m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
 
-        Window* pWindow = getGraphicsSystem()->getWindow();
-
-        int x = pWindow->getX();
-        int y = pWindow->getY();
-
-        if (m_WindowX == INT_MAX)
-            m_WindowX = x;
-        if (m_WindowY == INT_MAX)
-            m_WindowY = y;
-
-        pWindow->setPos(m_WindowX, m_WindowY);
+            pWindow->setPos(m_WindowX, m_WindowY);
+        }
     }
 
     rotation += rotationSpeed * (float)timeInfo.Delta;
@@ -280,10 +287,11 @@ void Dusk::Program::handleMouseDown( const Event& event )
 
     if (pData->getMouseButton() == MOUSE_BUTTON_LEFT)
     {
-        if ((m_MouseY - m_WindowY) <= 50)
+        int relY = m_MouseY - m_WindowY;
+        if (relY >= 0 && relY <= 50)
         {
             int relX = m_MouseX - m_WindowX;
-            if (relX >= pWindow->getWidth() - 50)
+            if (relX >= (int)pWindow->getWidth() - 50)
             {
                 m_ShouldExit = true;
             }

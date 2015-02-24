@@ -14,6 +14,7 @@ using namespace Dusk::World;
 using namespace Dusk::Logging;
 
 const Dusk::Events::EventID Dusk::Graphics::Window::EVT_RESIZE = 1;
+const Dusk::Events::EventID Dusk::Graphics::Window::EVT_RESET  = 2;
 
 Dusk::Graphics::Window::~Window()
 {
@@ -29,32 +30,26 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
 {
     LogInfo(getClassName(), "Initializing Window");
 
-	if ( ! glfwInit())
-	{
-        LogError(getClassName(), "Failed to initialize GLFW");
-        return false;
-	}
+    m_Title = title;
+    m_Width = width;
+    m_Height = height;
+    m_Fullscreen = fullscreen;
 
-	glfwSetErrorCallback(glfwError);
+    return init();
+}
 
+bool Dusk::Graphics::Window::init( void )
+{
 	glfwWindowHint(GLFW_DEPTH_BITS, 16);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, m_Resizable);
+	glfwWindowHint(GLFW_DECORATED, m_Decorated);
 	glfwWindowHint(GLFW_FOCUSED, GL_TRUE);
 
 	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
 
-    //const GLFWvidmode* mode = glfwGetVideoMode(pMonitor);
-    //
-    //if (mode->width > 0 && mode->height > 0)
-    //{
-    //    m_Width = mode->width;
-    //    m_Height = mode->height;
-    //}
+	bool isContextCurrent = (mp_GraphicsContext ? mp_GraphicsContext->mp_GLFWWindow == mp_GLFWWindow : false);
 
-    m_Title = title;
-    m_Width = width;
-    m_Height = height;
+    glfwDestroyWindow(mp_GLFWWindow);
 	mp_GLFWWindow = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), (m_Fullscreen ? pMonitor : NULL), NULL);
 
 	if ( ! mp_GLFWWindow )
@@ -63,7 +58,11 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
         return false;
 	}
 
+    delete mp_GraphicsContext;
 	mp_GraphicsContext = New GraphicsContext(mp_GLFWWindow);
+
+    if (isContextCurrent)
+        mp_GraphicsContext->bind();
 
 	if (mp_GLFWWindow != nullptr)
 	{
@@ -74,7 +73,7 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
 		glfwSetScrollCallback(mp_GLFWWindow, glfwMouseScroll);
 	}
 
-    return true;
+	return true;
 }
 
 bool Dusk::Graphics::Window::resize( const unsigned int& width, const unsigned int& height )
@@ -91,6 +90,12 @@ bool Dusk::Graphics::Window::resize( const unsigned int& width, const unsigned i
 	dispatch(Event(Window::EVT_RESIZE, WindowResizeEventData(width, height, deltaWidth, deltaHeight)));
 
     return true;
+}
+
+void Dusk::Graphics::Window::reset()
+{
+    init();
+    dispatch(Event(Window::EVT_RESET));
 }
 
 void Dusk::Graphics::Window::setTitle( const string& title )
@@ -182,11 +187,6 @@ int Dusk::Graphics::Window::Script_SetTitle( lua_State* pState )
     pWindow->setTitle(title);
 
 	return 0;
-}
-
-void Dusk::Graphics::glfwError( int error, const char* description )
-{
-    LogErrorFmt("GLFW", "%s (%d)", description, error);
 }
 
 void Dusk::Graphics::glfwResize( GLFWwindow* pGLFWWindow, int width, int height )

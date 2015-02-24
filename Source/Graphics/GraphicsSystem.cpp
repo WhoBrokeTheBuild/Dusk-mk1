@@ -10,6 +10,8 @@
 using namespace Dusk::Scripting;
 using namespace Dusk::Logging;
 
+const Dusk::Events::EventID Dusk::Graphics::GraphicsSystem::EVT_RESET  = 1;
+
 Dusk::Graphics::GraphicsSystem::~GraphicsSystem()
 {
     delete mp_ShaderManager;
@@ -19,10 +21,29 @@ Dusk::Graphics::GraphicsSystem::~GraphicsSystem()
     mp_Window = nullptr;
 }
 
-bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen /* = false */ , const bool& vsync /* = false */ )
+bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen /* = false */, const bool& vsnyc /* = false */  )
 {
+	if ( ! glfwInit())
+	{
+        LogError(getClassName(), "Failed to initialize GLFW");
+        return false;
+	}
+
+	glfwSetErrorCallback(glfwError);
+
+	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
+    glfwGetMonitorPos(pMonitor, &m_MonitorX, &m_MonitorY);
+
+    const GLFWvidmode* mode = glfwGetVideoMode(pMonitor);
+
+    if (mode->width > 0 && mode->height > 0)
+    {
+        m_MonitorWidth = mode->width;
+        m_MonitorHeight = mode->height;
+    }
+
+    m_Vsync = vsnyc;
     mp_Window = New Window();
-    mp_Window->setDecorated(false);
     if ( ! mp_Window->init(width, height, title, fullscreen))
     {
         LogError(getClassName(), "Failed to initialize Window");
@@ -31,7 +52,16 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
 
     getGraphicsContext()->bind();
 
-    glfwSwapInterval( ( vsync ? 1 : 0) );
+    initGL();
+
+	mp_ShaderManager = New ShaderManager();
+
+	return true;
+}
+
+bool Dusk::Graphics::GraphicsSystem::initGL( void )
+{
+    glfwSwapInterval( ( m_Vsync ? 1 : 0) );
 
     glewExperimental = GL_TRUE;
 	GLenum ret = glewInit();
@@ -51,8 +81,6 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	mp_ShaderManager = New ShaderManager();
-
 	return true;
 }
 
@@ -69,6 +97,12 @@ Dusk::Graphics::GraphicsContext* Dusk::Graphics::GraphicsSystem::getGraphicsCont
 Dusk::Graphics::ShaderManager* Dusk::Graphics::GraphicsSystem::getShaderManager(void)
 {
     return mp_ShaderManager;
+}
+
+void Dusk::Graphics::GraphicsSystem::handleReset( const Event& event )
+{
+    initGL();
+    dispatch(Event(GraphicsSystem::EVT_RESET));
 }
 
 void Dusk::Graphics::GraphicsSystem::InitScripting( void )
@@ -101,4 +135,9 @@ int Dusk::Graphics::GraphicsSystem::Script_GetShaderManager( lua_State* pState )
     lua_pushinteger(pState, (unsigned long)Program::Inst()->getGraphicsSystem()->getShaderManager());
 
 	return 1;
+}
+
+void Dusk::Graphics::glfwError( int error, const char* description )
+{
+    LogErrorFmt("GLFW", "%s (%d)", description, error);
 }

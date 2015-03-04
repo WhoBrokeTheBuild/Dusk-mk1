@@ -20,7 +20,7 @@ XLDFLAGS = $(LDFLAGS)
 #LDFLAGS = $(LDFLAGS) -s
 
 OBJDIR = ../obj/Dusk
-OUT = ../dusk
+OUT = ../dusktest
 
 SOURCES = \
 Events/Event.cpp \

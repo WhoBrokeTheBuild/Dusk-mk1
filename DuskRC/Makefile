@@ -44,7 +44,7 @@ Util/MainArgs.cpp \
 Main.cpp \
 savepng/savepng.cpp
 
-OBJECTS=$(SOURCES:.cpp=.o)
+OBJECTS=$(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
 all: $(OUT)
 
@@ -52,9 +52,9 @@ clean:
 	rm -f $(OUT)
 	rm -rf $(OBJDIR)
 
-.cpp.o:
-	mkdir -p `dirname $(OBJDIR)/$@`
-	$(CXX) $(XCFLAGS) $(INC) -c $< -o $(OBJDIR)/$@
+$(OBJDIR)/%.o: %.cpp
+	mkdir -p `dirname $@`
+	$(CXX) $(XCFLAGS) $(INC) -c $< -o $@
 
 $(OUT): $(OBJECTS)
-	$(LD) $(LIBDIR) -o $(OUT) $(addprefix $(OBJDIR)/, $(OBJECTS)) $(XLDFLAGS) $(LIB)
+	$(LD) $(LIBDIR) -o $(OUT) $(OBJECTS) $(XLDFLAGS) $(LIB)

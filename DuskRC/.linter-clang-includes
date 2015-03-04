@@ -1,0 +1,3 @@
+../Libraries/glm/include
+../Libraries/Arc/include
+/usr/include/SDL2 -I./

@@ -27,6 +27,7 @@ Events/Event.cpp \
 Events/IEventDispatcher.cpp \
 Graphics/GraphicsContext.cpp \
 Graphics/GraphicsSystem.cpp \
+Graphics/Material.cpp \
 Graphics/Mesh.cpp \
 Graphics/Model.cpp \
 Graphics/ShaderManager.cpp \
@@ -43,7 +44,7 @@ Program.cpp \
 Main.cpp \
 lodepng/lodepng.cpp
 
-OBJECTS=$(SOURCES:.cpp=.o)
+OBJECTS=$(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
 all: $(OUT)
 
@@ -51,9 +52,9 @@ clean:
 	rm -f $(OUT)
 	rm -rf $(OBJDIR)
 
-.cpp.o:
-	mkdir -p `dirname $(OBJDIR)/$@`
-	$(CXX) $(XCFLAGS) $(INC) -c $< -o $(OBJDIR)/$@
+$(OBJDIR)/%.o: %.cpp
+	mkdir -p `dirname $@`
+	$(CXX) $(XCFLAGS) $(INC) -c $< -o $@
 
 $(OUT): $(OBJECTS)
-	$(LD) $(LIBDIR) -o $(OUT) $(addprefix $(OBJDIR)/, $(OBJECTS)) $(XLDFLAGS) $(LIB)
+	$(LD) $(LIBDIR) -o $(OUT) $(OBJECTS) $(XLDFLAGS) $(LIB)

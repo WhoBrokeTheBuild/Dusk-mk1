@@ -20,7 +20,7 @@ bool ExportOBJ( const string& filename, InterModel* pModel )
     {
         error("Cannot open file");
     }
-
+/*
     if (pModel->VertInds.getSize() != pModel->NormInds.getSize())
     {
         error("Vertex/Normal count mismatch");
@@ -85,7 +85,7 @@ bool ExportOBJ( const string& filename, InterModel* pModel )
         file << "\n";
     }
     file << "\n";
-
+*/
     file.close();
 
     printf("Successfully wrote OBJ File: %s\n", filename.c_str());

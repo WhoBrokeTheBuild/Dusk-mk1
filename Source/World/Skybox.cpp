@@ -61,7 +61,7 @@ bool Dusk::World::Skybox::load( const string& filename )
 		skyboxVerts[i] *= SKYBOX_SCALE;
 
     mp_Mesh = New Mesh();
-    mp_Mesh->init(GL_QUADS, SKYBOX_VERT_COUNT, skyboxVerts, nullptr, skyboxTexCoords);
+    mp_Mesh->init("Skybox", GL_QUADS, SKYBOX_VERT_COUNT, skyboxVerts, nullptr, skyboxTexCoords);
 
     return true;
 }

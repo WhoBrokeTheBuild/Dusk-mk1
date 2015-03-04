@@ -1,3 +1,5 @@
+dusk_log_info("Loading Resources");
+
 local sm = Dusk.Graphics.GraphicsSystem.getShaderManager();
 
 sm:loadProgram( "flat", "Assets/Shaders/flat.fs.glsl", "Assets/Shaders/flat.vs.glsl" );

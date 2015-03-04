@@ -12,13 +12,22 @@ public:
 
 	virtual inline string getClassName(void) const { return "Intermediate Material"; }
 
-	string Name;
-	float Specular;
-	vec3 AmbientColor;
-	vec3 DiffuseColor;
-	vec3 SpecularColor;
-	float transparency;
-	
+	string  Name;
+
+    string  DiffuseMap,
+            AmbientMap,
+            SpecularMap,
+            SpecularHilightMap,
+            AlphaMap,
+            BumpMap;
+
+	float   Specular,
+            Transparency;
+
+	vec3    AmbientColor,
+            DiffuseColor,
+            SpecularColor;
+
 };
 
 #endif // DUSK_INTER_MATERIAL_H

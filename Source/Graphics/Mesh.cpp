@@ -4,7 +4,7 @@ const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_VERTEX     = 0;
 const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_NORMAL     = 1;
 const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_TEX_COORD  = 2;
 
-bool Dusk::Graphics::Mesh::init( const GLPrimitiveType& primitiveType, const ArrayList<vec3>& vertexes, const ArrayList<vec3>& normals /* = ArrayList<vec3>() */, const ArrayList<vec2>& texCoords /* = ArrayList<vec2>() */ )
+bool Dusk::Graphics::Mesh::init( const string& name, const GLPrimitiveType& primitiveType, const ArrayList<vec3>& vertexes, const ArrayList<vec3>& normals /* = ArrayList<vec3>() */, const ArrayList<vec2>& texCoords /* = ArrayList<vec2>() */ )
 {
     float* pVertexes = nullptr;
     float* pNormals = nullptr;
@@ -21,18 +21,19 @@ bool Dusk::Graphics::Mesh::init( const GLPrimitiveType& primitiveType, const Arr
     if ( ! texCoords.isEmpty())
         pTexCoords = (float*)&texCoords[0];
 
-    return init(primitiveType, vertexCount, pVertexes, pNormals, pTexCoords);
+    return init(name, primitiveType, vertexCount, pVertexes, pNormals, pTexCoords);
 }
 
-bool Dusk::Graphics::Mesh::init( const GLPrimitiveType& primitiveType, const unsigned int& vertexCount, const vec3* pVertexes, const vec3* pNormals /* = nullptr */, const vec2* pTexCoords /* = nullptr */ )
+bool Dusk::Graphics::Mesh::init( const string& name, const GLPrimitiveType& primitiveType, const unsigned int& vertexCount, const vec3* pVertexes, const vec3* pNormals /* = nullptr */, const vec2* pTexCoords /* = nullptr */ )
 {
-    return init(primitiveType, vertexCount, (const float*)pVertexes, (const float*)pNormals, (const float*)pTexCoords);
+    return init(name, primitiveType, vertexCount, (const float*)pVertexes, (const float*)pNormals, (const float*)pTexCoords);
 }
 
-bool Dusk::Graphics::Mesh::init( const GLPrimitiveType& primitiveType, const unsigned int& vertexCount, const float* pVertexes, const float* pNormals /* = nullptr */, const float* pTexCoords /* = nullptr */ )
+bool Dusk::Graphics::Mesh::init( const string& name, const GLPrimitiveType& primitiveType, const unsigned int& vertexCount, const float* pVertexes, const float* pNormals /* = nullptr */, const float* pTexCoords /* = nullptr */ )
 {
     term();
 
+    m_Name = name;
     m_PrimitiveType = primitiveType;
     m_VertexCount = vertexCount;
 
@@ -90,6 +91,8 @@ void Dusk::Graphics::Mesh::term( void )
 
     if (m_VertexArray != 0)
         glDeleteVertexArrays(1, &m_VertexArray);
+
+    delete mp_Material;
 }
 
 void Dusk::Graphics::Mesh::render( void )

@@ -16,7 +16,7 @@ bool ImportDSKM( const string& filename, InterModel* pModel )
     {
         error("Cannot open file");
     }
-
+/*
     char fileTypeCode[4];
     file.read(fileTypeCode, 4);
 
@@ -87,11 +87,10 @@ bool ImportDSKM( const string& filename, InterModel* pModel )
 		pModel->TexCoordInds.resize(texCoordIndCount);
 		file.read((char*)&pModel->TexCoordInds[0], sizeof(int) * texCoordIndCount);
 	}
-
+*/
     file.close();
 
     printf("Successfully loaded OBJ File: %s\n", filename.c_str());
-    printf("Triangles: %i \n", vertIndCount / 3);
 
     return true;
 }

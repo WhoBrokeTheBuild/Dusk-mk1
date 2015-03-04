@@ -24,41 +24,96 @@ bool ExportDSKM( const string& filename, InterModel* pModel )
     file.write((const char*)&nameLength, sizeof(unsigned short));
     file.write(pModel->Name.c_str(), nameLength);
 
-	unsigned int vertCount = pModel->Verts.getSize();
-	file.write((const char*)&vertCount, sizeof(unsigned int));
+    unsigned short meshCount = pModel->Meshes.getSize();
+    file.write((const char*)&meshCount, sizeof(unsigned short));
 
-	if (!pModel->Verts.isEmpty())
-		file.write((const char*)&pModel->Verts[0], sizeof(vec3) * vertCount);
+    for (unsigned int i = 0; i < pModel->Meshes.getSize(); ++i)
+    {
+        InterMesh& mesh = pModel->Meshes[i];
+        InterMaterial& mat = mesh.Material;
 
-	unsigned int vertIndCount = pModel->VertInds.getSize();
-	file.write((const char*)&vertIndCount, sizeof(unsigned int));
+        // Material
 
-	if (!pModel->VertInds.isEmpty())
-		file.write((const char*)&pModel->VertInds[0], sizeof(int) * vertIndCount);
+        nameLength = mesh.Name.size();
+        file.write((const char*)&nameLength, sizeof(unsigned short));
+        if (nameLength != 0)
+        {
+            file.write(mesh.Name.c_str(), nameLength);
 
-	unsigned int normCount = pModel->Norms.getSize();
-	file.write((const char*)&normCount, sizeof(unsigned int));
+            file.write((const char*)&mat.DiffuseColor, sizeof(vec3));
+            file.write((const char*)&mat.AmbientColor, sizeof(vec3));
+            file.write((const char*)&mat.SpecularColor, sizeof(vec3));
 
-	if (!pModel->Norms.isEmpty())
-		file.write((const char*)&pModel->Norms[0], sizeof(vec3) * normCount);
+            file.write((const char*)&mat.Specular, sizeof(float));
+            file.write((const char*)&mat.Transparency, sizeof(float));
 
-	unsigned int normIndCount = pModel->NormInds.getSize();
-	file.write((const char*)&normIndCount, sizeof(unsigned int));
+            nameLength = mat.DiffuseMap.size();
+            file.write((const char*)&nameLength, sizeof(unsigned short));
+            file.write(mat.DiffuseMap.c_str(), nameLength);
 
-	if (!pModel->NormInds.isEmpty())
-		file.write((const char*)&pModel->NormInds[0], sizeof(int) * normIndCount);
+            nameLength = mat.AmbientMap.size();
+            file.write((const char*)&nameLength, sizeof(unsigned short));
+            file.write(mat.AmbientMap.c_str(), nameLength);
 
-	unsigned int texCoordCount = pModel->TexCoords.getSize();
-	file.write((const char*)&texCoordCount, sizeof(unsigned int));
+            nameLength = mat.SpecularMap.size();
+            file.write((const char*)&nameLength, sizeof(unsigned short));
+            file.write(mat.SpecularMap.c_str(), nameLength);
 
-	if (!pModel->TexCoords.isEmpty())
-		file.write((const char*)&pModel->TexCoords[0], sizeof(vec2) * texCoordCount);
+            nameLength = mat.SpecularHilightMap.size();
+            file.write((const char*)&nameLength, sizeof(unsigned short));
+            file.write(mat.SpecularHilightMap.c_str(), nameLength);
 
-	unsigned int texCoordIndCount = pModel->TexCoordInds.getSize();
-	file.write((const char*)&texCoordIndCount, sizeof(unsigned int));
+            nameLength = mat.AlphaMap.size();
+            file.write((const char*)&nameLength, sizeof(unsigned short));
+            file.write(mat.AlphaMap.c_str(), nameLength);
 
-	if (!pModel->TexCoordInds.isEmpty())
-		file.write((const char*)&pModel->TexCoordInds[0], sizeof(int) * texCoordIndCount);
+            nameLength = mat.BumpMap.size();
+            file.write((const char*)&nameLength, sizeof(unsigned short));
+            file.write(mat.BumpMap.c_str(), nameLength);
+        }
+
+        // Mesh
+
+        nameLength = mesh.Name.size();
+        file.write((const char*)&nameLength, sizeof(unsigned short));
+        file.write(mesh.Name.c_str(), nameLength);
+
+        unsigned int vertCount = mesh.Verts.getSize();
+        file.write((const char*)&vertCount, sizeof(unsigned int));
+
+        if (!mesh.Verts.isEmpty())
+            file.write((const char*)&mesh.Verts[0], sizeof(vec3) * vertCount);
+
+        unsigned int vertIndCount = mesh.VertInds.getSize();
+        file.write((const char*)&vertIndCount, sizeof(unsigned int));
+
+        if (!mesh.VertInds.isEmpty())
+            file.write((const char*)&mesh.VertInds[0], sizeof(int) * vertIndCount);
+
+        unsigned int normCount = mesh.Norms.getSize();
+        file.write((const char*)&normCount, sizeof(unsigned int));
+
+        if (!mesh.Norms.isEmpty())
+            file.write((const char*)&mesh.Norms[0], sizeof(vec3) * normCount);
+
+        unsigned int normIndCount = mesh.NormInds.getSize();
+        file.write((const char*)&normIndCount, sizeof(unsigned int));
+
+        if (!mesh.NormInds.isEmpty())
+            file.write((const char*)&mesh.NormInds[0], sizeof(int) * normIndCount);
+
+        unsigned int texCoordCount = mesh.TexCoords.getSize();
+        file.write((const char*)&texCoordCount, sizeof(unsigned int));
+
+        if (!mesh.TexCoords.isEmpty())
+            file.write((const char*)&mesh.TexCoords[0], sizeof(vec2) * texCoordCount);
+
+        unsigned int texCoordIndCount = mesh.TexCoordInds.getSize();
+        file.write((const char*)&texCoordIndCount, sizeof(unsigned int));
+
+        if (!mesh.TexCoordInds.isEmpty())
+            file.write((const char*)&mesh.TexCoordInds[0], sizeof(int) * texCoordIndCount);
+    }
 
     file.close();
 

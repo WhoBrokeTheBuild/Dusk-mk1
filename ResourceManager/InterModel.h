@@ -15,7 +15,8 @@ class InterModel :
 
         virtual inline string getClassName( void ) const { return "Intermediate Model"; }
 
-        ArrayList<InterMesh> Meshes;
+        string                  Name;
+        ArrayList<InterMesh>    Meshes;
 };
 
 #endif // DUSK_INTER_MODEL_H

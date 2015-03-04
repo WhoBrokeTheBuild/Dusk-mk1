@@ -1,3 +1,5 @@
+dusk_log_info("Setting Up");
+
 local win = Dusk.Graphics.GraphicsSystem.getWindow();
 
 win:setWidth(1024);

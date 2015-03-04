@@ -8,6 +8,8 @@
 #include <Arc/ArrayList.h>
 #include <Arc/ManagedObject.h>
 
+#include "InterMaterial.h"
+
 using std::string;
 using glm::vec3;
 using glm::vec2;
@@ -21,6 +23,7 @@ public:
 	virtual inline string getClassName(void) const { return "Intermediate Mesh"; }
 
     string              Name;
+    InterMaterial       Material;
 
     ArrayList<vec3>     Verts;
     ArrayList<vec3>     Norms;
@@ -29,7 +32,6 @@ public:
     ArrayList<int>      VertInds;
     ArrayList<int>      NormInds;
     ArrayList<int>      TexCoordInds;
-
 };
 
 #endif // DUSK_INTER_MESH_H

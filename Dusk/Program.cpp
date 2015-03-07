@@ -9,6 +9,7 @@
 #include <Scripting/ScriptingSystem.h>
 #include <World/Camera.h>
 #include <World/Skybox.h>
+#include <World/Entity.h>
 #include <Input/InputSystem.h>
 #include <Timing/TimeInfo.h>
 
@@ -103,7 +104,7 @@ bool Dusk::Program::init()
     }
 	GraphicsSystem::InitScripting();
 
-    getGraphicsSystem()->getWindow()->setDecorated(false);
+    //getGraphicsSystem()->getWindow()->setDecorated(false);
     getGraphicsSystem()->getWindow()->setResizable(false);
     getGraphicsSystem()->getWindow()->reset();
 
@@ -121,14 +122,14 @@ bool Dusk::Program::init()
 	mp_InputSystem->addEventListener(InputSystem::EVT_MOUSE_UP,   this, &Program::handleMouseUp);
 	mp_InputSystem->addEventListener(InputSystem::EVT_MOUSE_MOVE, this, &Program::handleMouseMove);
 
-    m_MovingWindow = false;
-    m_MouseX = m_MouseY =INT_MAX;
-    m_WindowX = m_WindowY =INT_MAX;
-    m_WindowUpdateTimeoutMax = 20;
-    m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
+    //m_MovingWindow = false;
+    //m_MouseX = m_MouseY =INT_MAX;
+    //m_WindowX = m_WindowY =INT_MAX;
+    //m_WindowUpdateTimeoutMax = 20;
+    //m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
 
     rotation = 0.0f;
-    rotationSpeed = 0.0f;
+    rotationSpeed = 0.0001f;
 
     return true;
 }
@@ -159,8 +160,13 @@ bool Dusk::Program::load()
 
     rotation = 0.0f;
 
-    mp_Cube = New Model();
-    mp_Cube->load("Assets/Models/behemoth/mdl_behemoth.dskm");
+    mp_Cube = New Entity();
+    mp_Cube->init();
+
+    Model* pCubeModel = New Model();
+    pCubeModel->load("Assets/Models/behemoth/mdl_behemoth.dskm");
+
+    mp_Cube->addModel(pCubeModel);
 
     mp_Skybox = New Skybox();
     mp_Skybox->load("Assets/Skyboxes/tex_skybox_stormydays.dskt");
@@ -173,28 +179,29 @@ void Dusk::Program::update(TimeInfo& timeInfo)
     UpdateEventData evtData(&timeInfo);
     dispatch(Event(Program::EVT_UPDATE, evtData));
 
-    Window* pWindow = getGraphicsSystem()->getWindow();
+    mp_Cube->setRot(vec3(0.0f, rotation, 0.0f));
+    rotation += rotationSpeed;
 
-    int x = pWindow->getX();
-    int y = pWindow->getY();
+    //Window* pWindow = getGraphicsSystem()->getWindow();
 
-    if (m_WindowX == INT_MAX)
-        m_WindowX = x;
-    if (m_WindowY == INT_MAX)
-        m_WindowY = y;
+    //int x = pWindow->getX();
+    //int y = pWindow->getY();
 
-    if (m_MovingWindow)
-    {
-        m_WindowUpdateTimeout -= timeInfo.ElapsedMilliseconds;
-        if (m_WindowUpdateTimeout <= 0)
-        {
-            m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
+    //if (m_WindowX == INT_MAX)
+    //    m_WindowX = x;
+    //if (m_WindowY == INT_MAX)
+    //    m_WindowY = y;
 
-            pWindow->setPos(m_WindowX, m_WindowY);
-        }
-    }
+    //if (m_MovingWindow)
+    //{
+    //    m_WindowUpdateTimeout -= timeInfo.ElapsedMilliseconds;
+    //    if (m_WindowUpdateTimeout <= 0)
+    //    {
+    //        m_WindowUpdateTimeout = m_WindowUpdateTimeoutMax;
 
-    rotation += rotationSpeed * (float)timeInfo.Delta;
+    //        pWindow->setPos(m_WindowX, m_WindowY);
+    //    }
+    //}
 }
 
 void Dusk::Program::render()
@@ -205,49 +212,6 @@ void Dusk::Program::render()
 	dispatch(Event(Program::EVT_RENDER, RenderEventData()));
 
     mp_Skybox->render();
-
-    ShaderManager* pShaderManager = Program::Inst()->getGraphicsSystem()->getShaderManager();
-
-	mat4x4 mView = mp_Camera->getViewMatrix();
-	mat4x4 mProj = mp_Camera->getProjectionMatrix();
-	mat4x4 mViewProj = mProj * mView;
-
-	getGraphicsSystem()->getShaderManager()->useProgram("entity");
-
-	glm::mat4x4 mModel = mat4(1.0f);
-	glm::mat4x4 mModelView, mModelViewProj;
-
-	glm::vec3 m_Pos = vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 m_Scale = vec3(1.0f);
-	glm::vec3 m_Rot = vec3(0.0f, rotation, 0.0f);
-
-	mModel = glm::translate(mModel, m_Pos);
-	mModel = glm::scale(mModel, m_Scale);
-
-	mModel = glm::translate(mModel, vec3(0.5f, 0.0f, 0.5f));
-
-	mModel = glm::rotate(mModel, m_Rot.x, vec3(1.0f, 0.0f, 0.0f));
-	mModel = glm::rotate(mModel, m_Rot.y, vec3(0.0f, 1.0f, 0.0f));
-	mModel = glm::rotate(mModel, m_Rot.z, vec3(0.0f, 0.0f, 1.0f));
-
-	mModel = glm::translate(mModel, vec3(-0.5f, 0.0f, -0.5f));
-
-    mModelView = mView * mModel;
-	mModelViewProj = mViewProj * mModel;
-
-	static GLint m4ModelViewLoc      = pShaderManager->getUniformLocation("uModelView");
-	static GLint m4ModelViewProjLoc  = pShaderManager->getUniformLocation("uModelViewProj");
-	static GLint v3GlobalAmbientLoc  = pShaderManager->getUniformLocation("uGlobalAmbient");
-	static GLint v3LightColorLoc     = pShaderManager->getUniformLocation("uLightColor");
-	static GLint v3LightDirectionLoc = pShaderManager->getUniformLocation("uLightDirection");
-
-	pShaderManager->setUniformMatrix4fv(m4ModelViewProjLoc, 1, &mModelViewProj);
-	pShaderManager->setUniformMatrix4fv(m4ModelViewLoc,     1, &mModelView);
-
-	pShaderManager->setUniform3f(v3GlobalAmbientLoc,  vec3(1.0f));
-	pShaderManager->setUniform3f(v3LightColorLoc,     vec3(1.0f));
-	pShaderManager->setUniform3f(v3LightDirectionLoc, vec3(-1.0f));
-
     mp_Cube->render();
 }
 
@@ -263,84 +227,74 @@ void Dusk::Program::handleKeyDown( const Event& event )
     const KeyEventData* pData = event.getDataAs<KeyEventData>();
     if (pData->getKey() == KEY_ESCAPE)
         m_ShouldExit = true;
-
-    if (pData->getKey() == KEY_LEFT)
-        rotationSpeed = -0.1f;
-    else if (pData->getKey() == KEY_RIGHT)
-        rotationSpeed = 0.1f;
 }
 
 void Dusk::Program::handleKeyUp( const Event& event )
 {
-    const KeyEventData* pData = event.getDataAs<KeyEventData>();
-
-    if (pData->getKey() == KEY_LEFT && rotationSpeed < 0.0f)
-        rotationSpeed = 0.0f;
-    else if (pData->getKey() == KEY_RIGHT && rotationSpeed > 0.0f)
-        rotationSpeed = 0.0f;
+    //const KeyEventData* pData = event.getDataAs<KeyEventData>();
 }
 
 void Dusk::Program::handleMouseDown( const Event& event )
 {
-    const MouseEventData* pData = event.getDataAs<MouseEventData>();
-    Window* pWindow = getGraphicsSystem()->getWindow();
+    //const MouseEventData* pData = event.getDataAs<MouseEventData>();
+    //Window* pWindow = getGraphicsSystem()->getWindow();
 
-    if (pData->getMouseButton() == MOUSE_BUTTON_LEFT)
-    {
-        int relY = m_MouseY - m_WindowY;
-        if (relY >= 0 && relY <= 50)
-        {
-            int relX = m_MouseX - m_WindowX;
-            if (relX >= (int)pWindow->getWidth() - 50)
-            {
-                m_ShouldExit = true;
-            }
-            else
-            {
-                m_MovingWindow = true;
-            }
-        }
-    }
+    //if (pData->getMouseButton() == MOUSE_BUTTON_LEFT)
+    //{
+    //    int relY = m_MouseY - m_WindowY;
+    //    if (relY >= 0 && relY <= 50)
+    //    {
+    //        int relX = m_MouseX - m_WindowX;
+    //        if (relX >= (int)pWindow->getWidth() - 50)
+    //        {
+    //            m_ShouldExit = true;
+    //        }
+    //        else
+    //        {
+    //            m_MovingWindow = true;
+    //        }
+    //    }
+    //}
 }
 
 void Dusk::Program::handleMouseUp( const Event& event )
 {
-    const MouseEventData* pData = event.getDataAs<MouseEventData>();
+    //const MouseEventData* pData = event.getDataAs<MouseEventData>();
 
-    if (m_MovingWindow && pData->getMouseButton() == MOUSE_BUTTON_LEFT)
-        m_MovingWindow = false;
+    //if (m_MovingWindow && pData->getMouseButton() == MOUSE_BUTTON_LEFT)
+    //    m_MovingWindow = false;
 }
 
 void Dusk::Program::handleMouseMove( const Event& event )
 {
-    const MouseMoveEventData* pData = event.getDataAs<MouseMoveEventData>();
-    Window* pWindow = getGraphicsSystem()->getWindow();
+    //const MouseMoveEventData* pData = event.getDataAs<MouseMoveEventData>();
+    //Window* pWindow = getGraphicsSystem()->getWindow();
 
-    if (m_MouseX == INT_MAX)
-        m_MouseX = pData->getX();
-    if (m_MouseY == INT_MAX)
-        m_MouseY = pData->getY();
+    //if (m_MouseX == INT_MAX)
+    //    m_MouseX = pData->getX();
+    //if (m_MouseY == INT_MAX)
+    //    m_MouseY = pData->getY();
 
-    int winX = pWindow->getX();
-    int winY = pWindow->getY();
+    //int winX = pWindow->getX();
+    //int winY = pWindow->getY();
 
-    int newMouseX = pData->getX() + winX;
-    int newMouseY = pData->getY() + winY;
-    int dX = newMouseX - m_MouseX;
-    int dY = newMouseY - m_MouseY;
-    m_MouseX = newMouseX;
-    m_MouseY = newMouseY;
+    //int newMouseX = pData->getX() + winX;
+    //int newMouseY = pData->getY() + winY;
+    //int dX = newMouseX - m_MouseX;
+    //int dY = newMouseY - m_MouseY;
+    //m_MouseX = newMouseX;
+    //m_MouseY = newMouseY;
 
-    if (m_MovingWindow)
-    {
-        if (m_WindowX == INT_MAX)
-            m_WindowX = winX;
-        if (m_WindowY == INT_MAX)
-            m_WindowY = winY;
+    //if (m_MovingWindow)
+    //{
+    //    if (m_WindowX == INT_MAX)
+    //        m_WindowX = winX;
+    //    if (m_WindowY == INT_MAX)
+    //        m_WindowY = winY;
 
-        if (dX != 0)
-            m_WindowX += dX;
-        if (dY != 0)
-            m_WindowY += dY;
-    }
+    //    if (dX != 0)
+    //        m_WindowX += dX;
+    //    if (dY != 0)
+    //        m_WindowY += dY;
+    //}
 }

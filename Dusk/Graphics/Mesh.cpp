@@ -100,6 +100,9 @@ void Dusk::Graphics::Mesh::render( void )
     if (m_VertexArray == 0)
         return;
 
+    if (mp_Material)
+        mp_Material->bind();
+
     glBindVertexArray(m_VertexArray);
 
     glDrawArrays(m_PrimitiveType, 0, m_VertexCount);

@@ -24,6 +24,7 @@ namespace World
 {
     class Camera;
     class Skybox;
+    class Entity;
 }
 
 namespace Timing
@@ -114,7 +115,7 @@ private:
 
     // Temporary
     Skybox* mp_Skybox;
-    Model* mp_Cube;
+    Entity* mp_Cube;
     float rotation;
     float rotationSpeed;
 

@@ -1,5 +1,10 @@
 #include "Material.h"
 
+#include <Graphics/Texture.h>
+#include <Logging/Log.h>
+
+using namespace Dusk::Logging;
+
 bool Dusk::Graphics::Material::init( const string& name,
                                      const string& diffuseMap, const string& ambientMap, const string& specularMap,
                                      const string& specularHilightMap, const string& alphaMap, const string& bumpMap,
@@ -19,5 +24,29 @@ bool Dusk::Graphics::Material::init( const string& name,
     m_DiffuseColor = diffuseColor;
     m_SpecularColor = specularColor;
 
+    mp_DiffuseMapTexture = nullptr;
+
+    if (!m_DiffuseMap.empty())
+    {
+        mp_DiffuseMapTexture = New Texture();
+        if ( ! mp_DiffuseMapTexture->load(m_DiffuseMap))
+        {
+            LogErrorFmt(getClassName(), "Failed to load texture \"%s\"", m_DiffuseMap.c_str());
+            return false;
+        }
+    }
+
     return true;
+}
+
+void Dusk::Graphics::Material::term( void )
+{
+    delete mp_DiffuseMapTexture;
+    mp_DiffuseMapTexture = nullptr;
+}
+
+void Dusk::Graphics::Material::bind( void )
+{
+	glActiveTexture(GL_TEXTURE0);
+    mp_DiffuseMapTexture->bind();
 }

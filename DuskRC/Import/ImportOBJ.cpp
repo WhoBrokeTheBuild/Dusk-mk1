@@ -120,6 +120,9 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 	pModel->Meshes.add(InterMesh());
 	Map<string, InterMaterial> materials;
+    ArrayList<vec3> verts, norms;
+    ArrayList<vec2> texCoords;
+    Map<int, int> vertIndRewrite, normIndRewrite, texCoordIndRewrite;
 
     string line;
     while (std::getline(file, line))
@@ -147,7 +150,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 			ss >> vert.x >> vert.y >> vert.z;
 
-			mesh.Verts.add(vert);
+            verts.add(vert);
 		}
 		else if (cmd == "vt")
 		{
@@ -155,7 +158,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 			ss >> coord.x >> coord.y;
 
-			mesh.TexCoords.add(coord);
+            texCoords.add(coord);
 		}
 		else if (cmd == "vn")
 		{
@@ -163,7 +166,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 
 			ss >> norm.x >> norm.y >> norm.z;
 
-			mesh.Norms.add(norm);
+            norms.add(norm);
 		}
 		else if (cmd == "f")
 		{
@@ -219,6 +222,48 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					}
 				}
 			}
+
+            for (int j = 0; j < count; ++j)
+            {
+                if (tmpVertInds[j] != -1)
+                {
+                    if (vertIndRewrite.containsKey(tmpVertInds[j]))
+                        tmpVertInds[j] = vertIndRewrite[tmpVertInds[j]];
+                    else
+                    {
+                        int newInd = mesh.Verts.getSize();
+                        mesh.Verts.add(verts[tmpVertInds[j]]);
+                        vertIndRewrite.add(tmpVertInds[j], newInd);
+                        tmpVertInds[j] = newInd;
+                    }
+                }
+
+                if (tmpNormInds[j] != -1)
+                {
+                    if (normIndRewrite.containsKey(tmpNormInds[j]))
+                        tmpNormInds[j] = normIndRewrite[tmpNormInds[j]];
+                    else
+                    {
+                        int newInd = mesh.Verts.getSize();
+                        mesh.Norms.add(norms[tmpNormInds[j]]);
+                        normIndRewrite.add(tmpNormInds[j], newInd);
+                        tmpNormInds[j] = newInd;
+                    }
+                }
+
+                if (tmpTexCoordInds[j] != -1)
+                {
+                    if (texCoordIndRewrite.containsKey(tmpTexCoordInds[j]))
+                    tmpTexCoordInds[j] = texCoordIndRewrite[tmpTexCoordInds[j]];
+                    else
+                    {
+                        int newInd = mesh.TexCoords.getSize();
+                        mesh.TexCoords.add(texCoords[tmpTexCoordInds[j]]);
+                        texCoordIndRewrite.add(tmpTexCoordInds[j], newInd);
+                        tmpTexCoordInds[j] = newInd;
+                    }
+                }
+            }
 
 			if (count == 3)
 			{
@@ -297,6 +342,9 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
             {
                 pModel->Meshes.add(InterMesh());
                 pModel->Meshes.getBack().Name = data;
+                vertIndRewrite.clear();
+                normIndRewrite.clear();
+                texCoordIndRewrite.clear();
             }
 		}
 		else if (cmd == "mtllib")

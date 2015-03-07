@@ -10,16 +10,21 @@ namespace Dusk
 namespace Graphics
 {
 
+class Texture;
+
 class Material :
     public Arc::ManagedObject
 {
 public:
+
+    virtual inline ~Material( void ) { term(); }
 
     bool init( const string& name,
                const string& diffuseMap, const string& ambientMap, const string& specularMap,
                const string& specularHilightMap, const string& alphaMap, const string& bumpMap,
                const float& specular, const float& transparency,
                const vec3& ambientColor, const vec3& diffuseColor, const vec3& specularColor );
+    void term( void );
 
     virtual inline string getClassName( void ) const { return "Material"; }
 
@@ -39,23 +44,32 @@ public:
     inline vec3 getDiffuseColor ( void ) const { return m_DiffuseColor; }
     inline vec3 getSpecularColor( void ) const { return m_SpecularColor; }
 
+    void bind( void );
+
 private:
 
-    string  m_Name;
+    string      m_Name;
 
-    string  m_DiffuseMap,
-            m_AmbientMap,
-            m_SpecularMap,
-            m_SpecularHilightMap,
-            m_AlphaMap,
-            m_BumpMap;
+    string      m_DiffuseMap,
+                m_AmbientMap,
+                m_SpecularMap,
+                m_SpecularHilightMap,
+                m_AlphaMap,
+                m_BumpMap;
 
-    float   m_Specular,
-            m_Transparency;
+    Texture     *mp_DiffuseMapTexture,
+                *mp_AmbientMapTexture,
+                *mp_SpecularMapTexture,
+                *mp_SpecularHilightMapTexture,
+                *mp_AlphaMapTexture,
+                *mp_BumpMapTexture;
 
-    vec3    m_AmbientColor,
-            m_DiffuseColor,
-            m_SpecularColor;
+    float       m_Specular,
+                m_Transparency;
+
+    vec3        m_AmbientColor,
+                m_DiffuseColor,
+                m_SpecularColor;
 };
 
 } // Graphics

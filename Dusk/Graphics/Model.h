@@ -29,6 +29,7 @@ public:
 
     bool load( const string& filename );
     void render( void );
+    ArrayList<Mesh*> getMeshList( void );
 
 private:
 

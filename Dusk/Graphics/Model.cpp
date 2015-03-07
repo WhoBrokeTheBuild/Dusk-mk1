@@ -16,6 +16,11 @@ Dusk::Graphics::Model::~Model( void )
     m_Meshes.clear();
 }
 
+ArrayList<Dusk::Graphics::Mesh*> Dusk::Graphics::Model::getMeshList( void )
+{
+    return m_Meshes;
+}
+
 bool Dusk::Graphics::Model::load( const string& filename )
 {
     LogInfoFmt(getClassName(), "Load from file \"%s\"", filename.c_str());

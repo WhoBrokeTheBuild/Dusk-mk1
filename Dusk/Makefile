@@ -38,8 +38,9 @@ Logging/Log.cpp \
 Scripting/ScriptingSystem.cpp \
 Timing/TimeInfo.cpp \
 Timing/Timer.cpp \
-World/Skybox.cpp \
 World/Camera.cpp \
+World/Entity.cpp \
+World/Skybox.cpp \
 Program.cpp \
 Main.cpp \
 lodepng/lodepng.cpp

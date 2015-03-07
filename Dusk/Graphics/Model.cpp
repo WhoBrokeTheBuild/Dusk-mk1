@@ -130,6 +130,9 @@ bool Dusk::Graphics::Model::load( const string& filename )
             }
 
             pMat = New Material();
+            pMat->init(matName, diffuseMap, ambientMap, specularMap,
+                       specularHilightMap, alphaMap, bumpMap, specular,
+                       transparency, ambientColor, diffuseColor, specularColor);
         }
 
         // Mesh

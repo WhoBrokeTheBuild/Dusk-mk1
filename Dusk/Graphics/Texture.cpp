@@ -13,7 +13,7 @@ Dusk::Graphics::Texture::~Texture( void )
 
 bool Dusk::Graphics::Texture::load( const string& filename )
 {
-    LogInfoFmt(getClassName() + "[load]", "Load from file \"%s\"", filename.c_str());
+    LogInfoFmt(getClassName(), "Load from file \"%s\"", filename.c_str());
     std::vector<unsigned char> pixels;
     unsigned int width, height;
 

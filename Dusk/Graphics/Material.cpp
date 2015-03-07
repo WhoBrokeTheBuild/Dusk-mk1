@@ -26,6 +26,7 @@ bool Dusk::Graphics::Material::init( const string& name,
 
     mp_DiffuseMapTexture = nullptr;
 
+    LogInfoFmt(getClassName(), "Attempting to load diffuse texture \"%s\"", m_DiffuseMap.c_str());
     if (!m_DiffuseMap.empty())
     {
         mp_DiffuseMapTexture = New Texture();
@@ -47,6 +48,9 @@ void Dusk::Graphics::Material::term( void )
 
 void Dusk::Graphics::Material::bind( void )
 {
-	glActiveTexture(GL_TEXTURE0);
-    mp_DiffuseMapTexture->bind();
+    if (mp_DiffuseMapTexture)
+    {
+    	glActiveTexture(GL_TEXTURE0);
+        mp_DiffuseMapTexture->bind();
+    }
 }

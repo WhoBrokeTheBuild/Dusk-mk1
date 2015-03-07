@@ -9,7 +9,7 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd tex_behemoth_firehydrant.tga
+map_Kd tex_behemoth_firehydrant.dskt
 
 newmtl mat_behemoth_skin
 Ns 92.156863
@@ -19,7 +19,7 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd tex_behemoth_skin.tga
+map_Kd tex_behemoth_skin.dskt
 
 newmtl mat_behemoth_armor
 Ns 92.156863
@@ -29,4 +29,4 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 2
-map_Kd tex_behemoth_armor.tga
+map_Kd tex_behemoth_armor.dskt

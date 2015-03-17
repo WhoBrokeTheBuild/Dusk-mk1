@@ -1,28 +1,26 @@
 +0.0.0.9 INF <Program.cpp:44> Program: Starting
 +0.0.0.9 INF <Program.cpp:93> Program: Initializing
 +0.0.0.13 INF <Window.cpp:31> Window: Initializing Window
-+0.0.0.44 INF <GraphicsSystem.cpp:74> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
-+0.0.0.44 INF <GraphicsSystem.cpp:75> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
-+0.0.0.48 INF <Dusk.lua:1> Script: Initializing Dusk Classes
-+0.0.0.48 INF <Setup.lua:1> Script: Setting Up
-+0.0.0.48 INF <Setup.lua:5> Script: Hi Brian
-+0.0.0.48 INF <Program.cpp:157> Program: Loading Resources
-+0.0.0.48 INF <Resources.lua:1> Script: Loading Resources
-+0.0.0.48 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: flat
-+0.0.0.48 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
-+0.0.0.48 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
-+0.0.0.48 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: skybox
-+0.0.0.48 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
-+0.0.0.48 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
-+0.0.0.49 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: entity
-+0.0.0.49 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
-+0.0.0.49 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
-+0.0.0.49 INF <Model.cpp:26> Model: Load from file "Assets/Models/behemoth/mdl_behemoth.dskm"
-+0.0.0.49 INF <Material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/behemoth/tex_behemoth_armor.dskt"
-+0.0.0.49 INF <Texture.cpp:16> Texture: Load from file "Assets/Models/behemoth/tex_behemoth_armor.dskt"
-+0.0.0.268 INF <Material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/behemoth/tex_behemoth_firehydrant.dskt"
-+0.0.0.268 INF <Texture.cpp:16> Texture: Load from file "Assets/Models/behemoth/tex_behemoth_firehydrant.dskt"
-+0.0.0.287 INF <Material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/behemoth/tex_behemoth_skin.dskt"
-+0.0.0.287 INF <Texture.cpp:16> Texture: Load from file "Assets/Models/behemoth/tex_behemoth_skin.dskt"
-+0.0.0.484 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
-+0.0.0.484 INF <Texture.cpp:16> Texture: Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
++0.0.0.38 INF <GraphicsSystem.cpp:73> Graphics: Did I do the thing?
++0.0.0.38 INF <GraphicsSystem.cpp:74> Graphics: I DID!
++0.0.0.43 INF <GraphicsSystem.cpp:84> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
++0.0.0.43 INF <GraphicsSystem.cpp:85> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
++0.0.0.46 INF <Dusk.lua:1> Script: Initializing Dusk Classes
++0.0.0.46 INF <Setup.lua:1> Script: Setting Up
++0.0.0.46 INF <Setup.lua:9> Script: Testing 123
++0.0.0.46 INF <Program.cpp:157> Program: Loading Resources
++0.0.0.46 INF <Resources.lua:1> Script: Loading Resources
++0.0.0.46 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: flat
++0.0.0.46 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
++0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
++0.0.0.47 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: skybox
++0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
++0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
++0.0.0.47 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: entity
++0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
++0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
++0.0.0.47 INF <Model.cpp:26> Model: Load from file "Assets/Models/mdl_cube.dskm"
++0.0.0.47 INF <Material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/tex_cube.dskt"
++0.0.0.47 INF <Texture.cpp:16> Texture: Load from file "Assets/Models/tex_cube.dskt"
++0.0.0.99 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
++0.0.0.99 INF <Texture.cpp:16> Texture: Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"

@@ -40,7 +40,7 @@ bool Dusk::Graphics::Window::init( const unsigned int& width, const unsigned int
 
 bool Dusk::Graphics::Window::init( void )
 {
-	glfwWindowHint(GLFW_DEPTH_BITS, 16);
+	glfwWindowHint(GLFW_DEPTH_BITS, 24);
 	glfwWindowHint(GLFW_RESIZABLE, m_Resizable);
 	glfwWindowHint(GLFW_DECORATED, m_Decorated);
 

@@ -63,6 +63,16 @@ bool Dusk::Graphics::GraphicsSystem::initGL( void )
 {
     glfwSwapInterval( ( m_Vsync ? 1 : 0) );
 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    LogInfo(getClassName(), "Did I do the thing?");
+    LogInfo(getClassName(), "I DID!");
+
     glewExperimental = GL_TRUE;
 	GLenum ret = glewInit();
 	if (ret != GLEW_OK)
@@ -73,13 +83,6 @@ bool Dusk::Graphics::GraphicsSystem::initGL( void )
 
 	LogInfoFmt(getClassName(), "Running OpenGL Version %s", glGetString(GL_VERSION));
 	LogInfoFmt(getClassName(), "Running OpenGL Shading Language Version %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-	glEnable(GL_DEPTH_TEST);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	return true;
 }

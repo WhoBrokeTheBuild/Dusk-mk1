@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Project">
+      <UniqueIdentifier>{ec9ba44a-37b4-4937-a4cc-5a1930659871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Import">
+      <UniqueIdentifier>{d5f12178-9f5c-4098-826b-d104e1f1e0e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Export">
+      <UniqueIdentifier>{9f0bbbb9-4db0-466b-9c4b-b650143ecbee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Util">
+      <UniqueIdentifier>{88863d66-a5ef-4290-9c1c-18e24ee9e9a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Intermediate">
+      <UniqueIdentifier>{3ccb3b05-9ab1-43e9-b9b2-5e8a045582d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Import\Models">
+      <UniqueIdentifier>{0f916434-3a17-4736-92ed-2291323a75e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Export\Models">
+      <UniqueIdentifier>{5f7c61dd-7e43-4a8a-8e8c-c8d3752ec36a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Import\Textures">
+      <UniqueIdentifier>{64821e04-be96-4ca4-94a7-4658fcdadbef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Export\Textures">
+      <UniqueIdentifier>{1dee00c9-13d1-4bec-bd52-9d903478f86c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainArgs.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtensionTypeMap.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="InterModel.h">
+      <Filter>Project\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="Usage.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="InterTexture.h">
+      <Filter>Project\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportDSKM.h">
+      <Filter>Project\Export\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportOBJ.h">
+      <Filter>Project\Export\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportDSKT.h">
+      <Filter>Project\Export\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportJPG.h">
+      <Filter>Project\Export\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportPNG.h">
+      <Filter>Project\Export\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportDSKM.h">
+      <Filter>Project\Import\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportOBJ.h">
+      <Filter>Project\Import\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportDSKT.h">
+      <Filter>Project\Import\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportJPG.h">
+      <Filter>Project\Import\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportPNG.h">
+      <Filter>Project\Import\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportTGA.h">
+      <Filter>Project\Export\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportTGA.h">
+      <Filter>Project\Import\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="InterMaterial.h">
+      <Filter>Project\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="MainArgs.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtensionTypeMap.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="InterModel.cpp">
+      <Filter>Project\Intermediate</Filter>
+    </ClCompile>
+    <ClCompile Include="InterTexture.cpp">
+      <Filter>Project\Intermediate</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportDSKM.cpp">
+      <Filter>Project\Export\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportOBJ.cpp">
+      <Filter>Project\Export\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportDSKT.cpp">
+      <Filter>Project\Export\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportJPG.cpp">
+      <Filter>Project\Export\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportPNG.cpp">
+      <Filter>Project\Export\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportDSKM.cpp">
+      <Filter>Project\Import\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportOBJ.cpp">
+      <Filter>Project\Import\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportDSKT.cpp">
+      <Filter>Project\Import\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportJPG.cpp">
+      <Filter>Project\Import\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportPNG.cpp">
+      <Filter>Project\Import\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportTGA.cpp">
+      <Filter>Project\Export\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportTGA.cpp">
+      <Filter>Project\Import\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="InterMaterial.cpp">
+      <Filter>Project\Intermediate</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

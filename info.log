@@ -1,26 +1,23 @@
-+0.0.0.9 INF <Program.cpp:44> Program: Starting
-+0.0.0.9 INF <Program.cpp:93> Program: Initializing
-+0.0.0.13 INF <Window.cpp:31> Window: Initializing Window
-+0.0.0.38 INF <GraphicsSystem.cpp:73> Graphics: Did I do the thing?
-+0.0.0.38 INF <GraphicsSystem.cpp:74> Graphics: I DID!
-+0.0.0.43 INF <GraphicsSystem.cpp:84> Graphics: Running OpenGL Version 4.4.0 NVIDIA 331.113
-+0.0.0.43 INF <GraphicsSystem.cpp:85> Graphics: Running OpenGL Shading Language Version 4.40 NVIDIA via Cg compiler
-+0.0.0.46 INF <Dusk.lua:1> Script: Initializing Dusk Classes
-+0.0.0.46 INF <Setup.lua:1> Script: Setting Up
-+0.0.0.46 INF <Setup.lua:9> Script: Testing 123
-+0.0.0.46 INF <Program.cpp:157> Program: Loading Resources
-+0.0.0.46 INF <Resources.lua:1> Script: Loading Resources
-+0.0.0.46 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: flat
-+0.0.0.46 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
-+0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
-+0.0.0.47 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: skybox
-+0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
-+0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
-+0.0.0.47 INF <ShaderManager.cpp:15> Shader Manager: Loading Shader Program: entity
-+0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
-+0.0.0.47 INF <ShaderManager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
-+0.0.0.47 INF <Model.cpp:26> Model: Load from file "Assets/Models/mdl_cube.dskm"
-+0.0.0.47 INF <Material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/tex_cube.dskt"
-+0.0.0.47 INF <Texture.cpp:16> Texture: Load from file "Assets/Models/tex_cube.dskt"
-+0.0.0.99 INF <Skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
-+0.0.0.99 INF <Texture.cpp:16> Texture: Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
++0.0.0.78 INF <program.cpp:44> Program: Starting
++0.0.0.84 INF <program.cpp:93> Program: Initializing
++0.0.0.105 INF <window.cpp:31> Window: Initializing Window
++0.0.1.531 INF <graphicssystem.cpp:73> Graphics: Did I do the thing?
++0.0.1.534 INF <graphicssystem.cpp:74> Graphics: I DID!
++0.0.1.548 INF <graphicssystem.cpp:84> Graphics: Running OpenGL Version 4.5.0 NVIDIA 347.09
++0.0.1.553 INF <graphicssystem.cpp:85> Graphics: Running OpenGL Shading Language Version 4.50 NVIDIA
++0.0.1.616 INF <Dusk.lua:1> Script: Initializing Dusk Classes
++0.0.1.618 INF <Setup.lua:1> Script: Setting Up
++0.0.1.623 INF <program.cpp:157> Program: Loading Resources
++0.0.1.625 INF <Resources.lua:1> Script: Loading Resources
++0.0.1.627 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: flat
++0.0.1.631 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
++0.0.1.638 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
++0.0.1.648 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: skybox
++0.0.1.651 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
++0.0.1.658 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
++0.0.1.664 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: entity
++0.0.1.669 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
++0.0.1.674 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
++0.0.1.681 INF <model.cpp:26> Model: Load from file "Assets/Models/mdl_cube.dskm"
++0.0.1.684 INF <material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/tex_cube.dskt"
++0.0.1.689 INF <texture.cpp:16> Texture: Load from file "Assets/Models/tex_cube.dskt"

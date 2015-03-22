@@ -1,42 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Source\Graphics\Graphics.h" />
-    <ClInclude Include="Source\Graphics\GraphicsContext.h" />
-    <ClInclude Include="Source\Graphics\GraphicsSystem.h" />
-    <ClInclude Include="Source\Graphics\Mesh.h" />
-    <ClInclude Include="Source\Graphics\Model.h" />
-    <ClInclude Include="Source\Graphics\ShaderManager.h" />
-    <ClInclude Include="Source\Graphics\ShaderManager.Uniforms.inc.h" />
-    <ClInclude Include="Source\Graphics\Texture.h" />
-    <ClInclude Include="Source\Graphics\Window.h" />
-    <ClInclude Include="Source\Logging\Log.h" />
-    <ClInclude Include="Source\Math\Math.h" />
-    <ClInclude Include="Source\Program.h" />
-    <ClInclude Include="Source\Timing\TimeInfo.h" />
-    <ClInclude Include="Source\Timing\Timer.h" />
-    <ClInclude Include="Source\World\Camera.h" />
-    <ClInclude Include="Source\World\Skybox.h" />
-    <ClInclude Include="Libraries\lodepng\include\lodepng\lodepng.h" />
-    <ClInclude Include="Source\Scripting\ScriptingSystem.h" />
-    <ClInclude Include="Source\Scripting\Scripting.h" />
+    <ClInclude Include="Dusk\Program.h" />
+    <ClInclude Include="Dusk\Events\Callbacks.h" />
+    <ClInclude Include="Dusk\Events\Delegate.h" />
+    <ClInclude Include="Dusk\Events\Event.h" />
+    <ClInclude Include="Dusk\Events\IEventDispatcher.h" />
+    <ClInclude Include="Dusk\Graphics\Graphics.h" />
+    <ClInclude Include="Dusk\Graphics\GraphicsContext.h" />
+    <ClInclude Include="Dusk\Graphics\GraphicsSystem.h" />
+    <ClInclude Include="Dusk\Graphics\Material.h" />
+    <ClInclude Include="Dusk\Graphics\Mesh.h" />
+    <ClInclude Include="Dusk\Graphics\Model.h" />
+    <ClInclude Include="Dusk\Graphics\ShaderManager.h" />
+    <ClInclude Include="Dusk\Graphics\ShaderManager.Uniforms.inc.h" />
+    <ClInclude Include="Dusk\Graphics\Texture.h" />
+    <ClInclude Include="Dusk\Graphics\Window.h" />
+    <ClInclude Include="Dusk\Input\Input.h" />
+    <ClInclude Include="Dusk\Input\InputSystem.h" />
+    <ClInclude Include="Dusk\Input\Key.h" />
+    <ClInclude Include="Dusk\Input\MouseButton.h" />
+    <ClInclude Include="Dusk\lodepng\lodepng.h" />
+    <ClInclude Include="Dusk\Logging\Log.h" />
+    <ClInclude Include="Dusk\Math\Math.h" />
+    <ClInclude Include="Dusk\Scripting\Scripting.h" />
+    <ClInclude Include="Dusk\Scripting\ScriptingSystem.h" />
+    <ClInclude Include="Dusk\Timing\TimeInfo.h" />
+    <ClInclude Include="Dusk\Timing\Timer.h" />
+    <ClInclude Include="Dusk\World\Camera.h" />
+    <ClInclude Include="Dusk\World\Entity.h" />
+    <ClInclude Include="Dusk\World\Skybox.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Graphics\GraphicsContext.cpp" />
-    <ClCompile Include="Source\Graphics\GraphicsSystem.cpp" />
-    <ClCompile Include="Source\Graphics\Mesh.cpp" />
-    <ClCompile Include="Source\Graphics\Model.cpp" />
-    <ClCompile Include="Source\Graphics\ShaderManager.cpp" />
-    <ClCompile Include="Source\Graphics\Texture.cpp" />
-    <ClCompile Include="Source\Graphics\Window.cpp" />
-    <ClCompile Include="Source\Logging\Log.cpp" />
-    <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Program.cpp" />
-    <ClCompile Include="Source\Timing\TimeInfo.cpp" />
-    <ClCompile Include="Source\Timing\Timer.cpp" />
-    <ClCompile Include="Source\World\Camera.cpp" />
-    <ClCompile Include="Source\World\Skybox.cpp" />
-    <ClCompile Include="Libraries\lodepng\include\lodepng\lodepng.cpp" />
-    <ClCompile Include="Source\Scripting\ScriptingSystem.cpp" />
+    <ClCompile Include="Dusk\Events\Event.cpp" />
+    <ClCompile Include="Dusk\Events\IEventDispatcher.cpp" />
+    <ClCompile Include="Dusk\Graphics\GraphicsContext.cpp" />
+    <ClCompile Include="Dusk\Graphics\GraphicsSystem.cpp" />
+    <ClCompile Include="Dusk\Graphics\Material.cpp" />
+    <ClCompile Include="Dusk\Graphics\Mesh.cpp" />
+    <ClCompile Include="Dusk\Graphics\Model.cpp" />
+    <ClCompile Include="Dusk\Graphics\ShaderManager.cpp" />
+    <ClCompile Include="Dusk\Graphics\Texture.cpp" />
+    <ClCompile Include="Dusk\Graphics\Window.cpp" />
+    <ClCompile Include="Dusk\Input\InputSystem.cpp" />
+    <ClCompile Include="Dusk\lodepng\lodepng.cpp" />
+    <ClCompile Include="Dusk\Logging\Log.cpp" />
+    <ClCompile Include="Dusk\Scripting\ScriptingSystem.cpp" />
+    <ClCompile Include="Dusk\Timing\TimeInfo.cpp" />
+    <ClCompile Include="Dusk\Timing\Timer.cpp" />
+    <ClCompile Include="Dusk\World\Camera.cpp" />
+    <ClCompile Include="Dusk\World\Entity.cpp" />
+    <ClCompile Include="Dusk\World\Skybox.cpp" />
+    <ClCompile Include="Dusk\Main.cpp" />
+    <ClCompile Include="Dusk\Program.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dusk\.linter-clang-includes" />
+    <None Include="Dusk\Makefile" />
   </ItemGroup>
 </Project>

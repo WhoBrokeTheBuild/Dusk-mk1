@@ -1,6 +1,8 @@
 #ifndef DUSK_USAGE_H
 #define DUSK_USAGE_H
 
+#include <cstdio>
+
 #define STR_USAGE \
 "Usage: duskrc INPUT OUTPUT [OPTION..] \n\n" \
 "    -i, --input-type[=AUTO]     The input type of the file to be converted, or AUTO to autodetect\n" \
@@ -8,7 +10,7 @@
 
 inline void usage( void )
 {
-    printf("%s", STR_USAGE);
+    printf("%s\n", STR_USAGE);
     exit(0);
 }
 

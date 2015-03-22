@@ -111,7 +111,7 @@ bool Dusk::Program::init()
 	mp_InputSystem = New InputSystem();
 
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
-                           vec3(2.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
+                           vec3(2.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 1.0f, 1000.0f);
 
 	mp_ScriptingSystem->runScript("Assets/Scripts/Dusk.lua");
 	mp_ScriptingSystem->runScript("Assets/Scripts/Setup.lua");

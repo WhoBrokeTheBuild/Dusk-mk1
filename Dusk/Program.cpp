@@ -207,7 +207,7 @@ void Dusk::Program::update(TimeInfo& timeInfo)
 void Dusk::Program::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	//glClearDepth(1.0f);
+	glClearDepth(1.0f);
 
     mp_Skybox->render();
     glClear(GL_DEPTH_BUFFER_BIT);

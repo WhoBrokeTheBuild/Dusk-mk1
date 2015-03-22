@@ -9,8 +9,6 @@ bool Dusk::Graphics::GraphicsContext::bind(void)
 
 	glfwMakeContextCurrent(mp_GLFWWindow);
 
-	glfwSwapInterval(0);
-
 	return true;
 }
 

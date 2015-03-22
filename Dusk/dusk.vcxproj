@@ -64,6 +64,10 @@
     <ClCompile Include="World\Entity.cpp" />
     <ClCompile Include="World\Skybox.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\error.log" />
+    <Text Include="..\info.log" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BC076450-7212-46F4-9CFC-0FF1F8454CDC}</ProjectGuid>
     <RootNamespace>dusk</RootNamespace>
@@ -93,7 +97,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>../</OutDir>
+    <OutDir>$(SolutionDir)</OutDir>
     <IntDir>../obj/</IntDir>
     <TargetName>dusk</TargetName>
   </PropertyGroup>

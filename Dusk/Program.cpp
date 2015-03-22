@@ -164,7 +164,7 @@ bool Dusk::Program::load()
     mp_Cube->init();
 
     Model* pCubeModel = New Model();
-    pCubeModel->load("Assets/Models/mdl_cube.obj");
+    pCubeModel->load("Assets/Models/mdl_cube.dskm");
 
     mp_Cube->addModel(pCubeModel);
 

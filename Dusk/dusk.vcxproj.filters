@@ -54,4 +54,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\error.log" />
+    <Text Include="..\info.log" />
+  </ItemGroup>
 </Project>

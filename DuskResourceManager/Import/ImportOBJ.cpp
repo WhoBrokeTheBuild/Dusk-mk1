@@ -300,8 +300,8 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					mesh.VertInds.add(tmpVertInds[1]);
 					mesh.VertInds.add(tmpVertInds[2]);
 
-					mesh.VertInds.add(tmpVertInds[0]);
 					mesh.VertInds.add(tmpVertInds[2]);
+					mesh.VertInds.add(tmpVertInds[0]);
 					mesh.VertInds.add(tmpVertInds[3]);
 				}
 
@@ -311,9 +311,9 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					mesh.NormInds.add(tmpNormInds[1]);
 					mesh.NormInds.add(tmpNormInds[2]);
 
-					mesh.NormInds.add(tmpNormInds[0]);
-					mesh.NormInds.add(tmpNormInds[2]);
 					mesh.NormInds.add(tmpNormInds[3]);
+					mesh.NormInds.add(tmpNormInds[2]);
+					mesh.NormInds.add(tmpNormInds[0]);
 				}
 
 				if (tmpTexCoordInds[0] != -1 && tmpTexCoordInds[1] != -1 && tmpTexCoordInds[2] != -1 && tmpTexCoordInds[3] != -1)
@@ -322,9 +322,9 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					mesh.TexCoordInds.add(tmpTexCoordInds[1]);
 					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
 
-					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
-					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
 					mesh.TexCoordInds.add(tmpTexCoordInds[3]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
 				}
 			}
 		}

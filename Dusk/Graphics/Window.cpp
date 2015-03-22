@@ -44,6 +44,12 @@ bool Dusk::Graphics::Window::init( void )
 	glfwWindowHint(GLFW_RESIZABLE, m_Resizable);
 	glfwWindowHint(GLFW_DECORATED, m_Decorated);
 
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+    glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
+    glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3 );
+    glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
+    glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE );
+
 	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
 
 	bool isContextCurrent = (mp_GraphicsContext ? mp_GraphicsContext->mp_GLFWWindow == mp_GLFWWindow : false);
@@ -61,7 +67,12 @@ bool Dusk::Graphics::Window::init( void )
 	mp_GraphicsContext = New GraphicsContext(mp_GLFWWindow);
 
     if (isContextCurrent)
-        mp_GraphicsContext->bind();
+    {
+        if (!mp_GraphicsContext->bind())
+        {
+            LogError(getClassName(), "Binding Graphics Context Failed");
+        }
+    }
 
 	if (mp_GLFWWindow != nullptr)
 	{

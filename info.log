@@ -1,63 +1,63 @@
-+0.0.0.55 INF <program.cpp:44> Program: Starting
-+0.0.0.58 INF <program.cpp:93> Program: Initializing
-+0.0.0.71 INF <graphicssystem.cpp:34> Graphics: Running GLFW Version 3.0.4 Win32 WGL VisualC LoadLibrary(winmm)
-+0.0.0.77 INF <window.cpp:31> Window: Initializing Window
-+0.0.0.307 INF <graphicssystem.cpp:67> Graphics: Running GLEW Version 1.11.0
-+0.0.0.312 INF <graphicssystem.cpp:68> Graphics: Running OpenGL Version 4.5.0 NVIDIA 347.09
-+0.0.0.316 INF <graphicssystem.cpp:69> Graphics: Running OpenGL Shading Language Version 4.50 NVIDIA
-+0.0.0.373 INF <Dusk.lua:1> Script: Initializing Dusk Classes
-+0.0.0.376 INF <Setup.lua:1> Script: Setting Up
-+0.0.0.379 INF <program.cpp:157> Program: Loading Resources
-+0.0.0.382 INF <Resources.lua:1> Script: Loading Resources
-+0.0.0.384 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: flat
-+0.0.0.387 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
-+0.0.0.392 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
-+0.0.0.396 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: skybox
-+0.0.0.400 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
-+0.0.0.404 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
-+0.0.0.408 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: entity
-+0.0.0.412 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
-+0.0.0.416 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
-+0.0.0.421 INF <model.cpp:26> Model: Load from file "Assets/Models/mdl_cube.dskm"
-+0.0.0.424 INF <material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/tex_cube.dskt"
-+0.0.0.429 INF <texture.cpp:16> Texture: Load from file "Assets/Models/tex_cube.dskt"
-+0.0.0.531 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
-+0.0.0.535 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
-+0.0.0.537 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
-+0.0.0.540 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
-+0.0.0.542 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
-+0.0.0.545 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
-+0.0.0.547 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
-+0.0.0.550 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
-+0.0.0.553 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
-+0.0.0.555 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
-+0.0.0.558 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
-+0.0.0.562 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
-+0.0.0.564 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
-+0.0.0.567 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
-+0.0.0.570 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
-+0.0.0.572 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
-+0.0.0.575 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
-+0.0.0.577 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
-+0.0.0.580 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
-+0.0.0.583 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
-+0.0.0.586 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
-+0.0.0.588 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
-+0.0.0.591 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
-+0.0.0.593 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
-+0.0.0.596 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
-+0.0.0.598 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
-+0.0.0.601 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
-+0.0.0.603 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
-+0.0.0.606 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
-+0.0.0.608 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
-+0.0.0.611 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
-+0.0.0.614 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
-+0.0.0.616 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
-+0.0.0.619 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
-+0.0.0.622 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
-+0.0.0.624 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
-+0.0.0.627 INF <mesh.cpp:44> Mesh: Primitive Type: 4
-+0.0.0.630 INF <skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
-+0.0.0.634 INF <texture.cpp:16> Texture: Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
-+0.0.2.427 INF <mesh.cpp:44> Mesh: Primitive Type: 4
++0.0.0.58 INF <program.cpp:44> Program: Starting
++0.0.0.68 INF <program.cpp:93> Program: Initializing
++0.0.0.89 INF <graphicssystem.cpp:34> Graphics: Running GLFW Version 3.0.4 Win32 WGL VisualC LoadLibrary(winmm)
++0.0.0.106 INF <window.cpp:31> Window: Initializing Window
++0.0.0.442 INF <graphicssystem.cpp:67> Graphics: Running GLEW Version 1.11.0
++0.0.0.455 INF <graphicssystem.cpp:68> Graphics: Running OpenGL Version 4.3.0
++0.0.0.464 INF <graphicssystem.cpp:69> Graphics: Running OpenGL Shading Language Version 4.30 NVIDIA via Cg compiler
++0.0.0.560 INF <Dusk.lua:1> Script: Initializing Dusk Classes
++0.0.0.567 INF <Setup.lua:1> Script: Setting Up
++0.0.0.576 INF <program.cpp:163> Program: Loading Resources
++0.0.0.581 INF <Resources.lua:1> Script: Loading Resources
++0.0.0.587 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: flat
++0.0.0.597 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.fs.glsl"
++0.0.0.610 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/flat.vs.glsl"
++0.0.0.618 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: skybox
++0.0.0.629 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.fs.glsl"
++0.0.0.650 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/skybox.vs.glsl"
++0.0.0.667 INF <shadermanager.cpp:15> Shader Manager: Loading Shader Program: entity
++0.0.0.678 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.fs.glsl"
++0.0.0.693 INF <shadermanager.cpp:149> Shader Manager: Load from file "Assets/Shaders/entity.vs.glsl"
++0.0.0.710 INF <model.cpp:26> Model: Load from file "Assets/Models/mdl_cube.dskm"
++0.0.0.723 INF <material.cpp:29> Material: Attempting to load diffuse texture "Assets/Models/tex_cube.dskt"
++0.0.0.735 INF <texture.cpp:16> Texture: Load from file "Assets/Models/tex_cube.dskt"
++0.0.0.904 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
++0.0.0.915 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
++0.0.0.930 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
++0.0.0.943 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
++0.0.0.955 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
++0.0.0.970 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
++0.0.0.983 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
++0.0.0.995 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
++0.0.1.4 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
++0.0.1.14 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
++0.0.1.21 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
++0.0.1.31 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
++0.0.1.37 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
++0.0.1.47 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
++0.0.1.67 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
++0.0.1.87 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
++0.0.1.108 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
++0.0.1.121 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
++0.0.1.139 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
++0.0.1.156 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
++0.0.1.172 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
++0.0.1.189 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
++0.0.1.205 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
++0.0.1.217 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
++0.0.1.230 INF <model.cpp:224> Model: 0.500000, -0.500000, 0.500000
++0.0.1.246 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
++0.0.1.260 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
++0.0.1.266 INF <model.cpp:224> Model: 0.500000, 0.500000, 0.500000
++0.0.1.273 INF <model.cpp:224> Model: 0.500000, -0.500000, -0.500000
++0.0.1.283 INF <model.cpp:224> Model: 0.500000, 0.500000, -0.500000
++0.0.1.294 INF <model.cpp:224> Model: -0.500000, -0.500000, -0.500000
++0.0.1.302 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
++0.0.1.312 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
++0.0.1.322 INF <model.cpp:224> Model: -0.500000, 0.500000, -0.500000
++0.0.1.330 INF <model.cpp:224> Model: -0.500000, -0.500000, 0.500000
++0.0.1.338 INF <model.cpp:224> Model: -0.500000, 0.500000, 0.500000
++0.0.1.345 INF <mesh.cpp:44> Mesh: Primitive Type: 4
++0.0.1.355 INF <skybox.cpp:24> Skybox : Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
++0.0.1.360 INF <texture.cpp:16> Texture: Load from file "Assets/Skyboxes/tex_skybox_stormydays.dskt"
++0.0.3.579 INF <mesh.cpp:44> Mesh: Primitive Type: 4

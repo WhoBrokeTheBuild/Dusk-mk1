@@ -5,6 +5,7 @@
 #include <Events/IEventDispatcher.h>
 #include <Graphics/Graphics.h>
 #include <Scripting/Scripting.h>
+#include <Math/Math.h>
 
 namespace Dusk
 {
@@ -118,6 +119,10 @@ private:
     Entity* mp_Cube;
     float rotation;
     float rotationSpeed;
+	bool m_ChangingView;
+	float m_LookSpeed;
+	float m_Pitch, m_Yaw;
+	vec3 m_PosDelta;
 
 }; // class Program
 

@@ -29,17 +29,23 @@ bool Dusk::World::Skybox::load( const string& filename )
         return false;
     }
 
-	const GLfloat SKYBOX_SCALE = 1000.0f;
+	const GLfloat SKYBOX_SCALE = 100.0f;
 
-	const unsigned int SKYBOX_VERT_COUNT = 24;
+	const unsigned int SKYBOX_VERT_COUNT = 36;
 
 	vec3 skyboxVerts[SKYBOX_VERT_COUNT] = {
-		vec3(-1.0f,  1.0f, -1.0f), vec3( 1.0f,  1.0f, -1.0f), vec3( 1.0f, -1.0f, -1.0f), vec3(-1.0f, -1.0f, -1.0f), // Front
-		vec3(-1.0f,  1.0f,  1.0f), vec3(-1.0f,  1.0f, -1.0f), vec3(-1.0f, -1.0f, -1.0f), vec3(-1.0f, -1.0f,  1.0f), // Left
-		vec3( 1.0f,  1.0f,  1.0f), vec3(-1.0f,  1.0f,  1.0f), vec3(-1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f,  1.0f), // Back
-		vec3( 1.0f,  1.0f, -1.0f), vec3( 1.0f,  1.0f,  1.0f), vec3( 1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f, -1.0f), // Right
-		vec3(-1.0f,  1.0f,  1.0f), vec3( 1.0f,  1.0f,  1.0f), vec3( 1.0f,  1.0f, -1.0f), vec3(-1.0f,  1.0f, -1.0f), // Top
-		vec3(-1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f, -1.0f), vec3(-1.0f, -1.0f, -1.0f)  // Bottom
+		vec3(-1.0f,  1.0f, -1.0f), vec3( 1.0f,  1.0f, -1.0f), vec3( 1.0f, -1.0f, -1.0f),
+		vec3(-1.0f,  1.0f, -1.0f), vec3(1.0f, -1.0f, -1.0f),  vec3(-1.0f, -1.0f, -1.0f), // Front
+		vec3(-1.0f,  1.0f,  1.0f), vec3(-1.0f,  1.0f, -1.0f), vec3(-1.0f, -1.0f, -1.0f), 
+		vec3(-1.0f,  1.0f,  1.0f), vec3(-1.0f, -1.0f, -1.0f), vec3(-1.0f, -1.0f,  1.0f), // Left
+		vec3( 1.0f,  1.0f,  1.0f), vec3(-1.0f,  1.0f,  1.0f), vec3(-1.0f, -1.0f,  1.0f), 
+		vec3( 1.0f,  1.0f,  1.0f), vec3(-1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f,  1.0f), // Back
+		vec3( 1.0f,  1.0f, -1.0f), vec3( 1.0f,  1.0f,  1.0f), vec3( 1.0f, -1.0f,  1.0f),
+		vec3( 1.0f,  1.0f, -1.0f), vec3( 1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f, -1.0f), // Right
+		vec3(-1.0f,  1.0f,  1.0f), vec3( 1.0f,  1.0f,  1.0f), vec3( 1.0f,  1.0f, -1.0f), 
+		vec3(-1.0f,  1.0f,  1.0f), vec3( 1.0f,  1.0f, -1.0f), vec3(-1.0f,  1.0f, -1.0f), // Top
+		vec3(-1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f,  1.0f), vec3( 1.0f, -1.0f, -1.0f), 
+		vec3(-1.0f, -1.0f,  1.0f), vec3(1.0f,  -1.0f, -1.0f), vec3(-1.0f, -1.0f, -1.0f)  // Bottom
 	};
 
 	const GLfloat ONE_FOURTH   = 0.25f;
@@ -49,19 +55,25 @@ bool Dusk::World::Skybox::load( const string& filename )
 	const GLfloat TWO_THIRD    = 2.0f / 3.0f - 0.0015f;
 
 	vec2 skyboxTexCoords[SKYBOX_VERT_COUNT] = {
-		vec2( ONE_FOURTH,   TWO_THIRD ), vec2( TWO_FOURTH,   TWO_THIRD ), vec2( TWO_FOURTH,   ONE_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD ), // Front
-		vec2( 0.0f,         TWO_THIRD ), vec2( ONE_FOURTH,   TWO_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD ), vec2( 0.0f,         ONE_THIRD ), // Left
-		vec2( THREE_FOURTH, TWO_THIRD ), vec2( 1.0f,         TWO_THIRD ), vec2( 1.0f,         ONE_THIRD ), vec2( THREE_FOURTH, ONE_THIRD ), // Back
-		vec2( TWO_FOURTH,   TWO_THIRD ), vec2( THREE_FOURTH, TWO_THIRD ), vec2( THREE_FOURTH, ONE_THIRD ), vec2( TWO_FOURTH,   ONE_THIRD ), // Right
-		vec2( ONE_FOURTH,   1.0f      ), vec2( TWO_FOURTH,   1.0f      ), vec2( TWO_FOURTH,   TWO_THIRD ), vec2( ONE_FOURTH,   TWO_THIRD ), // Up
-		vec2( ONE_FOURTH,   0.0f      ), vec2( TWO_FOURTH,   0.0f      ), vec2( TWO_FOURTH,   ONE_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD )  // Down
+		vec2( ONE_FOURTH,   TWO_THIRD ), vec2( TWO_FOURTH,   TWO_THIRD ), vec2( TWO_FOURTH,   ONE_THIRD ), 
+		vec2( ONE_FOURTH,   TWO_THIRD ), vec2( TWO_FOURTH,   ONE_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD ), // Front
+		vec2( 0.0f,         TWO_THIRD ), vec2( ONE_FOURTH,   TWO_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD ),
+		vec2( 0.0f,         TWO_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD ), vec2( 0.0f,         ONE_THIRD ), // Left
+		vec2( THREE_FOURTH, TWO_THIRD ), vec2( 1.0f,         TWO_THIRD ), vec2( 1.0f,         ONE_THIRD ), 
+		vec2( THREE_FOURTH, TWO_THIRD ), vec2( 1.0f,         ONE_THIRD ), vec2( THREE_FOURTH, ONE_THIRD ), // Back
+		vec2( TWO_FOURTH,   TWO_THIRD ), vec2( THREE_FOURTH, TWO_THIRD ), vec2( THREE_FOURTH, ONE_THIRD ), 
+		vec2( TWO_FOURTH,   TWO_THIRD ), vec2( THREE_FOURTH, ONE_THIRD ), vec2( TWO_FOURTH,   ONE_THIRD ), // Right
+		vec2( ONE_FOURTH,   1.0f      ), vec2( TWO_FOURTH,   1.0f      ), vec2( TWO_FOURTH,   TWO_THIRD ),
+		vec2( ONE_FOURTH,   1.0f      ), vec2( TWO_FOURTH,   TWO_THIRD ), vec2( ONE_FOURTH,   TWO_THIRD ), // Up
+		vec2( ONE_FOURTH,   0.0f      ), vec2( TWO_FOURTH,   0.0f      ), vec2( TWO_FOURTH,   ONE_THIRD ),
+		vec2( ONE_FOURTH,   0.0f      ), vec2( TWO_FOURTH,   ONE_THIRD ), vec2( ONE_FOURTH,   ONE_THIRD )  // Down
 	};
 
 	for (unsigned int i = 0; i < SKYBOX_VERT_COUNT; ++i)
 		skyboxVerts[i] *= SKYBOX_SCALE;
 
     mp_Mesh = New Mesh();
-    mp_Mesh->init("Skybox", GL_QUADS, SKYBOX_VERT_COUNT, skyboxVerts, nullptr, skyboxTexCoords);
+    mp_Mesh->init("Skybox", GL_TRIANGLES, SKYBOX_VERT_COUNT, skyboxVerts, nullptr, skyboxTexCoords);
 
     return true;
 }

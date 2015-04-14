@@ -110,7 +110,7 @@ bool Dusk::Program::init()
 	mp_InputSystem = New InputSystem();
 
     mp_Camera = New Camera((float)getGraphicsSystem()->getWindow()->getWidth(), (float)getGraphicsSystem()->getWindow()->getHeight(),
-                           vec3(2.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
+                           vec3(2.0f), vec3(-1.0f), vec3(0.0f, 1.0f, 0.0f), 45.0f, 1.0f, 1000.0f);
 
 	mp_ScriptingSystem->runScript("Assets/Scripts/Dusk.lua");
 	mp_ScriptingSystem->runScript("Assets/Scripts/Setup.lua");
@@ -129,6 +129,12 @@ bool Dusk::Program::init()
 
     rotation = 0.0f;
     rotationSpeed = 0.0001f;
+
+	m_LookSpeed = 1.0f;
+	m_ChangingView = false;
+	m_Pitch = 0.0f;
+	m_Yaw = 0.0f;
+	m_PosDelta = vec3(0.0f);
 
     return true;
 }
@@ -181,6 +187,17 @@ void Dusk::Program::update(TimeInfo& timeInfo)
     mp_Cube->setRot(vec3(0.0f, rotation, 0.0f));
     rotation += rotationSpeed;// * timeInfo.Delta;
 
+
+	vec3 pitchAxis = cross(mp_Camera->getDir(), mp_Camera->getUp());
+	quat pitchQ = angleAxis(m_Pitch, pitchAxis);
+	quat yawQ = angleAxis(m_Yaw, mp_Camera->getUp());
+	quat tmp = normalize(cross(pitchQ, yawQ));
+	mp_Camera->setDir(rotate(tmp, mp_Camera->getDir()));
+	mp_Camera->setPos(mp_Camera->getPos() + m_PosDelta);
+
+	m_Yaw *= 0.2f;
+	m_Pitch *= 0.2f;
+
     //Window* pWindow = getGraphicsSystem()->getWindow();
 
     //int x = pWindow->getX();
@@ -206,7 +223,7 @@ void Dusk::Program::update(TimeInfo& timeInfo)
 void Dusk::Program::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	//glClearDepth(1.0f);
+	glClearDepth(1.0f);
 
     mp_Skybox->render();
     glClear(GL_DEPTH_BUFFER_BIT);
@@ -239,6 +256,8 @@ void Dusk::Program::handleKeyUp( const Event& event )
 
 void Dusk::Program::handleMouseDown( const Event& event )
 {
+	m_ChangingView = true;
+
     //const MouseEventData* pData = event.getDataAs<MouseEventData>();
     //Window* pWindow = getGraphicsSystem()->getWindow();
 
@@ -262,6 +281,8 @@ void Dusk::Program::handleMouseDown( const Event& event )
 
 void Dusk::Program::handleMouseUp( const Event& event )
 {
+	m_ChangingView = false;
+
     //const MouseEventData* pData = event.getDataAs<MouseEventData>();
 
     //if (m_MovingWindow && pData->getMouseButton() == MOUSE_BUTTON_LEFT)
@@ -270,7 +291,25 @@ void Dusk::Program::handleMouseUp( const Event& event )
 
 void Dusk::Program::handleMouseMove( const Event& event )
 {
-    //const MouseMoveEventData* pData = event.getDataAs<MouseMoveEventData>();
+    const MouseMoveEventData* pData = event.getDataAs<MouseMoveEventData>();
+
+	static float lastX = 0.0f, lastY = 0.0f;
+
+	if (m_ChangingView && mp_Camera)
+	{
+		float dX = (lastX - pData->getX()) * m_LookSpeed;
+		float dY = (lastY - pData->getY()) * m_LookSpeed;
+
+		dX = glm::radians(dX);
+		dY = glm::radians(dY);
+
+		m_Yaw += dX;
+		m_Pitch += dY;
+	}
+
+	lastX = pData->getX();
+	lastY = pData->getY();
+
     //Window* pWindow = getGraphicsSystem()->getWindow();
 
     //if (m_MouseX == INT_MAX)

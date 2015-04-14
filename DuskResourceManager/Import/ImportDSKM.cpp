@@ -90,7 +90,7 @@ bool ImportDSKM( const string& filename, InterModel* pModel )
 */
     file.close();
 
-    printf("Successfully loaded OBJ File: %s\n", filename.c_str());
+    printf("Successfully loaded DSKM File: %s\n", filename.c_str());
 
     return true;
 }

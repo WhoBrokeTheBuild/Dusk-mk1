@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Events\Callbacks.h" />
+    <ClInclude Include="Events\Delegate.h" />
+    <ClInclude Include="Events\Event.h" />
+    <ClInclude Include="Events\IEventDispatcher.h" />
+    <ClInclude Include="Graphics\Graphics.h" />
+    <ClInclude Include="Graphics\GraphicsContext.h" />
+    <ClInclude Include="Graphics\GraphicsSystem.h" />
+    <ClInclude Include="Graphics\Material.h" />
+    <ClInclude Include="Graphics\Mesh.h" />
+    <ClInclude Include="Graphics\Model.h" />
+    <ClInclude Include="Graphics\ShaderManager.h" />
+    <ClInclude Include="Graphics\ShaderManager.Uniforms.inc.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\Window.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputSystem.h" />
+    <ClInclude Include="Input\Key.h" />
+    <ClInclude Include="Input\MouseButton.h" />
+    <ClInclude Include="lodepng\lodepng.h" />
+    <ClInclude Include="Logging\Log.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Scripting\Scripting.h" />
+    <ClInclude Include="Scripting\ScriptingSystem.h" />
+    <ClInclude Include="Timing\TimeInfo.h" />
+    <ClInclude Include="Timing\Timer.h" />
+    <ClInclude Include="World\Camera.h" />
+    <ClInclude Include="World\Entity.h" />
+    <ClInclude Include="World\Skybox.h" />
+    <ClInclude Include="Program.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Events\Event.cpp" />
+    <ClCompile Include="Events\IEventDispatcher.cpp" />
+    <ClCompile Include="Graphics\GraphicsContext.cpp" />
+    <ClCompile Include="Graphics\GraphicsSystem.cpp" />
+    <ClCompile Include="Graphics\Material.cpp" />
+    <ClCompile Include="Graphics\Mesh.cpp" />
+    <ClCompile Include="Graphics\Model.cpp" />
+    <ClCompile Include="Graphics\ShaderManager.cpp" />
+    <ClCompile Include="Graphics\Texture.cpp" />
+    <ClCompile Include="Graphics\Window.cpp" />
+    <ClCompile Include="Input\InputSystem.cpp" />
+    <ClCompile Include="lodepng\lodepng.cpp" />
+    <ClCompile Include="Logging\Log.cpp" />
+    <ClCompile Include="Scripting\ScriptingSystem.cpp" />
+    <ClCompile Include="Timing\TimeInfo.cpp" />
+    <ClCompile Include="Timing\Timer.cpp" />
+    <ClCompile Include="World\Camera.cpp" />
+    <ClCompile Include="World\Entity.cpp" />
+    <ClCompile Include="World\Skybox.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Program.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\error.log" />
+    <Text Include="..\info.log" />
+  </ItemGroup>
+</Project>

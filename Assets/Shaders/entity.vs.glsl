@@ -17,4 +17,3 @@ void main()
 
 	gl_Position = uModelViewProj * vec4(iVertexPosition, 1.0f);
 }
-

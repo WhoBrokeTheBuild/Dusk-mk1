@@ -244,7 +244,7 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
                         tmpNormInds[j] = normIndRewrite[tmpNormInds[j]];
                     else
                     {
-                        int newInd = mesh.Verts.getSize();
+                        int newInd = mesh.Norms.getSize();
                         mesh.Norms.add(norms[tmpNormInds[j]]);
                         normIndRewrite.add(tmpNormInds[j], newInd);
                         tmpNormInds[j] = newInd;
@@ -300,8 +300,8 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					mesh.VertInds.add(tmpVertInds[1]);
 					mesh.VertInds.add(tmpVertInds[2]);
 
-					mesh.VertInds.add(tmpVertInds[0]);
 					mesh.VertInds.add(tmpVertInds[2]);
+					mesh.VertInds.add(tmpVertInds[0]);
 					mesh.VertInds.add(tmpVertInds[3]);
 				}
 
@@ -311,9 +311,9 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					mesh.NormInds.add(tmpNormInds[1]);
 					mesh.NormInds.add(tmpNormInds[2]);
 
-					mesh.NormInds.add(tmpNormInds[0]);
-					mesh.NormInds.add(tmpNormInds[2]);
 					mesh.NormInds.add(tmpNormInds[3]);
+					mesh.NormInds.add(tmpNormInds[2]);
+					mesh.NormInds.add(tmpNormInds[0]);
 				}
 
 				if (tmpTexCoordInds[0] != -1 && tmpTexCoordInds[1] != -1 && tmpTexCoordInds[2] != -1 && tmpTexCoordInds[3] != -1)
@@ -322,9 +322,9 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
 					mesh.TexCoordInds.add(tmpTexCoordInds[1]);
 					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
 
-					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
-					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
 					mesh.TexCoordInds.add(tmpTexCoordInds[3]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[2]);
+					mesh.TexCoordInds.add(tmpTexCoordInds[0]);
 				}
 			}
 		}
@@ -362,6 +362,35 @@ bool ImportOBJ( const string& filename, InterModel* pModel )
     }
 
     file.close();
+
+    printf("Vert Inds: %d\n", pModel->Meshes[0].VertInds.getSize());
+    for (unsigned int i = 0; i < pModel->Meshes[0].VertInds.getSize(); ++i)
+    {
+        const vec3& vert = pModel->Meshes[0].Verts[pModel->Meshes[0].VertInds[i]];
+        printf("(%d, [%f %f %f]) ", pModel->Meshes[0].VertInds[i], vert.x, vert.y, vert.z);
+        if (i % 3 == 2)
+            printf("\n");
+    }
+    printf("\n");
+
+    printf("Norm Inds: %d\n", pModel->Meshes[0].NormInds.getSize());
+    for (unsigned int i = 0; i < pModel->Meshes[0].NormInds.getSize(); ++i)
+    {
+        const vec3& norm = pModel->Meshes[0].Norms[pModel->Meshes[0].NormInds[i]];
+        printf("(%d, [%f %f %f]) ", pModel->Meshes[0].NormInds[i], norm.x, norm.y, norm.z);
+        if (i % 3 == 2)
+            printf("\n");
+    }
+    printf("\n");
+
+    printf("Tex Coord Inds: %d\n", pModel->Meshes[0].TexCoordInds.getSize());
+    for (unsigned int i = 0; i < pModel->Meshes[0].TexCoordInds.getSize(); ++i)
+    {
+        printf("%d ", pModel->Meshes[0].TexCoordInds[i]);
+        if (i % 3 == 2)
+            printf("\n");
+    }
+    printf("\n");
 
     printf("Successfully loaded OBJ File: %s\n", filename.c_str());
     printf("Triangles: %i \n", triCount);

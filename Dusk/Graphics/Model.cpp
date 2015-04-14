@@ -208,11 +208,8 @@ bool Dusk::Graphics::Model::load( const string& filename )
         }
 
         ArrayList<vec3> verts;
-        verts.resize(vertIndCount);
         ArrayList<vec3> norms;
-        norms.resize(normIndCount);
         ArrayList<vec2> texCoords;
-        texCoords.resize(texCoordIndCount);
 
         for (unsigned int i = 0; i < vertInds.getSize(); ++i)
             verts.add(vertList[vertInds[i]]);
@@ -222,6 +219,9 @@ bool Dusk::Graphics::Model::load( const string& filename )
 
         for (unsigned int i = 0; i < texCoordInds.getSize(); ++i)
             texCoords.add(texCoordList[texCoordInds[i]]);
+
+		for (unsigned int i = 0; i < verts.getSize(); ++i)
+			LogInfoFmt(getClassName(), "%f, %f, %f", verts[i].x, verts[i].y, verts[i].z);
 
         Mesh* pMesh = New Mesh();
         success = pMesh->init(meshName, GL_TRIANGLES, verts, norms, texCoords);

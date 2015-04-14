@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Events\Callbacks.h" />
+    <ClInclude Include="Events\Delegate.h" />
+    <ClInclude Include="Events\Event.h" />
+    <ClInclude Include="Events\IEventDispatcher.h" />
+    <ClInclude Include="Graphics\Graphics.h" />
+    <ClInclude Include="Graphics\GraphicsContext.h" />
+    <ClInclude Include="Graphics\GraphicsSystem.h" />
+    <ClInclude Include="Graphics\Material.h" />
+    <ClInclude Include="Graphics\Mesh.h" />
+    <ClInclude Include="Graphics\Model.h" />
+    <ClInclude Include="Graphics\ShaderManager.h" />
+    <ClInclude Include="Graphics\ShaderManager.Uniforms.inc.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\Window.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputSystem.h" />
+    <ClInclude Include="Input\Key.h" />
+    <ClInclude Include="Input\MouseButton.h" />
+    <ClInclude Include="lodepng\lodepng.h" />
+    <ClInclude Include="Logging\Log.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="Scripting\Scripting.h" />
+    <ClInclude Include="Scripting\ScriptingSystem.h" />
+    <ClInclude Include="Timing\TimeInfo.h" />
+    <ClInclude Include="Timing\Timer.h" />
+    <ClInclude Include="World\Camera.h" />
+    <ClInclude Include="World\Entity.h" />
+    <ClInclude Include="World\Skybox.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Events\Event.cpp" />
+    <ClCompile Include="Events\IEventDispatcher.cpp" />
+    <ClCompile Include="Graphics\GraphicsContext.cpp" />
+    <ClCompile Include="Graphics\GraphicsSystem.cpp" />
+    <ClCompile Include="Graphics\Material.cpp" />
+    <ClCompile Include="Graphics\Mesh.cpp" />
+    <ClCompile Include="Graphics\Model.cpp" />
+    <ClCompile Include="Graphics\ShaderManager.cpp" />
+    <ClCompile Include="Graphics\Texture.cpp" />
+    <ClCompile Include="Graphics\Window.cpp" />
+    <ClCompile Include="Input\InputSystem.cpp" />
+    <ClCompile Include="lodepng\lodepng.cpp" />
+    <ClCompile Include="Logging\Log.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Scripting\ScriptingSystem.cpp" />
+    <ClCompile Include="Timing\TimeInfo.cpp" />
+    <ClCompile Include="Timing\Timer.cpp" />
+    <ClCompile Include="World\Camera.cpp" />
+    <ClCompile Include="World\Entity.cpp" />
+    <ClCompile Include="World\Skybox.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\error.log" />
+    <Text Include="..\info.log" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BC076450-7212-46F4-9CFC-0FF1F8454CDC}</ProjectGuid>
+    <RootNamespace>dusk</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)</OutDir>
+    <IntDir>../obj/</IntDir>
+    <TargetName>dusk</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../Libraries/glm/include;../Libraries/GLFW/include;../Libraries/Arc/include;../Libraries/GLEW/include/;Libraries/SDL/include/;Libraries/lodepng/include;../Libraries/lua/include;./</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;NOMINMAX;WIN32_LEAN_AND_MEAN%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ArcCore.lib;OpenGL32.lib;GLu32.lib;glew32.lib;glfw3.lib;lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Libraries/GLFW/lib/;../Libraries/Arc/lib/;../Libraries/GLEW/lib/;../Libraries/lua/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

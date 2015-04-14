@@ -1,5 +1,9 @@
 #include "Mesh.h"
 
+#include <Logging/Log.h>
+
+using namespace Dusk::Logging;
+
 const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_VERTEX     = 0;
 const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_NORMAL     = 1;
 const Dusk::Graphics::GLAttribute Dusk::Graphics::Mesh::ATTR_TEX_COORD  = 2;
@@ -36,6 +40,8 @@ bool Dusk::Graphics::Mesh::init( const string& name, const GLPrimitiveType& prim
     m_Name = name;
     m_PrimitiveType = primitiveType;
     m_VertexCount = vertexCount;
+
+	LogInfoFmt(getClassName(), "Primitive Type: %d", primitiveType);
 
     m_VertexBuffer = m_NormalBuffer = m_TexCoordBuffer = 0;
     m_VertexArray = 0;

@@ -19,6 +19,8 @@ Dusk::Graphics::GraphicsSystem::~GraphicsSystem()
 
     delete mp_Window;
     mp_Window = nullptr;
+
+    glfwTerminate();
 }
 
 bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsigned int& height, const string& title, const bool& fullscreen /* = false */, const bool& vsnyc /* = false */  )
@@ -29,18 +31,9 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
         return false;
 	}
 
+    LogInfoFmt(getClassName(), "Running GLFW Version %s", glfwGetVersionString());
+
 	glfwSetErrorCallback(glfwError);
-
-	GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
-    glfwGetMonitorPos(pMonitor, &m_MonitorX, &m_MonitorY);
-
-    const GLFWvidmode* mode = glfwGetVideoMode(pMonitor);
-
-    if (mode->width > 0 && mode->height > 0)
-    {
-        m_MonitorWidth = mode->width;
-        m_MonitorHeight = mode->height;
-    }
 
     m_Vsync = vsnyc;
     mp_Window = New Window();
@@ -50,7 +43,7 @@ bool Dusk::Graphics::GraphicsSystem::init(const unsigned int& width, const unsig
         return false;
     }
 
-    getGraphicsContext()->bind();
+    getWindow()->getGraphicsContext()->bind();
 
     initGL();
 
@@ -63,16 +56,6 @@ bool Dusk::Graphics::GraphicsSystem::initGL( void )
 {
     glfwSwapInterval( ( m_Vsync ? 1 : 0) );
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-    glEnable(GL_DEPTH_TEST);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    LogInfo(getClassName(), "Did I do the thing?");
-    LogInfo(getClassName(), "I DID!");
-
     glewExperimental = GL_TRUE;
 	GLenum ret = glewInit();
 	if (ret != GLEW_OK)
@@ -81,8 +64,18 @@ bool Dusk::Graphics::GraphicsSystem::initGL( void )
         return false;
 	}
 
+    LogInfoFmt(getClassName(), "Running GLEW Version %s", glewGetString(GLEW_VERSION));
 	LogInfoFmt(getClassName(), "Running OpenGL Version %s", glGetString(GL_VERSION));
 	LogInfoFmt(getClassName(), "Running OpenGL Shading Language Version %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
 	return true;
 }

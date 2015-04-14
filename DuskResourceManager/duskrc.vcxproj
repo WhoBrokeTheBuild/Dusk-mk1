@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Export\ExportDSKM.cpp" />
+    <ClCompile Include="Export\ExportDSKT.cpp" />
+    <ClCompile Include="Export\ExportJPG.cpp" />
+    <ClCompile Include="Export\ExportOBJ.cpp" />
+    <ClCompile Include="Export\ExportPNG.cpp" />
+    <ClCompile Include="Export\ExportTGA.cpp" />
+    <ClCompile Include="Import\ImportDSKM.cpp" />
+    <ClCompile Include="Import\ImportDSKT.cpp" />
+    <ClCompile Include="Import\ImportJPG.cpp" />
+    <ClCompile Include="Import\ImportOBJ.cpp" />
+    <ClCompile Include="Import\ImportPNG.cpp" />
+    <ClCompile Include="Import\ImportTGA.cpp" />
+    <ClCompile Include="Intermediate\InterMaterial.cpp" />
+    <ClCompile Include="Intermediate\InterMesh.cpp" />
+    <ClCompile Include="Intermediate\InterModel.cpp" />
+    <ClCompile Include="Intermediate\InterTexture.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="savepng\savepng.cpp" />
+    <ClCompile Include="Util\ExtensionTypeMap.cpp" />
+    <ClCompile Include="Util\Functions.cpp" />
+    <ClCompile Include="Util\MainArgs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Export\ExportDSKM.h" />
+    <ClInclude Include="Export\ExportDSKT.h" />
+    <ClInclude Include="Export\ExportJPG.h" />
+    <ClInclude Include="Export\ExportOBJ.h" />
+    <ClInclude Include="Export\ExportPNG.h" />
+    <ClInclude Include="Export\ExportTGA.h" />
+    <ClInclude Include="Import\ImportDSKM.h" />
+    <ClInclude Include="Import\ImportDSKT.h" />
+    <ClInclude Include="Import\ImportJPG.h" />
+    <ClInclude Include="Import\ImportOBJ.h" />
+    <ClInclude Include="Import\ImportPNG.h" />
+    <ClInclude Include="Import\ImportTGA.h" />
+    <ClInclude Include="Intermediate\InterMaterial.h" />
+    <ClInclude Include="Intermediate\InterMesh.h" />
+    <ClInclude Include="Intermediate\InterModel.h" />
+    <ClInclude Include="Intermediate\InterTexture.h" />
+    <ClInclude Include="savepng\savepng.h" />
+    <ClInclude Include="Util\ExtensionTypeMap.h" />
+    <ClInclude Include="Util\Functions.h" />
+    <ClInclude Include="Util\MainArgs.h" />
+    <ClInclude Include="Util\Math.h" />
+    <ClInclude Include="Util\Usage.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C03BE65A-781B-4E00-B174-9031141BE61E}</ProjectGuid>
+    <RootNamespace>duskrc</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>duskrc</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../Libraries/SDL/include/;../Libraries/glm/include/;../Libraries/Arc/include/;../Libraries/png/include/;./</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../Libraries/SDL/lib/;../Libraries/Arc/lib/;../Libraries/png/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;ArcCore.lib;libpng.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

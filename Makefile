@@ -4,10 +4,10 @@ dusk:
 	cd Dusk; make
 
 duskrc:
-	cd DuskRC; make
+	cd DuskResourceManager; make
 
 clean:
 	cd Dusk; make clean
-	cd DuskRC; make clean
+	cd DuskResourceManager; make clean
 
 .PHONY: dusk duskrc

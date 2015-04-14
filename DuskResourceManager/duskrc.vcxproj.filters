@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Export\ExportDSKM.cpp" />
+    <ClCompile Include="Export\ExportDSKT.cpp" />
+    <ClCompile Include="Export\ExportJPG.cpp" />
+    <ClCompile Include="Export\ExportOBJ.cpp" />
+    <ClCompile Include="Export\ExportPNG.cpp" />
+    <ClCompile Include="Export\ExportTGA.cpp" />
+    <ClCompile Include="Import\ImportDSKM.cpp" />
+    <ClCompile Include="Import\ImportDSKT.cpp" />
+    <ClCompile Include="Import\ImportJPG.cpp" />
+    <ClCompile Include="Import\ImportOBJ.cpp" />
+    <ClCompile Include="Import\ImportPNG.cpp" />
+    <ClCompile Include="Import\ImportTGA.cpp" />
+    <ClCompile Include="Intermediate\InterMaterial.cpp" />
+    <ClCompile Include="Intermediate\InterMesh.cpp" />
+    <ClCompile Include="Intermediate\InterModel.cpp" />
+    <ClCompile Include="Intermediate\InterTexture.cpp" />
+    <ClCompile Include="savepng\savepng.cpp" />
+    <ClCompile Include="Util\ExtensionTypeMap.cpp" />
+    <ClCompile Include="Util\Functions.cpp" />
+    <ClCompile Include="Util\MainArgs.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Export\ExportDSKM.h" />
+    <ClInclude Include="Export\ExportDSKT.h" />
+    <ClInclude Include="Export\ExportJPG.h" />
+    <ClInclude Include="Export\ExportOBJ.h" />
+    <ClInclude Include="Export\ExportPNG.h" />
+    <ClInclude Include="Export\ExportTGA.h" />
+    <ClInclude Include="Import\ImportDSKM.h" />
+    <ClInclude Include="Import\ImportDSKT.h" />
+    <ClInclude Include="Import\ImportJPG.h" />
+    <ClInclude Include="Import\ImportOBJ.h" />
+    <ClInclude Include="Import\ImportPNG.h" />
+    <ClInclude Include="Import\ImportTGA.h" />
+    <ClInclude Include="Intermediate\InterMaterial.h" />
+    <ClInclude Include="Intermediate\InterMesh.h" />
+    <ClInclude Include="Intermediate\InterModel.h" />
+    <ClInclude Include="Intermediate\InterTexture.h" />
+    <ClInclude Include="savepng\savepng.h" />
+    <ClInclude Include="Util\ExtensionTypeMap.h" />
+    <ClInclude Include="Util\Functions.h" />
+    <ClInclude Include="Util\MainArgs.h" />
+    <ClInclude Include="Util\Math.h" />
+    <ClInclude Include="Util\Usage.h" />
+  </ItemGroup>
+</Project>

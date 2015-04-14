@@ -12,7 +12,7 @@ CFLAGS = -pedantic-errors -pedantic -std=c++11 -Wall
 LDFLAGS =
 
 # Debug
-XCFLAGS = $(CFLAGS) -g -DDEBUG
+XCFLAGS = $(CFLAGS) -g -DDEBUG -D_CRT_SECURE_NO_WARNINGS
 XLDFLAGS = $(LDFLAGS)
 
 # Release

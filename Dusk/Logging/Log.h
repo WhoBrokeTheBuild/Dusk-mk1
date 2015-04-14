@@ -1,7 +1,6 @@
+/** @file Log.h */
 #ifndef DUSK_LOG_H
 #define DUSK_LOG_H
-
-#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 
@@ -57,10 +56,14 @@ private:
 
 };
 
+/// Log an info message to all logging outputs with the source and message
 #define LogInfo(SRC, MSG) Log::Info(SRC, MSG, string(__FILE__), __LINE__);
+/// Log an error message to all logging outputs with the source and message
 #define LogError(SRC, MSG) Log::Error(SRC, MSG, string(__FILE__), __LINE__);
 
+/// Log a printf-style info message to all logging outputs
 #define LogInfoFmt(SRC, FMT, ...) Log::InfoFmt(SRC, FMT, string(__FILE__), __LINE__, __VA_ARGS__);
+/// Log a printf-style error message to all logging outputs
 #define LogErrorFmt(SRC, FMT, ...) Log::ErrorFmt(SRC, FMT, string(__FILE__), __LINE__, __VA_ARGS__);
 
 } // Logging

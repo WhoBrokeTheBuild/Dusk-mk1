@@ -11,6 +11,7 @@ extern "C"
 namespace Dusk
 {
 
+/// Parent namespace for all of the Scripting functionality within Dusk.
 namespace Scripting
 {
 

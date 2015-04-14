@@ -4,6 +4,7 @@
 namespace Dusk
 {
 
+/// Parent namespace for all of the Input functionality within Dusk.
 namespace Input
 {
 

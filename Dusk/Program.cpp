@@ -78,7 +78,6 @@ void Dusk::Program::run()
 
         update(timeInfo);
         render();
-        getGraphicsSystem()->getGraphicsContext()->swapBuffers();
 
         ++frameCount;
 
@@ -215,6 +214,8 @@ void Dusk::Program::render()
 	dispatch(Event(Program::EVT_RENDER, RenderEventData()));
 
     mp_Cube->render();
+    
+    getGraphicsSystem()->getGraphicsContext()->swapBuffers();
 }
 
 int Dusk::Program::Script_GetCamera( lua_State* pState )

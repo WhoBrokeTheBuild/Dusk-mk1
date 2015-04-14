@@ -28,6 +28,7 @@ using glm::radians;
 namespace Dusk
 {
 
+/// Parent namespace for all of the Math functionality within Dusk.
 namespace Math
 {
 
